@@ -1,0 +1,23 @@
+---
+title: "Cálculo del Índice de IE (versión actual)."
+description: |
+  A short description of the post.
+author:
+  - name: Nora Jones
+    url: https://example.com/norajones
+date: 2022-08-26
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+<iframe
+    src="http://www.gnu.org/" 
+    frameborder="0"
+    style="overflow:hidden;height:100%;width:100%" 
+    height="100%" 
+    width="100%"
+    data-external="1">
+    
+</iframe>
+
