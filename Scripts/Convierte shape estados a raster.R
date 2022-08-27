@@ -1,50 +1,65 @@
-library(raster)
 library(ggplot2)
 library(tidyverse)
 library(sf)
-library(sp)
+library(terra)
+library(raster)
+
 
 # Ubicación archivo "ESRI-shape" de estados de la república mexicana
 mapas_dir <- "V:/Datos/layers_harmon"
 edos_arch <- list.files(mapas_dir, pattern = "^00.*shp$", full.names = TRUE)
-edos_shp <- shapefile(edos_arch[1])
-class(edos_shp)
-Encoding(edos_shp$NOMGEO) <- "latin1"
-names(edos_shp)
-edos_shp$NOMGEO
-plot(edos_shp, main = "México\nalgorítmo r básico")
+ie2018_r_arch <- list.files(mapas_dir, pattern = "^ie_2018.*.tif$", full.names = TRUE)
 
-
-# Solución más actualizada (conviere datos tipo "sp" a "sf")
-edos_shp.sf = st_as_sf(edos_shp)
+# Hacer todo con TERRA para leer vectores y raster
+edos_shp_tr <- vect(edos_arch)
+ie2018_r_tr <- rast(ie2018_r_arch)
+Encoding(edos_shp_tr$NOMGEO) <- "latin1"
 
 # Hay que tener cuidado con la codificación de proyecciones
-st_crs(edos_shp.sf) <- projection(edos_shp.sf)
-class(edos_shp.sf)
-ggplot(edos_shp.sf) + 
+# Este mapa tiene una proyección Lambert CC 2008, con EPSG:6372
+cat(crs(edos_shp_tr))
+cat(crs(ie2018_r_tr))
+
+# Despliegue simple de los mapas
+plot(ie2018_r_tr)
+lines(edos_shp_tr)
+
+# Geometría
+crs(edos_shp_tr, describe=TRUE)$area
+
+# Conviene mejorar la especificación de la proyección con un códigos "epsg"
+crs(ie2018_r_tr)  <- "epsg:6372"
+crs(edos_shp_tr)    <- "epsg:6372"
+crs(edos_shp_tr, describe=TRUE)$area
+
+
+### SpatVector: selección de objetos geográficos
+edos_shp_tr[1:3, 3]
+plot(edos_shp_tr[1:3,])
+plot(edos_shp_tr[1:2, 3])
+quer_v <- subset(edos_shp_tr, edos_shp_tr$NOMGEO == "Querétaro", 
+                c("CVEGEO", "CVE_ENT", "NOMGEO"))
+quer_v$NOMGEO
+plot(quer_v)
+
+# Tipo de datos en estos mapas
+class(edos_shp_tr)
+class(ie2018_r_tr)
+
+## Podemos extraer datos de un raster (aquí ie2018) con base en un polígono. 
+ie2018_quer <- tibble(edo = "Que", 
+                   ie2018 = sort(unique(extract(ie2018_r_tr, 
+                              quer_v, na.rm=TRUE)$ie_2018_st_v2)))
+plot(extract(ie2018_r_tr, quer_v, na.rm=TRUE, as.spatvector = TRUE))
+
+# Mapa con más control de diseño
+edos_shp_sf <- st_as_sf(edos_shp_tr)
+names(edos_shp_sf)
+ggplot(edos_shp_sf) + 
   geom_sf(aes(fill = NOMGEO), show.legend = FALSE) +
-  labs(title = "México", subtitle = "objeto espacial preferido actualmente: sf")
+  labs(title = "México", subtitle = "objeto espacial sf a partir de <<SpatVector>>")
 
-# Especificación geográfica
-projection(edos_shp.sf)
+r_puntos <- st_as_sf(as.points(ie2018_r_tr))
 
-# Conversión a raster, tomando atributos de un mapa GeoTIFF de referencia
-raster_ref_arch <- list.files(mapas_dir, pattern = "^zvh.*.tif$", full.names = TRUE)
-raster_ref <- raster(raster_ref_arch)
-plot(raster_ref)
-
-edos_rast <- rasterize(edos_shp.sf, raster_ref, fun = "first")
-plot(edos_rast)
-
-# Este raster tiene las siguientes propiedades geométricas
-st_crs(edos_rast)
-extent(edos_rast)
-res(edos_rast)
-
-# Para convertir estos mapas en datos tabulares convertimos a puuntos y luego a tabla
-edos_tbl <- as_tibble(rasterToPoints(edos_rast))
-
-# Agregar esta columna a la base de datos de todas las variables, es un "csv"
-vars_arch <- list.files(mapas_dir, pattern = "^ie_train.*.csv$", full.names = TRUE)
-vars_tbl  <- read_csv(vars_arch, na = "*")
-
+ggplot(r_puntos) +
+  geom_sf(aes(col = zvh_inegi)) 
