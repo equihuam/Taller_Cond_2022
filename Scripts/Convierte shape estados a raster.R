@@ -50,7 +50,9 @@ class(ie2018_r_tr)
 ie2018_quer <- tibble(edo = "Que", 
                    ie2018 = sort(unique(extract(ie2018_r_tr, 
                               quer_v, na.rm=TRUE)$ie_2018_st_v2)))
-plot(extract(ie2018_r_tr, quer_v, na.rm=TRUE, as.spatvector = TRUE))
+ie2018_quer_prom <- extract(ie2018_r_tr, quer_v, na.rm=TRUE, fun = mean,
+                            as.spatvector = TRUE, xy = TRUE, bind = TRUE)
+plot(ie2018_quer_prom, "ie_2018_st_v2")
 
 # Mapa con más control de diseño
 edos_shp_sf <- st_as_sf(edos_shp_tr)
