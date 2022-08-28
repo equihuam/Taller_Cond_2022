@@ -1,5 +1,5 @@
 ---
-title: "Presentación"
+title: "Dinámica del Taller"
 description: |
   Objetivos y plan de trabajo.
 author:
@@ -30,7 +30,10 @@ agenda <- read_excel("~/1 Nubes/El Instituto de Ecología/Proyecto Integralidad 
 
 names(agenda) <- c("tema", "tiempo", "hora_i", "hora_f", "expone", "objetivo", "temas")
 temas <- agenda$tema[!grepl("Duración|Día", agenda$tema) & !is.na(agenda$tema)]
-#knitr::kable(temas, format = "html")
+temas
+agenda$objetivo
+#knitr::kable(temas, format = "html", tmpdir =)
+ctx$outputFolder
 ```
 
 

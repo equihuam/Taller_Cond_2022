@@ -6,7 +6,6 @@ library(tidyterra)
 library(RColorBrewer)
 library(paletteer)
 
-
 # Ubicación archivo "ESRI-shape" de estados de la república mexicana
 mapas_dir <- "z:/Datos/layers_harmon"
 edos_arch <- list.files(mapas_dir, pattern = "^00.*shp$", full.names = TRUE)
@@ -52,20 +51,21 @@ ext(quer_v)
 quer_v$NOMGEO
 plot(quer_v, "NOMGEO")
 
+
 ## Podemos extraer datos de un raster (aquí ie2018) con base en un polígono. 
-ie2018_quer <- tibble(edo = "Que", extract(ie2018_r_tr, 
-                              quer_v, na.rm=TRUE, xy = TRUE))
-coordinates(ie2018_quer) <-  ~ x + y
+ie2018_quer <- tibble(edo = "Querétaro", extract(ie2018_r_tr, quer_v, na.rm=TRUE, 
+                                           xy = TRUE, bind = TRUE))
+
+ie2018_quer <- vect(ie2018_quer, geom = c("x", "y"))
+crs(ie2018_quer)  <- "epsg:6372"
 names(ie2018_quer)
-ie2018_quer_v <- vect(ie2018_quer)
-crs(ie2018_quer_v)  <- "epsg:6372"
-plot(ie2018_quer_v, "ie_2018_st_v2")
+plot(ie2018_quer, "ie_2018_st_v2", main = "Querétaro IIE2018 v2")
 
 # Promedio
 ie2018_edo_prom_v <- extract(ie2018_r_tr, edos_shp_tr, na.rm=TRUE, fun = mean,
                             as.spatvector = TRUE, xy = TRUE, bind = TRUE)
-plot(ie2018_edo_prom_v, "ie_2018_st_v2")
-head(ie2018_edo_prom_v)
+plot(ie2018_edo_prom_v, "México IIE2018 v2")
+head(ie2018_edo_prom_v) 
 
 # Mapa con más control de diseño mediante "ggplot2"
 # Mapa de estados de la república

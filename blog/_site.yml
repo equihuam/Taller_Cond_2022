@@ -4,7 +4,10 @@ description: |
   Condición con base en el índice de integridad ecosistémica 
   estimado con base en redes bayesianas
 output_dir: "_site"
+favicon: figuras/i-Gamma-1.ico
 navbar:
+  logo:
+    image: figuras/i-Gamma-1.png
   right:
     - text: "Inicio"
       href: index.html
