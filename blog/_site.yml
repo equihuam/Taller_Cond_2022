@@ -9,6 +9,7 @@ navbar:
   logo:
     image: figuras/i-Gamma-1.png
   right:
+    - text: "Días"
     - text: "Inicio"
       href: index.html
     - text: "De qué trata"
