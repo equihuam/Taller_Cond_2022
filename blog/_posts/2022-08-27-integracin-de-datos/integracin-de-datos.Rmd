@@ -3,277 +3,125 @@ title: "Integración de datos"
 description: |
   A short description of the post.
 author:
-  - name: Nora Jones
-    url: https://example.com/norajones
+  - name: Julián Equihua
+    url: https://taller-cuenta-condicion.netlify.app/posts/2022-08-27-integracin-de-datos/
 date: 2022-08-27
 output:
   distill::distill_article:
     self_contained: false
 ---
 
-
-
-
 # Aprendizaje de máquina (Machine learning)
 
-The probabilistic graphical models ecosystems are quite large these days.Arguably a bit more developed in R than in python. 
+Métodos computacionales para aprender de datos con el fin de replicar una tarea o toma de decisión.
 
+Existen varios paradigmas en aprendizaje de máquina, con distintos objetivos:
 
-```{r, echo = FALSE, fig.align = 'center', out.width = '100%' }
+* El aprendizaje supervisado procura predecir o estimar una variable respuesta a partir de datos de entrada
+* El apprendizaje no supervisado procura describir estructuras interesantes en datos, donde no necesariamente hay una respuesta que predecir
+* El aprendizaje semi-supervisado procura utilizar datos asociados a una variable respuesta al mismo tiempo que datos sin la variable para procurar mejor estimarla. Estos es intenta explotar datos sin etiquetas para mejorar la estimación.
+* El aprendizaje por refuerzo intenta estimar la mejor política posible en un problema de toma de decisiones secuenciales.
 
-knitr::include_graphics("./1_software.png")
+Ejemplos de tareas de aprendizaje:
+
+* Predecir si un individuo va a sobrevivir el hundimiento del Titanic,
+* Detectar llamados de murciélagos en grabaciones ultrasónicas,
+* Clasificar especies de animales en imágenes digitales producidas a través de foto trampeo,
+* Estimar el ingreso mensual de un hogar a partir de las características de la vivienda,
+* Dividir a los clientes de Netflix según sus gustos.
+* Recomendar artículos a clientes de un programa de lealtad o servicio online.
+
+Las razones usuales para intentar resolver estos problemas computacionalmente son diversas:
+
+Quisiéramos obtener una respuesta barata, rápida, automatizada, y con suficiente exactitud y precisión. Por ejemplo, reconocer caracteres en una placa de coche de una fotografía se puede hacer por personas, pero eso es lento y costoso. 
+
+```{r, echo = FALSE, fig.align = 'center', out.width = '80%'}
+
+knitr::include_graphics("1_license.jpeg")
 ```
 
-Probabilistic graphical models and bayesian causal inference in general has (unfortunately?) also been very successful in the propriety software department. There are many commercial applications that have impressive tools and even great educational resources (for a price):
+Igual ver cada fotografía para detectar e identificar los animales ahí presentes toma muchísimo tiempo.
 
-* [Netica](https://www.norsys.com/netica.html), used by us. Conabio has licenses for the application and c++ api.
-* [BayesFusion](https://www.bayesfusion.com/)
-* [BayesiaLab](https://www.bayesia.com/)
+```{r, echo = FALSE, fig.align = 'center', out.width = '80%'}
 
-Here we will be focusing on the excellent bnlearn package. 
+knitr::include_graphics("2_trampa.jpg")
+```
 
-# Defining BNs
+Quisiéramos superar el desempeño actual de los expertos o de reglas simples utilizando datos: por ejemplo, en la decisión de dar o no un préstamo a un solicitante, puede ser posible tomar mejores decisiones con algoritmos que con evaluaciones personales o con reglas simples que toman en cuenta el ingreso mensual, por ejemplo.
 
-In general, there are many ways to define BNs. It should be noted that what is usually needed first is a set of variables (which will later correspond to nodes) and a graph structure (some format where you can infer which nodes are connected to which).
+¿Lo mismo para la mejor toma de decisiones en cuanto al manejo de recursos naturales?
 
-The first natural step is to just have a list of the nodes we will work with. In bnlearn this is done quite easily. For example:
+También es de gran interés entender de manera más completa y sistemática el comportamiento de un fenómeno, identificando variables o patrones importantes.
+
+¿Dado un conjunto de datos ecológicos podemos hacer generar modelos que nos permitan ir explorando distintos aspectos de la integridad ecosistémica para generar conocimiento?
+
+De una vez adelantamos que el acercamiento que se sigue para generar el índice de integridad
+propuesto es uno de aprendizaje supervisado. Existe una variable que sirve de evidencia para el nivel de condición de los distintos ecosistemas del país y a la par se tienen variables que permiten estimar y, eventualmente, explicar este nivel de condición. El único detalle importante aquí es que la evidencia es categórica, y el índice deseado es uno continuo entre 0 y 1. 
+
+El aprendizaje de máquina generalmente se lleva a cabo con ayuda de software especializado. Programas propietarios o de código abierto o comunmente utilizando lenguajes de programación. Por ejemplo R, python y Julia. 
+
+Recomendamos ampliamente aprender los tres en la medida de lo posible pues ofrecen distintas posibilidades y ventajas. En esta sesión trabajaremos con R.
+
+Para comenzar carguemos unos datos ejemplo al espacio de trabajo de R.
 
 ```{r, echo = TRUE, fig.align = 'center'}
 
-library("bnlearn")
-
-empty_graph <- empty.graph(c("X", "Y", "Z"))
-
-empty_graph
-
-```
-
-Which simply initializes a 3-node BN with no arcs. We can then just set some arcs with a a two column matrix: "from" -> "to".
-
-```{r, echo = TRUE, fig.align = 'center'}
-
-edges = matrix(c("X", "Y",
-                 "Z", "Y"),
-                 ncol=2, byrow=TRUE)
-
-arcs(empty_graph)=edges
-
-empty_graph
-
-```
-
-
-```{r, echo = FALSE, fig.align = 'center', out.width = '100%' }
-
-knitr::include_graphics("2_empty.png")
-```
-
-## Notes on data availability for EI modelling
-
-The question of what data to use to model EI is an open one. We have already mentioned that we have a supervised approach (our target node has EI labels) and that the input for our models is a pixel*variables matrix. Since our objective is to produce a spatially explicit index each column in our input data table corresponds to a flattened geo-raster image. It's then extremely important to bare in mind that any variable can be used for EI modelling as long as it can be put in raster format. All rasters must be harmonized meaning that their extent, spatial resolution and projection be the same.
-
-All our variables are already harmonized and can be found [here](https://www.dropbox.com/sh/xvhlh4kq5pr4nam/AADzqY97zgy1p1vvwg40xLNEa?dl=0) and all the used code can be found in [this](https://github.com/jequihua/ei-workshop) repository.
-
-Before we begin to use them, we should mention that there are three main approaches to definine a BN structure:
-
-* Expert knowledge
-* Automated structure learning (algorithms)
-* Combinations of the previous
-
-we followed a combination of expert knowledge and structure learning to propose our EI-BN structure. It's based on a conceptual model which relates three distinct levels (tiers) of ecosystem functioning.
-
-```{r, echo = FALSE, fig.align = 'center', out.width = '100%', fig.cap="\\ The ecosystem integrity three-tier model."}
-
-knitr::include_graphics("3_threetier.png")
-```
-
-Even though we are currently working with 25 variables (TOO MANY!!!), the gist of the BN structure is something like:
-
-```{r, echo = FALSE, fig.align = 'center', out.width = '100%', fig.cap="\\ A generic ecosystem integrity BN based on the three-tier model."}
-
-knitr::include_graphics("4_generic_eibn.png")
-```
-
-## Defining a BN with our variables
-
-We have created code that allows to directly initilize a BN by reading in the list of (harmonized) rasters in a given folder as well a supplying the name of the target variable (EI).
-
-
-```{r, echo = TRUE, fig.align = 'center'}
-
-# load packages
-library("tools")
-
-# load misc functions
-source("./R/misc_functions.R")
-
-# List of independent variable rasters file names
-indep_var_paths = list_files_with_exts("./indep_var_paths/",
-                                       exts = "tif",
-                                       full.names = FALSE)
-
-# File name of dependent variable raster to be used
-dep_var_file = "hemerobia_250m.tif"
-
-adj_matrix = data.frame(matrix(0,length(indep_var_paths)+1,
-                                 length(indep_var_paths)+1))
-
-# set column and row names as file names 
-# (dependent and independent variables)
-colnames(adj_matrix)=c(dep_var_file,indep_var_paths)
-rownames(adj_matrix)=c(dep_var_file,indep_var_paths)
-
-# Remove file extensions from dimension names
-# Replace "." and spaces with "_"
-adj_matrix = fixDimnames(adj_matrix)
-
-# write initialized adjacency matrix to disk
-write.table(adj_matrix,"ienet_adj_v2.csv",sep=",",
-            row.names=TRUE,col.names=NA)
-
-```
-
-The output is an empty matrix where the rows and columns correspond to the available variables. This can be uploaded to google docs to discuss with experts which nodes should be connected. This can be a very cumbersome task but luckily we have [already](https://docs.google.com/spreadsheets/d/1TaI-yqTMK1ymKu_Ca6U77noY39wQW_PqSRwTrVeFvYc/edit?usp=sharing) done it for you. 
-
-
-```{r, echo = FALSE, fig.align = 'center', out.width = '100%', fig.cap="\\ The ecosystem integrity adjacency matrix."}
-
-knitr::include_graphics("./5_adj_matrix.png")
-```
-
-# Fitting the EI-BN
-
-Now that we have our variable list and our structure its time to fit our bayesian network. As mentionded first we need to have our data in table format. This will be produced by reading in our geo-rasters and flattening them to accomodate a single column in a data table. 
-
-```{r, echo = TRUE, fig.align = 'center'}
-
-# load additional packages
+# Cargar paquetes.
 library("raster")
-library("gRain")
 
-# List of independent variable rasters.
-indep_var_paths = list_files_with_exts("./indep_var_paths/",
-                                  exts = "tif")
+# Cargar un geotiff a R, de hecho el que sirve como evidencia para el modelo de IE.
+ruta_evidencia <- "./delta_vp/hemerobia_250m.tif"
+raster_evidencia <- raster(ruta_evidencia)
 
-# Load dependent variable raster (will be used as base raster).
-dep_var_path = "./delta_vp/hemerobia_250m.tif"
-
-# Create raster brick where bands are [dep_var,indep_var_1,...,indep_var_n].
-bnbrik = bnBrick(dep_var_path,indep_var_paths)
-
-# To df and drop incomplete rows
-bnbrik_df = data.frame(rasterToPoints(bnbrik))
-bnbrik_df = bnbrik_df[complete.cases(bnbrik_df),]
-
-# User must know which variables are factors and coerce them to factor.
-bnbrik_df = factorCols(bnbrik_df,
-                       c("hemerobia_250m", "zvh_31_lcc_h"))
+raster_evidencia
 
 ```
 
-We are working with discrete bayesian networks. So all nodes must be categorical. It's a research topic in itself how to discretize continuous variables in order to maximize the information they contain. To avoid complications in the original EI-BN we simply discretized all continuous variables using 10-equal intervals. We will do the same here but using 5 to lower the overall computation time. 
+Para aquellos que no han experimentado con lenguajes de programación para manejo y análisis de datos, acá están pasando varias cosas. Repasamos algunas de ellas.
 
-It should also be noted that the names of the variables that need discretizing must be supplied, but we know here that they are simply the 3rd to 24th variables/columns. 
-
-```{r, echo = TRUE, fig.align = 'center'}
-
-names(bnbrik_df)
-
-# User must know which variables are numeric and discretize them.
-bnbrik_df = discretizeCols(bnbrik_df,
-                           names(bnbrik_df)[3:24])
-```
-
-Now we load the csv file that has our adjacency matrix. This is then assigned to a bnlearn network object.  
-
-```{r, echo = TRUE, fig.align = 'center'}
-
-# Load adjacency matrix from csv.
-ie_adj <- read.csv("./networks/ienet_v2.csv", header = TRUE, row.names = 1, stringsAsFactors = FALSE)
-ie_adj[is.na(ie_adj)] <- 0
-
-# Create a graph based on this adjacency matrix.
-ie_graph = empty.graph(rownames(ie_adj))
-amat(ie_graph) = as.matrix(ie_adj)
-
-
-ie_graph
-
-```
-
-We are now ready to fit the EI-BN, this is actually quite fast!!! [sadly unlike predicting with it].
-
-```{r,eval=FALSE, echo = TRUE, fig.align = 'center'}
-
-# Fit bayesian network.
-fitted = bn.fit(ie_graph, bnbrik_df[,3:25], method = "bayes")
-
-# We use the junction tree algorithm to create 
-# an independence network that we can query
-# will be used later to predict and create the EI map.
-prior <- compile(as.grain(fitted))
-
-```
-
-# Predicting an EI index with the EI-BN.
-
-Now that we have our fitted EI-BN we simply need to predict over the whole data set.
-
-It's a good time to dwell a bit more deeply into the nature of our evidence for ecosystem condition. 
-
-In order to prime the hidden tier we prepared a “Delta Primary Vegetation” (DeltaPV) map, based on the [hemeroby concept](https://www.sciencedirect.com/science/article/abs/pii/S1617138104000299), that estimates the amount of transformation that vegetation shows by comparing [current](https://www.inegi.org.mx/temas/usosuelo/) land cover obtained from classified satellite imagery of the year 2008 versus [expected](https://www.inegi.org.mx/temas/bosques/) “primary vegetation”, as judged by expert opinion. The qualitative amount of change was evaluated following the criteria showed in Figure 4.
-
-
-```{r, echo = FALSE, fig.align = 'center', out.width = '100%', fig.cap="\\ Description of our proposed hemeroby/deltavp levels."}
-
-knitr::include_graphics("./6_deltavp.png")
-```
-
-As a classification task this will give us a probability for each of the 19 degradation levels (0-pristine, 18-well conserved) we have at our disposal as evidence for each and every pixel of our region of interest (the whole of Mexico but in this particular case it's state of Yucatan).
-
-We then proceed to use these probabilities to calculate the expectancy of the degradation levels and then standardize this over all the pixels (to 0-degraded, 1-well conserved). This is used to create the EI index map.
-
-```{r,eval=FALSE, echo = TRUE, fig.align = 'center', eval=FALSE}
-
-# Prediction (takes a million years but can be trivially parallelized, TODO)
-prediction = predict(prior,
-                     response="hemerobia_250m",
-                     newdata=bnbrik_df,
-                     type="distribution")
-
-
-probabilities <- prediction$pred$Adelt_vp_250m
-
-ie_expectancy <- list()
-for (i in 1:nrow(probabilities)){
-  print(i)
-  expect <- sum(as.numeric(colnames(probabilities)) * probabilities[i,])
-  print(expect)
-  ie_expectancy[[i]] <- expect
-}
-
-ie <- unlist(ie_expectancy)
-ie <- (18-ie)/(18)
-
-final_raster = data.frame(ie=ie,x=bnbrik_df$x,y=bnbrik_df$y)
-coordinates(final_raster)=~x+y
-gridded(final_raster)=TRUE
-final_raster = raster(final_raster)
-projection(final_raster)=projection(bnbrik)
-
-# save raster
-rf <- writeRaster(final_raster, filename="ie_yucatan.tif",
-                  format="GTiff", overwrite=TRUE)
-
-```
+Primero que nada, un elemento fundamental que debemos mencionar es el de una función. Una función recibe argumentos y lleva a cabo una cierta tarea (aunque suene un poco raro también puede recibir ningún argumento y llevar a cabo una tarea). Las funciones siempre tienen un nombre y los argumentos que reciben se colocan dentro de paréntesis.
 
 ```{r, echo = FALSE, fig.align = 'center', out.width = '100%'}
 
-knitr::include_graphics("./7_ei.png")
+knitr::include_graphics("3_funciones.png")
 ```
 
-```{r, echo = FALSE, fig.align = 'center', out.width = '100%', fig.cap="\\ Comparison of deltavp/hemerobia and the EI index."}
+Por ejemplo la función library() lleva a cabo la tarea de cargar un determinado paquete de R. Un argumento que DEBE recibir es el nombre del paquete a cargar. La función raster carga un raster en el espacio de trabajo de R (en la memoria RAM) y un argumento que DEBE recibir es la ruta en el disco duro del raster que se quiere cargar.
 
-knitr::include_graphics("./8_deltavp2.png")
+Cuando una función carga algo en memoria, esto se debe asignar a un objeto. Es decir que se debe de elegir un "nombre" con el cuál referirse a lo que se está cargando. Se puede elegir cualquier nombre pero se recomienda usar unos juiciosos para recordar de qué se tratan. Para asignar en R comúnmente se usa una flechita pero también puede usarse el símbolo de igual como en otros lenguajes de programación.
+
+```{r, echo = FALSE, fig.align = 'center', out.width = '100%'}
+
+knitr::include_graphics("4_asigobjeto.png")
 ```
 
+Hemos llamado 'raster_evidencia' al que acabamos de cargar, con este objeto podemos ver una versión cruda del mismo dentro de R.
+
+
+```{r, echo = TRUE, fig.align = 'center'}
+
+plot(raster_evidencia)
+
+```
+
+Ahora bien, un raster es una estructura que puede resultar muy útil para ciertos propósitos, pero para otros no tanto. Por ejemplo para llevar a cabo un proceso de análisis exploratorio de datos, el formato más común es el de una tabla de datos. De hecho R tiene un estándar de datos ampliamente aceptado llamado [tidy data](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html#:~:text=Tidy%20data%20is%20a%20standard,Every%20row%20is%20an%20observation.) donde se analiza y describe cómo deberían de ser las tablas de datos para análisis. Dejando eso de lado, generalmente existen funciones en R (y en los otros lenguajes) para pasar de un tipo de objeto (dato) a otro. Por ejemplo de un raster a una tabla de datos: 
+
+```{r, echo = TRUE, fig.align = 'center'}
+
+tabla_evidencia <- as.data.frame(rasterToPoints(raster_evidencia))
+
+head(tabla_evidencia)
+
+```
+
+Acá cada fila es una observación (un píxel) y cada columna una variable coordenada x, coordenada y, el valor de hemerobia del píxel. 
+
+```{r, echo = TRUE, fig.align = 'center'}
+
+library("ggplot2")
+
+ggplot(tabla_evidencia, aes(hemerobia_250m, fill = cut(hemerobia_250m, 18))) +
+  geom_histogram(show.legend = FALSE) +
+  scale_fill_brewer(palette="RdYlGn", direction = -1)
+
+```
