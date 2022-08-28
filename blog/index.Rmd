@@ -1,5 +1,5 @@
 ---
-title: "Integridad Ecosistémica"
+title: "Condición: IIE"
 site: distill::distill_website
 listing: posts
 ---

@@ -1,5 +1,22 @@
 [
   {
+    "path": "posts/2022-08-28-presentacion/",
+    "title": "Presentación",
+    "description": "Objetivos y plan de trabajo.",
+    "author": [
+      {
+        "name": "Octavio Pérez Maqueo, Miguel Equihua Zamora y Julián Equihua Benítez",
+        "url": "https://ie-gamma.net"
+      }
+    ],
+    "date": "2022-08-28",
+    "categories": [],
+    "contents": "\r\nTaller de\r\ntrabajo sobre la cuenta de condición\r\nLos días 29 y 30 de agosto así como el 1 de septiembre se desarrolla\r\neste taller con la participación de personal de INEGI y SEMARNAT. Los\r\nconductores del taller son:\r\nOctavio Pérez Maqueo\r\nMiguel Equihua Zamora\r\nJulián Equihua Benítez\r\nConsideraciones estratégicas\r\nPara reflexionar sobre aspectos estratégicos de la gestión del\r\nsistema de cuentas ambientales basadas en ecosistemas (SEEA EA),\r\nproponemos utilizar este pizarra virtual en\r\nMiro. Les solicitamos que vayan anotando ideas ahí, conforme les\r\nvayan surgiendo. Tenemos previsto tener una sesión de discusión sobre la\r\nperspectiva futura del sistema el Miércoles 1. Lo haremos con base en\r\nesta pizarra virtual.\r\n\r\n\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2022-08-28T12:21:27-05:00",
+    "input_file": {}
+  },
+  {
     "path": "posts/2022-08-27-integracin-de-datos/",
     "title": "Integración de datos",
     "description": "A short description of the post.",

@@ -2,18 +2,18 @@
   "articles": [
     {
       "path": "about.html",
-      "title": "About this blog",
-      "description": "Some additional details about the blog",
+      "title": "Qué contiene este blog",
+      "description": "Material de exposición y discusión en torno al cálculo del índice de integridad\necosistémica en México. Se describe principalmente el enfoque basado en redes bayesianas ",
       "author": [],
       "contents": "\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-08-28T00:13:09-05:00"
+      "last_modified": "2022-08-28T12:56:22-05:00"
     },
     {
       "path": "index.html",
-      "title": "Integridad Ecosistémica",
+      "title": "Condición: IIE",
       "author": [],
       "contents": "\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-08-28T00:13:12-05:00"
+      "last_modified": "2022-08-28T12:56:45-05:00"
     }
   ],
   "collections": ["posts/posts.json"]

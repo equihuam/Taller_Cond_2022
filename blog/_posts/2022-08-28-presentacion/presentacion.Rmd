@@ -1,0 +1,45 @@
+---
+title: "Presentación"
+description: |
+  Objetivos y plan de trabajo.
+author:
+  - name: Octavio Pérez Maqueo, Miguel Equihua Zamora y Julián Equihua Benítez
+    url: https://ie-gamma.net
+date: 2022-08-28
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Taller sobre Cuenta de Condición
+
+Los días 29 y 30 de agosto así como el 1 de septiembre se desarrolla este taller con la participación de personal de INEGI y SEMARNAT. Los conductores del taller son:
+
+* Octavio Pérez Maqueo
+* Miguel Equihua Zamora
+* Julián Equihua Benítez
+
+```{r}
+agenda <- read_excel("~/1 Nubes/El Instituto de Ecología/Proyecto Integralidad Gamma - Documentos/02 Cursos Gamma/INEGI_2022/Agenda.xlsx", skip = 1, range = "B1:G30")
+
+
+names(agenda) <- c("tema", "tiempo", "hora_i", "hora_f", "expone", "objetivo", "temas")
+temas <- agenda$tema[!grepl("Duración|Día", agenda$tema) & !is.na(agenda$tema)]
+#knitr::kable(temas, format = "html")
+```
+
+
+
+### Consideraciones estratégicas
+
+Para reflexionar sobre aspectos estratégicos de la gestión del sistema de cuentas ambientales basadas en ecosistemas (SEEA EA), proponemos utilizar este [pizarra virtual en Miro](https://miro.com/app/board/uXjVPf-z5Tg=/). Les solicitamos que vayan anotando ideas ahí, conforme les vayan surgiendo. Tenemos previsto tener una sesión de discusión sobre la perspectiva futura del sistema el Miércoles 1. Lo haremos con base en esta pizarra virtual.
+
+<iframe width="768" height="432" src="https://miro.com/app/live-embed/uXjVPf-z5Tg=/?moveToViewport=-2488,-1273,4975,2544&embedId=473439136531" frameborder="0" scrolling="no" allowfullscreen></iframe>
+
+
+

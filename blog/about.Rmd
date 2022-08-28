@@ -1,7 +1,8 @@
 ---
-title: "About this blog"
+title: "Qué contiene este blog"
 description: |
-  Some additional details about the blog
+  Material de exposición y discusión en torno al cálculo del índice de integridad
+  ecosistémica en México. Se describe principalmente el enfoque basado en redes bayesianas 
 ---
 
 ```{r setup, include=FALSE}

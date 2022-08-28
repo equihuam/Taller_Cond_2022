@@ -1,13 +1,14 @@
 ---
-title: "Welcome to Integridad Ecosistémica"
+title: "Bienvenida al taller sobre condición ecosistémica"
 description: |
-  Welcome to our new blog, Integridad Ecosistémica. We hope you enjoy 
-  reading what we have to say!
+  Bienvenidos a este blog que está integrado por los materiales de capacitación
+  y discusión sobre el cómputo del índice de integridad ecosistémica con el enfoque
+  de redes bayesianas. Este índice se utiliza en la integración de la cuenta 
+  de condición.
 author:
-  - name: Nora Jones 
-    url: https://example.com/norajones
-    affiliation: Spacely Sprockets
-    affiliation_url: https://example.com/spacelysprokets
+  - name: Octavio Pérez Maqueo, Miguel Equihua Zamora y Julián Equihua Benítez 
+    url: https://i-gamma.net
+    affiliation: Integralidad Gamma
 date: 08-26-2022
 output:
   distill::distill_article:
