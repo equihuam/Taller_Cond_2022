@@ -14,8 +14,15 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-Distill is a publication format for scientific and technical writing, native to the web.
+En esta presentación buscamos compartir estructura conceptual y las definiciones operativas de los elementos que intervienen la integración de un sistema de contabilidad ambiental y económica basado en ecosistemas ([SCAE CE](https://seea.un.org/ecosystem-accounting), SEEA EA en inglés). El objetivo que proponemos para esta participación es:
 
-Learn more about using Distill at <https://rstudio.github.io/distill>.
+> El participante identifica los conceptos clave de la tipología SCAE EA y conoce la forma como se aplicó el enfoque en el piloto mexicano
+
+
+Lo que sigue es el vínculo a la presentación que usaremos para discutir el tema.
+
+
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTHeokrZ8-W3Hvjh5ktqfja_OFKdBxXCaySbhTDkhtndbaBxDjtD0qJYkfR55uZtT7fXVQEiPI9TK6U/embed?start=false&loop=false&delayms=3000" frameborder="0" width="1280" height="749" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" data-external="1"></iframe>
+
 
 

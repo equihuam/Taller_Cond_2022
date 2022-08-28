@@ -25,6 +25,7 @@ Los días 29 y 30 de agosto así como el 1 de septiembre se desarrolla este tall
 * Julián Equihua Benítez
 
 ```{r}
+
 agenda <- read_excel("~/1 Nubes/El Instituto de Ecología/Proyecto Integralidad Gamma - Documentos/02 Cursos Gamma/INEGI_2022/Agenda.xlsx", skip = 1, range = "B1:G30")
 
 
