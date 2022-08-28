@@ -11,13 +11,5 @@ output:
     self_contained: false
 ---
 
-<iframe
-    src="http://www.gnu.org/" 
-    frameborder="0"
-    style="overflow:hidden;height:100%;width:100%" 
-    height="100%" 
-    width="100%"
-    data-external="1">
-    
-</iframe>
 
+<iframe src="https://inecol-my.sharepoint.com/personal/miguel_equihua_inecol_mx/_layouts/15/Doc.aspx?sourcedoc={957f3ffe-7450-46af-bba9-dee2e3dc6893}&amp;action=embedview&amp;wdAr=1.7777777777777777" width="800px" height="400px" frameborder="0" data-external="1">This is an embedded <a target="_blank" href="https://office.com">Microsoft Office</a> presentation, powered by <a target="_blank" href="https://office.com/webapps" >Office</a>.</iframe>
