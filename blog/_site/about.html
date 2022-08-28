@@ -88,39 +88,639 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
   <!--radix_placeholder_meta_tags-->
-  <title>Integración de datos</title>
+  <title>Condición: IIE: Qué contiene este blog</title>
 
-  <meta property="description" itemprop="description" content="A short description of the post."/>
+  <meta property="description" itemprop="description" content="Material de exposición y discusión en torno al cálculo del índice de integridad&#10;ecosistémica en México. Se describe principalmente el enfoque basado en redes bayesianas"/>
 
+  <link rel="icon" type="image/vnd.microsoft.icon" href="figuras/i-Gamma-1.ico"/>
 
-  <!--  https://schema.org/Article -->
-  <meta property="article:published" itemprop="datePublished" content="2022-08-27"/>
-  <meta property="article:created" itemprop="dateCreated" content="2022-08-27"/>
-  <meta name="article:author" content="Julián Equihua"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Integración de datos"/>
+  <meta property="og:title" content="Condición: IIE: Qué contiene este blog"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="A short description of the post."/>
+  <meta property="og:description" content="Material de exposición y discusión en torno al cálculo del índice de integridad&#10;ecosistémica en México. Se describe principalmente el enfoque basado en redes bayesianas"/>
   <meta property="og:locale" content="en_US"/>
+  <meta property="og:site_name" content="Condición: IIE"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Integración de datos"/>
-  <meta property="twitter:description" content="A short description of the post."/>
+  <meta property="twitter:title" content="Condición: IIE: Qué contiene este blog"/>
+  <meta property="twitter:description" content="Material de exposición y discusión en torno al cálculo del índice de integridad&#10;ecosistémica en México. Se describe principalmente el enfoque basado en redes bayesianas"/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Integración de datos"]},{"type":"character","attributes":{},"value":["A short description of the post.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Julián Equihua"]},{"type":"character","attributes":{},"value":["https://taller-cuenta-condicion.netlify.app/posts/2022-08-27-integracin-de-datos/"]}]}]},{"type":"character","attributes":{},"value":["2022-08-27"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description"]}},"value":[{"type":"character","attributes":{},"value":["Qué contiene este blog"]},{"type":"character","attributes":{},"value":["Material de exposición y discusión en torno al cálculo del índice de integridad\necosistémica en México. Se describe principalmente el enfoque basado en redes bayesianas "]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
-  
-  <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["1_license.jpeg","1_software.png","2_empty.png","2_trampa.jpg","3_funciones.png","3_threetier.png","4_asigobjeto.png","4_generic_eibn.png","5_adj_matrix.png","6_deltavp.png","7_ei.png","8_deltavp2.png","delta_vp/hemerobia_250m.tif","ienet_adj_v2.csv","indep_var_paths/AlturaFusteLimpio_desvest_250m.tif","indep_var_paths/AlturaFusteLimpio_media_250m.tif","indep_var_paths/AlturaTotal_desvest_250m.tif","indep_var_paths/AlturaTotal_media_250m.tif","indep_var_paths/DiametroCopa_desvest_250m.tif","indep_var_paths/DiametroCopa_media_250m.tif","indep_var_paths/DiametroNormal_desvest_250m.tif","indep_var_paths/DiametroNormal_media_250m.tif","indep_var_paths/net_photo_mean.tif","indep_var_paths/net_photo_mean_lluvias.tif","indep_var_paths/net_photo_mean_secas.tif","indep_var_paths/net_photo_sd.tif","indep_var_paths/presenciaArbolesMuertos_250m.tif","indep_var_paths/presenciaInsectos_250m.tif","indep_var_paths/propor_bosque.tif","indep_var_paths/propor_pastizaloagricultura.tif","indep_var_paths/propor_selva.tif","indep_var_paths/propor_suelodesnudo.tif","indep_var_paths/propor_urbano.tif","indep_var_paths/srtm90m_mean250m.tif","indep_var_paths/srtm90m_range250m.tif","indep_var_paths/zvh_31_lcc_h.tif","integracin-de-datos_files/anchor-4.2.2/anchor.min.js","integracin-de-datos_files/bowser-1.9.3/bowser.min.js","integracin-de-datos_files/distill-2.2.21/template.v2.js","integracin-de-datos_files/figure-html5/unnamed-chunk-4-1.png","integracin-de-datos_files/figure-html5/unnamed-chunk-6-1.png","integracin-de-datos_files/figure-html5/unnamed-chunk-8-1.png","integracin-de-datos_files/figure-html5/unnamed-chunk-9-1.png","integracin-de-datos_files/header-attrs-2.11/header-attrs.js","integracin-de-datos_files/jquery-3.6.0/jquery-3.6.0.js","integracin-de-datos_files/jquery-3.6.0/jquery-3.6.0.min.js","integracin-de-datos_files/jquery-3.6.0/jquery-3.6.0.min.map","integracin-de-datos_files/popper-2.6.0/popper.min.js","integracin-de-datos_files/tippy-6.2.7/tippy-bundle.umd.min.js","integracin-de-datos_files/tippy-6.2.7/tippy-light-border.css","integracin-de-datos_files/tippy-6.2.7/tippy.css","integracin-de-datos_files/tippy-6.2.7/tippy.umd.min.js","integracin-de-datos_files/webcomponents-2.0.0/webcomponents.js","networks/ienet_empty_v2.csv","networks/ienet_v2.csv","R/fit_bn_adj_matrix.R","R/initialize_adj_matrix.R","R/misc_functions.R","R/predict_with_bn.R","R/specify_bn.R"]}
-  </script>
   <!--radix_placeholder_navigation_in_header-->
+  <meta name="distill:offset" content=""/>
+
+  <script type="application/javascript">
+
+    window.headroom_prevent_pin = false;
+
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+
+      // initialize headroom for banner
+      var header = $('header').get(0);
+      var headerHeight = header.offsetHeight;
+      var headroom = new Headroom(header, {
+        tolerance: 5,
+        onPin : function() {
+          if (window.headroom_prevent_pin) {
+            window.headroom_prevent_pin = false;
+            headroom.unpin();
+          }
+        }
+      });
+      headroom.init();
+      if(window.location.hash)
+        headroom.unpin();
+      $(header).addClass('headroom--transition');
+
+      // offset scroll location for banner on hash change
+      // (see: https://github.com/WickyNilliams/headroom.js/issues/38)
+      window.addEventListener("hashchange", function(event) {
+        window.scrollTo(0, window.pageYOffset - (headerHeight + 25));
+      });
+
+      // responsive menu
+      $('.distill-site-header').each(function(i, val) {
+        var topnav = $(this);
+        var toggle = topnav.find('.nav-toggle');
+        toggle.on('click', function() {
+          topnav.toggleClass('responsive');
+        });
+      });
+
+      // nav dropdowns
+      $('.nav-dropbtn').click(function(e) {
+        $(this).next('.nav-dropdown-content').toggleClass('nav-dropdown-active');
+        $(this).parent().siblings('.nav-dropdown')
+           .children('.nav-dropdown-content').removeClass('nav-dropdown-active');
+      });
+      $("body").click(function(e){
+        $('.nav-dropdown-content').removeClass('nav-dropdown-active');
+      });
+      $(".nav-dropdown").click(function(e){
+        e.stopPropagation();
+      });
+    });
+  </script>
+
+  <style type="text/css">
+
+  /* Theme (user-documented overrideables for nav appearance) */
+
+  .distill-site-nav {
+    color: rgba(255, 255, 255, 0.8);
+    background-color: #0F2E3D;
+    font-size: 15px;
+    font-weight: 300;
+  }
+
+  .distill-site-nav a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .distill-site-nav a:hover {
+    color: white;
+  }
+
+  @media print {
+    .distill-site-nav {
+      display: none;
+    }
+  }
+
+  .distill-site-header {
+
+  }
+
+  .distill-site-footer {
+
+  }
+
+
+  /* Site Header */
+
+  .distill-site-header {
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 3;
+  }
+
+  .distill-site-header .nav-left {
+    display: inline-block;
+    margin-left: 8px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .distill-site-header .nav-left {
+      margin-left: 0;
+    }
+  }
+
+
+  .distill-site-header .nav-right {
+    float: right;
+    margin-right: 8px;
+  }
+
+  .distill-site-header a,
+  .distill-site-header .title {
+    display: inline-block;
+    text-align: center;
+    padding: 14px 10px 14px 10px;
+  }
+
+  .distill-site-header .title {
+    font-size: 18px;
+    min-width: 150px;
+  }
+
+  .distill-site-header .logo {
+    padding: 0;
+  }
+
+  .distill-site-header .logo img {
+    display: none;
+    max-height: 20px;
+    width: auto;
+    margin-bottom: -4px;
+  }
+
+  .distill-site-header .nav-image img {
+    max-height: 18px;
+    width: auto;
+    display: inline-block;
+    margin-bottom: -3px;
+  }
+
+
+
+  @media screen and (min-width: 1000px) {
+    .distill-site-header .logo img {
+      display: inline-block;
+    }
+    .distill-site-header .nav-left {
+      margin-left: 20px;
+    }
+    .distill-site-header .nav-right {
+      margin-right: 20px;
+    }
+    .distill-site-header .title {
+      padding-left: 12px;
+    }
+  }
+
+
+  .distill-site-header .nav-toggle {
+    display: none;
+  }
+
+  .nav-dropdown {
+    display: inline-block;
+    position: relative;
+  }
+
+  .nav-dropdown .nav-dropbtn {
+    border: none;
+    outline: none;
+    color: rgba(255, 255, 255, 0.8);
+    padding: 16px 10px;
+    background-color: transparent;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    margin: 0;
+    margin-top: 1px;
+    z-index: 2;
+  }
+
+  .nav-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 200px;
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 4px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+    z-index: 1;
+    margin-top: 2px;
+    white-space: nowrap;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+
+  .nav-dropdown-content hr {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-dropdown-active {
+    display: block;
+  }
+
+  .nav-dropdown-content a, .nav-dropdown-content .nav-dropdown-header {
+    color: black;
+    padding: 6px 24px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+
+  .nav-dropdown-content .nav-dropdown-header {
+    display: block;
+    padding: 5px 24px;
+    padding-bottom: 0;
+    text-transform: uppercase;
+    font-size: 14px;
+    color: #999999;
+    white-space: nowrap;
+  }
+
+  .nav-dropdown:hover .nav-dropbtn {
+    color: white;
+  }
+
+  .nav-dropdown-content a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+
+  .nav-right .nav-dropdown-content {
+    margin-left: -45%;
+    right: 0;
+  }
+
+  @media screen and (max-width: 768px) {
+    .distill-site-header a, .distill-site-header .nav-dropdown  {display: none;}
+    .distill-site-header a.nav-toggle {
+      float: right;
+      display: block;
+    }
+    .distill-site-header .title {
+      margin-left: 0;
+    }
+    .distill-site-header .nav-right {
+      margin-right: 0;
+    }
+    .distill-site-header {
+      overflow: hidden;
+    }
+    .nav-right .nav-dropdown-content {
+      margin-left: 0;
+    }
+  }
+
+
+  @media screen and (max-width: 768px) {
+    .distill-site-header.responsive {position: relative; min-height: 500px; }
+    .distill-site-header.responsive a.nav-toggle {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .distill-site-header.responsive a,
+    .distill-site-header.responsive .nav-dropdown {
+      display: block;
+      text-align: left;
+    }
+    .distill-site-header.responsive .nav-left,
+    .distill-site-header.responsive .nav-right {
+      width: 100%;
+    }
+    .distill-site-header.responsive .nav-dropdown {float: none;}
+    .distill-site-header.responsive .nav-dropdown-content {position: relative;}
+    .distill-site-header.responsive .nav-dropdown .nav-dropbtn {
+      display: block;
+      width: 100%;
+      text-align: left;
+    }
+  }
+
+  /* Site Footer */
+
+  .distill-site-footer {
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    z-index: 3;
+    margin-top: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    text-align: center;
+  }
+
+  /* Headroom */
+
+  d-title {
+    padding-top: 6rem;
+  }
+
+  @media print {
+    d-title {
+      padding-top: 4rem;
+    }
+  }
+
+  .headroom {
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .headroom--transition {
+    transition: all .4s ease-in-out;
+  }
+
+  .headroom--unpinned {
+    top: -100px;
+  }
+
+  .headroom--pinned {
+    top: 0;
+  }
+
+  /* adjust viewport for navbar height */
+  /* helps vertically center bootstrap (non-distill) content */
+  .min-vh-100 {
+    min-height: calc(100vh - 100px) !important;
+  }
+
+  </style>
+
+  <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+  <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
+  <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
+  <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
+  <script src="site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
+  <script src="site_libs/fuse-6.4.1/fuse.min.js"></script>
+
+  <script type="application/javascript">
+
+  function getMeta(metaName) {
+    var metas = document.getElementsByTagName('meta');
+    for (let i = 0; i < metas.length; i++) {
+      if (metas[i].getAttribute('name') === metaName) {
+        return metas[i].getAttribute('content');
+      }
+    }
+    return '';
+  }
+
+  function offsetURL(url) {
+    var offset = getMeta('distill:offset');
+    return offset ? offset + '/' + url : url;
+  }
+
+  function createFuseIndex() {
+
+    // create fuse index
+    var options = {
+      keys: [
+        { name: 'title', weight: 20 },
+        { name: 'categories', weight: 15 },
+        { name: 'description', weight: 10 },
+        { name: 'contents', weight: 5 },
+      ],
+      ignoreLocation: true,
+      threshold: 0
+    };
+    var fuse = new window.Fuse([], options);
+
+    // fetch the main search.json
+    return fetch(offsetURL('search.json'))
+      .then(function(response) {
+        if (response.status == 200) {
+          return response.json().then(function(json) {
+            // index main articles
+            json.articles.forEach(function(article) {
+              fuse.add(article);
+            });
+            // download collections and index their articles
+            return Promise.all(json.collections.map(function(collection) {
+              return fetch(offsetURL(collection)).then(function(response) {
+                if (response.status === 200) {
+                  return response.json().then(function(articles) {
+                    articles.forEach(function(article) {
+                      fuse.add(article);
+                    });
+                  })
+                } else {
+                  return Promise.reject(
+                    new Error('Unexpected status from search index request: ' +
+                              response.status)
+                  );
+                }
+              });
+            })).then(function() {
+              return fuse;
+            });
+          });
+
+        } else {
+          return Promise.reject(
+            new Error('Unexpected status from search index request: ' +
+                        response.status)
+          );
+        }
+      });
+  }
+
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+
+    // get search element (bail if we don't have one)
+    var searchEl = window.document.getElementById('distill-search');
+    if (!searchEl)
+      return;
+
+    createFuseIndex()
+      .then(function(fuse) {
+
+        // make search box visible
+        searchEl.classList.remove('hidden');
+
+        // initialize autocomplete
+        var options = {
+          autoselect: true,
+          hint: false,
+          minLength: 2,
+        };
+        window.autocomplete(searchEl, options, [{
+          source: function(query, callback) {
+            const searchOptions = {
+              isCaseSensitive: false,
+              shouldSort: true,
+              minMatchCharLength: 2,
+              limit: 10,
+            };
+            var results = fuse.search(query, searchOptions);
+            callback(results
+              .map(function(result) { return result.item; })
+            );
+          },
+          templates: {
+            suggestion: function(suggestion) {
+              var img = suggestion.preview && Object.keys(suggestion.preview).length > 0
+                ? `<img src="${offsetURL(suggestion.preview)}"</img>`
+                : '';
+              var html = `
+                <div class="search-item">
+                  <h3>${suggestion.title}</h3>
+                  <div class="search-item-description">
+                    ${suggestion.description || ''}
+                  </div>
+                  <div class="search-item-preview">
+                    ${img}
+                  </div>
+                </div>
+              `;
+              return html;
+            }
+          }
+        }]).on('autocomplete:selected', function(event, suggestion) {
+          window.location.href = offsetURL(suggestion.path);
+        });
+        // remove inline display style on autocompleter (we want to
+        // manage responsive display via css)
+        $('.algolia-autocomplete').css("display", "");
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+
+  });
+
+  </script>
+
+  <style type="text/css">
+
+  .nav-search {
+    font-size: x-small;
+  }
+
+  /* Algolioa Autocomplete */
+
+  .algolia-autocomplete {
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: sub;
+    background-color: white;
+    color: black;
+    padding: 6px;
+    padding-top: 8px;
+    padding-bottom: 0;
+    border-radius: 6px;
+    border: 1px #0F2E3D solid;
+    width: 180px;
+  }
+
+
+  @media screen and (max-width: 768px) {
+    .distill-site-nav .algolia-autocomplete {
+      display: none;
+      visibility: hidden;
+    }
+    .distill-site-nav.responsive .algolia-autocomplete {
+      display: inline-block;
+      visibility: visible;
+    }
+    .distill-site-nav.responsive .algolia-autocomplete .aa-dropdown-menu {
+      margin-left: 0;
+      width: 400px;
+      max-height: 400px;
+    }
+  }
+
+  .algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
+    width: 90%;
+    outline: none;
+    border: none;
+  }
+
+  .algolia-autocomplete .aa-hint {
+    color: #999;
+  }
+  .algolia-autocomplete .aa-dropdown-menu {
+    width: 550px;
+    max-height: 70vh;
+    overflow-x: visible;
+    overflow-y: scroll;
+    padding: 5px;
+    margin-top: 3px;
+    margin-left: -150px;
+    background-color: #fff;
+    border-radius: 5px;
+    border: 1px solid #999;
+    border-top: none;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
+    cursor: pointer;
+    padding: 5px 4px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion:last-of-type {
+    border-bottom: none;
+    margin-bottom: 2px;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item {
+    overflow: hidden;
+    font-size: 0.8em;
+    line-height: 1.4em;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item h3 {
+    font-size: 1rem;
+    margin-block-start: 0;
+    margin-block-end: 5px;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-description {
+    display: inline-block;
+    overflow: hidden;
+    height: 2.8em;
+    width: 80%;
+    margin-right: 4%;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview {
+    display: inline-block;
+    width: 15%;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img {
+    height: 3em;
+    width: auto;
+    display: none;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img[src] {
+    display: initial;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
+    background-color: #eee;
+  }
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
+    font-weight: bold;
+    font-style: normal;
+  }
+
+  </style>
+
+
   <!--/radix_placeholder_navigation_in_header-->
   <!--radix_placeholder_distill-->
 
@@ -1468,16 +2068,15 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="integracin-de-datos_files/header-attrs-2.14/header-attrs.js"></script>
-  <script src="integracin-de-datos_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-  <script src="integracin-de-datos_files/popper-2.6.0/popper.min.js"></script>
-  <link href="integracin-de-datos_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
-  <link href="integracin-de-datos_files/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
-  <script src="integracin-de-datos_files/tippy-6.2.7/tippy.umd.min.js"></script>
-  <script src="integracin-de-datos_files/anchor-4.2.2/anchor.min.js"></script>
-  <script src="integracin-de-datos_files/bowser-1.9.3/bowser.min.js"></script>
-  <script src="integracin-de-datos_files/webcomponents-2.0.0/webcomponents.js"></script>
-  <script src="integracin-de-datos_files/distill-2.2.21/template.v2.js"></script>
+  <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+  <script src="site_libs/popper-2.6.0/popper.min.js"></script>
+  <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="site_libs/tippy-6.2.7/tippy.umd.min.js"></script>
+  <script src="site_libs/anchor-4.2.2/anchor.min.js"></script>
+  <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
+  <script src="site_libs/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="site_libs/distill-2.2.21/template.v2.js"></script>
   <!--radix_placeholder_site_in_header-->
   <!--/radix_placeholder_site_in_header-->
 
@@ -1489,197 +2088,44 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Integración de datos","description":"A short description of the post.","authors":[{"author":"Julián Equihua","authorURL":"https://taller-cuenta-condicion.netlify.app/posts/2022-08-27-integracin-de-datos/","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2022-08-27T00:00:00.000-05:00","citationText":"Equihua, 2022"}
+{"title":"Qué contiene este blog","description":"Material de exposición y discusión en torno al cálculo del índice de integridad\necosistémica en México. Se describe principalmente el enfoque basado en redes bayesianas","authors":[]}
 </script>
 
 <!--/radix_placeholder_front_matter-->
 <!--radix_placeholder_navigation_before_body-->
+<header class="header header--fixed" role="banner">
+<nav class="distill-site-nav distill-site-header">
+<div class="nav-left">
+<a class="logo">
+<img src="figuras/i-Gamma-1.png" alt="Logo"/>
+</a>
+<a href="index.html" class="title">Condición: IIE</a>
+<input id="distill-search" class="nav-search hidden" type="text" placeholder="Search..."/>
+</div>
+<div class="nav-right">
+<span class="nav-dropdown-header">Días</span>
+<a href="index.html">Inicio</a>
+<a href="about.html">De qué trata</a>
+<a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
+</div>
+</nav>
+</header>
 <!--/radix_placeholder_navigation_before_body-->
 <!--radix_placeholder_site_before_body-->
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Integración de datos</h1>
+<h1>Qué contiene este blog</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>A short description of the post.</p></p>
+<p><p>Material de exposición y discusión en torno al cálculo del índice
+de integridad ecosistémica en México. Se describe principalmente el
+enfoque basado en redes bayesianas</p></p>
 </div>
 
-<div class="d-byline">
-  Julián Equihua <a
-href="https://taller-cuenta-condicion.netlify.app/posts/2022-08-27-integracin-de-datos/"
-class="uri">https://taller-cuenta-condicion.netlify.app/posts/2022-08-27-integracin-de-datos/</a> 
-  
-<br/>2022-08-27
-</div>
 
 <div class="d-article">
-<h1 id="aprendizaje-de-máquina-machine-learning">Aprendizaje de máquina
-(Machine learning)</h1>
-<p>Métodos computacionales para aprender de datos con el fin de replicar
-una tarea o toma de decisión.</p>
-<p>Existen varios paradigmas en aprendizaje de máquina, con distintos
-objetivos:</p>
-<ul>
-<li>El aprendizaje supervisado procura predecir o estimar una variable
-respuesta a partir de datos de entrada</li>
-<li>El apprendizaje no supervisado procura describir estructuras
-interesantes en datos, donde no necesariamente hay una respuesta que
-predecir</li>
-<li>El aprendizaje semi-supervisado procura utilizar datos asociados a
-una variable respuesta al mismo tiempo que datos sin la variable para
-procurar mejor estimarla. Estos es intenta explotar datos sin etiquetas
-para mejorar la estimación.</li>
-<li>El aprendizaje por refuerzo intenta estimar la mejor política
-posible en un problema de toma de decisiones secuenciales.</li>
-</ul>
-<p>Ejemplos de tareas de aprendizaje:</p>
-<ul>
-<li>Predecir si un individuo va a sobrevivir el hundimiento del
-Titanic,</li>
-<li>Detectar llamados de murciélagos en grabaciones ultrasónicas,</li>
-<li>Clasificar especies de animales en imágenes digitales producidas a
-través de foto trampeo,</li>
-<li>Estimar el ingreso mensual de un hogar a partir de las
-características de la vivienda,</li>
-<li>Dividir a los clientes de Netflix según sus gustos.</li>
-<li>Recomendar artículos a clientes de un programa de lealtad o servicio
-online.</li>
-</ul>
-<p>Las razones usuales para intentar resolver estos problemas
-computacionalmente son diversas:</p>
-<p>Quisiéramos obtener una respuesta barata, rápida, automatizada, y con
-suficiente exactitud y precisión. Por ejemplo, reconocer caracteres en
-una placa de coche de una fotografía se puede hacer por personas, pero
-eso es lento y costoso.</p>
-<div class="layout-chunk" data-layout="l-body">
-<p><img src="1_license.jpeg" width="80%" style="display: block; margin: auto;" /></p>
-</div>
-<p>Igual ver cada fotografía para detectar e identificar los animales
-ahí presentes toma muchísimo tiempo.</p>
-<div class="layout-chunk" data-layout="l-body">
-<p><img src="2_trampa.jpg" width="80%" style="display: block; margin: auto;" /></p>
-</div>
-<p>Quisiéramos superar el desempeño actual de los expertos o de reglas
-simples utilizando datos: por ejemplo, en la decisión de dar o no un
-préstamo a un solicitante, puede ser posible tomar mejores decisiones
-con algoritmos que con evaluaciones personales o con reglas simples que
-toman en cuenta el ingreso mensual, por ejemplo.</p>
-<p>¿Lo mismo para la mejor toma de decisiones en cuanto al manejo de
-recursos naturales?</p>
-<p>También es de gran interés entender de manera más completa y
-sistemática el comportamiento de un fenómeno, identificando variables o
-patrones importantes.</p>
-<p>¿Dado un conjunto de datos ecológicos podemos hacer generar modelos
-que nos permitan ir explorando distintos aspectos de la integridad
-ecosistémica para generar conocimiento?</p>
-<p>De una vez adelantamos que el acercamiento que se sigue para generar
-el índice de integridad propuesto es uno de aprendizaje supervisado.
-Existe una variable que sirve de evidencia para el nivel de condición de
-los distintos ecosistemas del país y a la par se tienen variables que
-permiten estimar y, eventualmente, explicar este nivel de condición. El
-único detalle importante aquí es que la evidencia es categórica, y el
-índice deseado es uno continuo entre 0 y 1.</p>
-<p>El aprendizaje de máquina generalmente se lleva a cabo con ayuda de
-software especializado. Programas propietarios o de código abierto o
-comunmente utilizando lenguajes de programación. Por ejemplo R, python y
-Julia.</p>
-<p>Recomendamos ampliamente aprender los tres en la medida de lo posible
-pues ofrecen distintas posibilidades y ventajas. En esta sesión
-trabajaremos con R.</p>
-<p>Para comenzar carguemos unos datos ejemplo al espacio de trabajo de
-R.</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'># Cargar paquetes.</span></span>
-<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'><a href='https://rspatial.org/raster'>"raster"</a></span><span class='op'>)</span></span>
-<span></span>
-<span><span class='co'># Cargar un geotiff a R, de hecho el que sirve como evidencia para el modelo de IE.</span></span>
-<span><span class='va'>ruta_evidencia</span> <span class='op'>&lt;-</span> <span class='st'>"./delta_vp/hemerobia_250m.tif"</span></span>
-<span><span class='va'>raster_evidencia</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/raster/man/raster.html'>raster</a></span><span class='op'>(</span><span class='va'>ruta_evidencia</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='va'>raster_evidencia</span></span></code></pre>
-</div>
-<pre><code>class      : RasterLayer 
-dimensions : 911, 1185, 1079535  (nrow, ncol, ncell)
-resolution : 250, 250  (x, y)
-extent     : 3697500, 3993750, 908000, 1135750  (xmin, xmax, ymin, ymax)
-crs        : +proj=lcc +lat_0=12 +lon_0=-102 +lat_1=17.5 +lat_2=29.5 +x_0=2500000 +y_0=0 +datum=WGS84 +units=m +no_defs 
-source     : hemerobia_250m.tif 
-names      : hemerobia_250m 
-values     : 0, 18  (min, max)</code></pre>
-</div>
-<p>Para aquellos que no han experimentado con lenguajes de programación
-para manejo y análisis de datos, acá están pasando varias cosas.
-Repasamos algunas de ellas.</p>
-<p>Primero que nada, un elemento fundamental que debemos mencionar es el
-de una función. Una función recibe argumentos y lleva a cabo una cierta
-tarea (aunque suene un poco raro también puede recibir ningún argumento
-y llevar a cabo una tarea). Las funciones siempre tienen un nombre y los
-argumentos que reciben se colocan dentro de paréntesis.</p>
-<div class="layout-chunk" data-layout="l-body">
-<p><img src="3_funciones.png" width="100%" style="display: block; margin: auto;" /></p>
-</div>
-<p>Por ejemplo la función library() lleva a cabo la tarea de cargar un
-determinado paquete de R. Un argumento que DEBE recibir es el nombre del
-paquete a cargar. La función raster carga un raster en el espacio de
-trabajo de R (en la memoria RAM) y un argumento que DEBE recibir es la
-ruta en el disco duro del raster que se quiere cargar.</p>
-<p>Cuando una función carga algo en memoria, esto se debe asignar a un
-objeto. Es decir que se debe de elegir un “nombre” con el cuál referirse
-a lo que se está cargando. Se puede elegir cualquier nombre pero se
-recomienda usar unos juiciosos para recordar de qué se tratan. Para
-asignar en R comúnmente se usa una flechita pero también puede usarse el
-símbolo de igual como en otros lenguajes de programación.</p>
-<div class="layout-chunk" data-layout="l-body">
-<p><img src="4_asigobjeto.png" width="100%" style="display: block; margin: auto;" /></p>
-</div>
-<p>Hemos llamado ‘raster_evidencia’ al que acabamos de cargar, con este
-objeto podemos ver una versión cruda del mismo dentro de R.</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>raster_evidencia</span><span class='op'>)</span></span></code></pre>
-</div>
-<p><img src="integracin-de-datos_files/figure-html5/unnamed-chunk-6-1.png" width="624" style="display: block; margin: auto;" /></p>
-</div>
-<p>Ahora bien, un raster es una estructura que puede resultar muy útil
-para ciertos propósitos, pero para otros no tanto. Por ejemplo para
-llevar a cabo un proceso de análisis exploratorio de datos, el formato
-más común es el de una tabla de datos. De hecho R tiene un estándar de
-datos ampliamente aceptado llamado <a
-href="https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html#:~:text=Tidy%20data%20is%20a%20standard,Every%20row%20is%20an%20observation.">tidy
-data</a> donde se analiza y describe cómo deberían de ser las tablas de
-datos para análisis. Dejando eso de lado, generalmente existen funciones
-en R (y en los otros lenguajes) para pasar de un tipo de objeto (dato) a
-otro. Por ejemplo de un raster a una tabla de datos:</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>tabla_evidencia</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/raster/man/rasterToPoints.html'>rasterToPoints</a></span><span class='op'>(</span><span class='va'>raster_evidencia</span><span class='op'>)</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>tabla_evidencia</span><span class='op'>)</span></span></code></pre>
-</div>
-<pre><code>        x       y hemerobia_250m
-1 3939125 1135625             16
-2 3939375 1135625             16
-3 3939625 1135625             16
-4 3939875 1135625             16
-5 3940125 1135625             16
-6 3940375 1135625             16</code></pre>
-</div>
-<p>Acá cada fila es una observación (un píxel) y cada columna una
-variable coordenada x, coordenada y, el valor de hemerobia del
-píxel.</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'><a href='https://ggplot2.tidyverse.org'>"ggplot2"</a></span><span class='op'>)</span></span>
-<span></span>
-<span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>tabla_evidencia</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>hemerobia_250m</span>, fill <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/raster/man/cut.html'>cut</a></span><span class='op'>(</span><span class='va'>hemerobia_250m</span>, <span class='fl'>18</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_histogram.html'>geom_histogram</a></span><span class='op'>(</span>show.legend <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_brewer.html'>scale_fill_brewer</a></span><span class='op'>(</span>palette<span class='op'>=</span><span class='st'>"RdYlGn"</span>, direction <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span></span></code></pre>
-</div>
-<p><img src="integracin-de-datos_files/figure-html5/unnamed-chunk-8-1.png" width="624" style="display: block; margin: auto;" /></p>
-</div>
-<div class="sourceCode" id="cb3"><pre
+<div class="sourceCode" id="cb1"><pre
 class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->

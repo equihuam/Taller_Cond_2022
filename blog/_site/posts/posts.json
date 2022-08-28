@@ -1,0 +1,70 @@
+[
+  {
+    "path": "posts/2022-08-28-conceptos-clave/",
+    "title": "conceptos clave",
+    "description": "A short description of the post.",
+    "author": [
+      {
+        "name": "Octavio Pérez Maqueo",
+        "url": {}
+      }
+    ],
+    "date": "2022-08-28",
+    "categories": [],
+    "contents": "\r\nEn esta presentación buscamos compartir estructura conceptual y las\r\ndefiniciones operativas de los elementos que intervienen la integración\r\nde un sistema de contabilidad ambiental y económica basado en\r\necosistemas (SCAE\r\nCE, SEEA EA en inglés). El objetivo que proponemos para esta\r\nparticipación es:\r\n\r\nEl participante identifica los conceptos clave de la tipología SCAE\r\nEA y conoce la forma como se aplicó el enfoque en el piloto mexicano\r\n\r\nLo que sigue es el vínculo a la presentación que usaremos para\r\ndiscutir el tema.\r\n\r\n\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2022-08-28T17:23:05-05:00",
+    "input_file": {}
+  },
+  {
+    "path": "posts/2022-08-28-presentacion/",
+    "title": "Presentación",
+    "description": "Objetivos y plan de trabajo.",
+    "author": [
+      {
+        "name": "Octavio Pérez Maqueo, Miguel Equihua Zamora y Julián Equihua Benítez",
+        "url": "https://ie-gamma.net"
+      }
+    ],
+    "date": "2022-08-28",
+    "categories": [],
+    "contents": "\r\nTaller de\r\ntrabajo sobre la cuenta de condición\r\nLos días 29 y 30 de agosto así como el 1 de septiembre se desarrolla\r\neste taller con la participación de personal de INEGI y SEMARNAT. Los\r\nconductores del taller son:\r\nOctavio Pérez Maqueo\r\nMiguel Equihua Zamora\r\nJulián Equihua Benítez\r\nConsideraciones estratégicas\r\nPara reflexionar sobre aspectos estratégicos de la gestión del\r\nsistema de cuentas ambientales basadas en ecosistemas (SEEA EA),\r\nproponemos utilizar este pizarra virtual en\r\nMiro. Les solicitamos que vayan anotando ideas ahí, conforme les\r\nvayan surgiendo. Tenemos previsto tener una sesión de discusión sobre la\r\nperspectiva futura del sistema el Miércoles 1. Lo haremos con base en\r\nesta pizarra virtual.\r\n\r\n\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2022-08-28T12:21:27-05:00",
+    "input_file": {}
+  },
+  {
+    "path": "posts/2022-08-27-integracin-de-datos/",
+    "title": "Integración de datos",
+    "description": "A short description of the post.",
+    "author": [
+      {
+        "name": "Julián Equihua",
+        "url": "https://taller-cuenta-condicion.netlify.app/posts/2022-08-27-integracin-de-datos/"
+      }
+    ],
+    "date": "2022-08-27",
+    "categories": [],
+    "contents": "\r\nAprendizaje de máquina\r\n(Machine learning)\r\nMétodos computacionales para aprender de datos con el fin de replicar\r\nuna tarea o toma de decisión.\r\nExisten varios paradigmas en aprendizaje de máquina, con distintos\r\nobjetivos:\r\nEl aprendizaje supervisado procura predecir o estimar una variable\r\nrespuesta a partir de datos de entrada\r\nEl apprendizaje no supervisado procura describir estructuras\r\ninteresantes en datos, donde no necesariamente hay una respuesta que\r\npredecir\r\nEl aprendizaje semi-supervisado procura utilizar datos asociados a\r\nuna variable respuesta al mismo tiempo que datos sin la variable para\r\nprocurar mejor estimarla. Estos es intenta explotar datos sin etiquetas\r\npara mejorar la estimación.\r\nEl aprendizaje por refuerzo intenta estimar la mejor política\r\nposible en un problema de toma de decisiones secuenciales.\r\nEjemplos de tareas de aprendizaje:\r\nPredecir si un individuo va a sobrevivir el hundimiento del\r\nTitanic,\r\nDetectar llamados de murciélagos en grabaciones ultrasónicas,\r\nClasificar especies de animales en imágenes digitales producidas a\r\ntravés de foto trampeo,\r\nEstimar el ingreso mensual de un hogar a partir de las\r\ncaracterísticas de la vivienda,\r\nDividir a los clientes de Netflix según sus gustos.\r\nRecomendar artículos a clientes de un programa de lealtad o servicio\r\nonline.\r\nLas razones usuales para intentar resolver estos problemas\r\ncomputacionalmente son diversas:\r\nQuisiéramos obtener una respuesta barata, rápida, automatizada, y con\r\nsuficiente exactitud y precisión. Por ejemplo, reconocer caracteres en\r\nuna placa de coche de una fotografía se puede hacer por personas, pero\r\neso es lento y costoso.\r\n\r\n\r\n\r\nIgual ver cada fotografía para detectar e identificar los animales\r\nahí presentes toma muchísimo tiempo.\r\n\r\n\r\n\r\nQuisiéramos superar el desempeño actual de los expertos o de reglas\r\nsimples utilizando datos: por ejemplo, en la decisión de dar o no un\r\npréstamo a un solicitante, puede ser posible tomar mejores decisiones\r\ncon algoritmos que con evaluaciones personales o con reglas simples que\r\ntoman en cuenta el ingreso mensual, por ejemplo.\r\n¿Lo mismo para la mejor toma de decisiones en cuanto al manejo de\r\nrecursos naturales?\r\nTambién es de gran interés entender de manera más completa y\r\nsistemática el comportamiento de un fenómeno, identificando variables o\r\npatrones importantes.\r\n¿Dado un conjunto de datos ecológicos podemos hacer generar modelos\r\nque nos permitan ir explorando distintos aspectos de la integridad\r\necosistémica para generar conocimiento?\r\nDe una vez adelantamos que el acercamiento que se sigue para generar\r\nel índice de integridad propuesto es uno de aprendizaje supervisado.\r\nExiste una variable que sirve de evidencia para el nivel de condición de\r\nlos distintos ecosistemas del país y a la par se tienen variables que\r\npermiten estimar y, eventualmente, explicar este nivel de condición. El\r\núnico detalle importante aquí es que la evidencia es categórica, y el\r\níndice deseado es uno continuo entre 0 y 1.\r\nEl aprendizaje de máquina generalmente se lleva a cabo con ayuda de\r\nsoftware especializado. Programas propietarios o de código abierto o\r\ncomunmente utilizando lenguajes de programación. Por ejemplo R, python y\r\nJulia.\r\nRecomendamos ampliamente aprender los tres en la medida de lo posible\r\npues ofrecen distintas posibilidades y ventajas. En esta sesión\r\ntrabajaremos con R.\r\nPara comenzar carguemos unos datos ejemplo al espacio de trabajo de\r\nR.\r\n\r\n\r\n# Cargar paquetes.\r\nlibrary(\"raster\")\r\n\r\n# Cargar un geotiff a R, de hecho el que sirve como evidencia para el modelo de IE.\r\nruta_evidencia <- \"./delta_vp/hemerobia_250m.tif\"\r\nraster_evidencia <- raster(ruta_evidencia)\r\n\r\nraster_evidencia\r\n\r\nclass      : RasterLayer \r\ndimensions : 911, 1185, 1079535  (nrow, ncol, ncell)\r\nresolution : 250, 250  (x, y)\r\nextent     : 3697500, 3993750, 908000, 1135750  (xmin, xmax, ymin, ymax)\r\ncrs        : +proj=lcc +lat_0=12 +lon_0=-102 +lat_1=17.5 +lat_2=29.5 +x_0=2500000 +y_0=0 +datum=WGS84 +units=m +no_defs \r\nsource     : hemerobia_250m.tif \r\nnames      : hemerobia_250m \r\nvalues     : 0, 18  (min, max)\r\n\r\nPara aquellos que no han experimentado con lenguajes de programación\r\npara manejo y análisis de datos, acá están pasando varias cosas.\r\nRepasamos algunas de ellas.\r\nPrimero que nada, un elemento fundamental que debemos mencionar es el\r\nde una función. Una función recibe argumentos y lleva a cabo una cierta\r\ntarea (aunque suene un poco raro también puede recibir ningún argumento\r\ny llevar a cabo una tarea). Las funciones siempre tienen un nombre y los\r\nargumentos que reciben se colocan dentro de paréntesis.\r\n\r\n\r\n\r\nPor ejemplo la función library() lleva a cabo la tarea de cargar un\r\ndeterminado paquete de R. Un argumento que DEBE recibir es el nombre del\r\npaquete a cargar. La función raster carga un raster en el espacio de\r\ntrabajo de R (en la memoria RAM) y un argumento que DEBE recibir es la\r\nruta en el disco duro del raster que se quiere cargar.\r\nCuando una función carga algo en memoria, esto se debe asignar a un\r\nobjeto. Es decir que se debe de elegir un “nombre” con el cuál referirse\r\na lo que se está cargando. Se puede elegir cualquier nombre pero se\r\nrecomienda usar unos juiciosos para recordar de qué se tratan. Para\r\nasignar en R comúnmente se usa una flechita pero también puede usarse el\r\nsímbolo de igual como en otros lenguajes de programación.\r\n\r\n\r\n\r\nHemos llamado ‘raster_evidencia’ al que acabamos de cargar, con este\r\nobjeto podemos ver una versión cruda del mismo dentro de R.\r\n\r\n\r\nplot(raster_evidencia)\r\n\r\n\r\n\r\nAhora bien, un raster es una estructura que puede resultar muy útil\r\npara ciertos propósitos, pero para otros no tanto. Por ejemplo para\r\nllevar a cabo un proceso de análisis exploratorio de datos, el formato\r\nmás común es el de una tabla de datos. De hecho R tiene un estándar de\r\ndatos ampliamente aceptado llamado tidy\r\ndata donde se analiza y describe cómo deberían de ser las tablas de\r\ndatos para análisis. Dejando eso de lado, generalmente existen funciones\r\nen R (y en los otros lenguajes) para pasar de un tipo de objeto (dato) a\r\notro. Por ejemplo de un raster a una tabla de datos:\r\n\r\n\r\ntabla_evidencia <- as.data.frame(rasterToPoints(raster_evidencia))\r\n\r\nhead(tabla_evidencia)\r\n\r\n        x       y hemerobia_250m\r\n1 3939125 1135625             16\r\n2 3939375 1135625             16\r\n3 3939625 1135625             16\r\n4 3939875 1135625             16\r\n5 3940125 1135625             16\r\n6 3940375 1135625             16\r\n\r\nAcá cada fila es una observación (un píxel) y cada columna una\r\nvariable coordenada x, coordenada y, el valor de hemerobia del\r\npíxel.\r\n\r\n\r\nlibrary(\"ggplot2\")\r\n\r\nggplot(tabla_evidencia, aes(hemerobia_250m, fill = cut(hemerobia_250m, 18))) +\r\n  geom_histogram(show.legend = FALSE) +\r\n  scale_fill_brewer(palette=\"RdYlGn\", direction = -1)\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+    "preview": "posts/2022-08-27-integracin-de-datos/1_license.jpeg",
+    "last_modified": "2022-08-28T17:45:19-05:00",
+    "input_file": {}
+  },
+  {
+    "path": "posts/welcome/",
+    "title": "Bienvenida al taller sobre condición ecosistémica",
+    "description": "Bienvenidos a este blog que está integrado por los materiales de capacitación\ny discusión sobre el cómputo del índice de integridad ecosistémica con el enfoque\nde redes bayesianas. Este índice se utiliza en la integración de la cuenta \nde condición.",
+    "author": [
+      {
+        "name": "Octavio Pérez Maqueo, Miguel Equihua Zamora y Julián Equihua Benítez",
+        "url": "https://i-gamma.net"
+      }
+    ],
+    "date": "2022-08-26",
+    "categories": [],
+    "contents": "\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2022-08-28T17:46:30-05:00",
+    "input_file": {}
+  }
+]
