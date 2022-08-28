@@ -1,15 +1,32 @@
 ---
-title: "Cálculo del Índice de IE (versión actual)."
+title: "Cálculo del Índice de IE (versión actual)"
 description: |
-  A short description of the post.
+  Ensayo exitoso de incrustación de presentaciónes.
 author:
-  - name: Nora Jones
-    url: https://example.com/norajones
+  - name: Octavio Pérez Maqueo, Julián Equihua y Miguel Equihua, 
+    url: https://i-gamma.net
 date: 2022-08-26
 output:
   distill::distill_article:
     self_contained: false
 ---
 
+## Presentación incrustada
 
-<iframe src="https://inecol-my.sharepoint.com/personal/miguel_equihua_inecol_mx/_layouts/15/Doc.aspx?sourcedoc={957f3ffe-7450-46af-bba9-dee2e3dc6893}&amp;action=embedview&amp;wdAr=1.7777777777777777" width="800px" height="400px" frameborder="0" data-external="1">This is an embedded <a target="_blank" href="https://office.com">Microsoft Office</a> presentation, powered by <a target="_blank" href="https://office.com/webapps" >Office</a>.</iframe>
+Utilizar el código *iframe* con la especificación de **MS-SharePoint** funciona, pero exige autenticación antes de desplegar la presentación. No he encontrado la forma de hacer *pública* la presentación. En el caso de **Google-slides** sí hay la opción de hacer pública la presentación y también se ofrece la opción de generar el vínculo *iframe* para incrustar. Este camino funciona bastante bien. Es el que se ejemplifica a continuación.
+
+Para hacer esto sólo subi la presentación *PPT* en **Google-slides**. Utilicé la opción del menú *Archivo/publicar en la web*
+
+![](../../figuras/google-slides-1.png){width=60%} 
+
+Finalmete seleccioné el vínculo de incrustación.
+
+![](../../figuras/google-slides-2.png){width=40%} 
+
+Lo que sigue es el vínculo copiado de esta ventana. Agreguué la instrucción `data-external="1"` al final del tag iframe, aunque no parece ser realmente necesaria.
+
+
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTHeokrZ8-W3Hvjh5ktqfja_OFKdBxXCaySbhTDkhtndbaBxDjtD0qJYkfR55uZtT7fXVQEiPI9TK6U/embed?start=false&loop=false&delayms=3000" frameborder="0" width="1280" height="749" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" data-external="1"></iframe>
+
+
+

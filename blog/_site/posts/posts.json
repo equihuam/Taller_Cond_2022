@@ -18,19 +18,19 @@
   },
   {
     "path": "posts/2022-08-26-clculo-del-ndice-de-ie-versin-actual/",
-    "title": "Cálculo del Índice de IE (versión actual).",
-    "description": "A short description of the post.",
+    "title": "Cálculo del Índice de IE (versión actual)",
+    "description": "Ensayo exitoso de incrustación de presentaciónes.",
     "author": [
       {
-        "name": "Nora Jones",
-        "url": "https://example.com/norajones"
+        "name": "Octavio Pérez Maqueo, Julián Equihua y Miguel Equihua,",
+        "url": "https://i-gamma.net"
       }
     ],
     "date": "2022-08-26",
     "categories": [],
-    "contents": "\r\n\r\nThis is an embedded\r\nMicrosoft Office\r\npresentation, powered by\r\nOffice.\r\n\r\n\r\n\r\n\r\n",
+    "contents": "\r\nPresentación incrustada\r\nUtilizar el código iframe con la especificación de\r\nMS-SharePoint funciona, pero exige autenticación antes\r\nde desplegar la presentación. No he encontrado la forma de hacer\r\npública la presentación. En el caso de\r\nGoogle-slides sí hay la opción de hacer pública la\r\npresentación y también se ofrece la opción de generar el vínculo\r\niframe para incrustar. Este camino funciona bastante bien. Es\r\nel que se ejemplifica a continuación.\r\nPara hacer esto sólo subi la presentación PPT en\r\nGoogle-slides. Utilicé la opción del menú\r\nArchivo/publicar en la web\r\n\r\nFinalmete seleccioné el vínculo de incrustación.\r\n\r\nLo que sigue es el vínculo copiado de esta ventana. Agreguué la\r\ninstrucción data-external=\"1\" al final del tag iframe,\r\naunque no parece ser realmente necesaria.\r\n\r\n\r\n\r\n\r\n\r\n",
     "preview": {},
-    "last_modified": "2022-08-27T22:44:36-05:00",
+    "last_modified": "2022-08-28T00:12:50-05:00",
     "input_file": {}
   },
   {
