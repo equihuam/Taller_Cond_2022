@@ -23,10 +23,3 @@ Finalmete seleccioné el vínculo de incrustación.
 
 ![](../../figuras/google-slides-2.png){width=40%} 
 
-Lo que sigue es el vínculo copiado de esta ventana. Agreguué la instrucción `data-external="1"` al final del tag iframe, aunque no parece ser realmente necesaria.
-
-
-<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTHeokrZ8-W3Hvjh5ktqfja_OFKdBxXCaySbhTDkhtndbaBxDjtD0qJYkfR55uZtT7fXVQEiPI9TK6U/embed?start=false&loop=false&delayms=3000" frameborder="0" width="1280" height="749" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" data-external="1"></iframe>
-
-
-
