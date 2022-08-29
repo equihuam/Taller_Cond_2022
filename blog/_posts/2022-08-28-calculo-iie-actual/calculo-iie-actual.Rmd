@@ -12,7 +12,11 @@ output:
     self_contained: false
 ---
 
-![](../../figuras/datos_geoespaciales.png)
+```{r, echo = FALSE, fig.align = 'center', out.width = '50%'}
+
+knitr::include_graphics("../../figuras/datos_geoespaciales.png")
+```
+
 
 
 ```{r setup, include=FALSE}

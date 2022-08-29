@@ -10,7 +10,13 @@ output:
     self_contained: false
 ---
 
-![](../../figuras/sp-Enfoque espacial_es.png)
+```{r, echo = FALSE, fig.align = 'center', out.width = 50%'}
+
+knitr::include_graphics("../../figuras/sp-Enfoque espacial_es.png")
+```
+
+
+
 
 
 ```{r setup, include=FALSE}
