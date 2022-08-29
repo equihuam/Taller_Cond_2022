@@ -1,0 +1,23 @@
+---
+title: "Calculo de IIE actual"
+description: |
+  Conceptos, herramientas y mecanísmo de cálculo usado para el cómputo del
+  índice de integridad ecosistémica basado en redes bayesianas.
+author:
+  - name: Octavio Pérez Maqueo
+    url: {}
+date: 2022-08-28
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+En esta presentación se describen los conceptos utilizados para integrar la estrategia analítica basada en *redes bayesianas* que condujo al cómputo del índice de integridad ecosistémica que se empleó en el proyecto piloto [NCAVES en el que participó México](https://seea.un.org/home/Natural-Capital-Accounting-Project). Así se obtuvieron estimadores de condición para todos los ecosistemas del país en pixeles con resolución de 250m. Las fechas nominales de estos cálculos son 2004 y 2018.
+
+
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQwgd69FPocEJhcGbGY5nRaokw2BTfurifkIQlCE4XTwJJaTlVuUNMfvD4Iu8W1Bw/embed?start=false&loop=false&delayms=3000" frameborder="0" width="1280" height="749" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+
