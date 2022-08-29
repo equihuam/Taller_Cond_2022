@@ -26,7 +26,7 @@ knitr::opts_chunk$set(echo = FALSE)
 knitr::opts_knit$set(base.dir = normalizePath(tempdir(), winslash = '/'))
 ```
 
-```{r, echo = FALSE, fig.align = 'center', out.width = '15%'}
+```{r, echo = FALSE, fig.align = 'center', out.width = '50%'}
 
 knitr::include_graphics("../../figuras/Portada-CME-30.png")
 ```
