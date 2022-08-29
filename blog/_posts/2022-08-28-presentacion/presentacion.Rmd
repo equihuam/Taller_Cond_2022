@@ -45,6 +45,8 @@ horas_i <- as.character(agenda$hora_i[!grepl("Duración|Día", agenda$tema) &
                                       !is.na(agenda$tema)], format = "%H:%M")
 horas_f <- as.character(agenda$hora_f[!grepl("Duración|Día", agenda$tema) &
                                       !is.na(agenda$tema)], format = "%H:%M")
+objetivos <- agenda$objetivo[!grepl("Duración|Día", agenda$tema) &
+                                      !is.na(agenda$tema)]
 
 horas_i[temas == "Inicio"] <- c("", "", "")
 horas_f[temas == "Inicio"] <- c("", "", "")

@@ -10,6 +10,8 @@ output:
     self_contained: false
 ---
 
+![](../../figuras/sp-Enfoque espacial_es.png)
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
