@@ -10,6 +10,21 @@ navbar:
     image: figuras/i-Gamma-1.png
   right:
     - text: "Días"
+      menu:
+      - text: "Día 1"
+        menu:
+          - text: "Bienvenida"
+            href: posts/welcome/index.html
+          - text: "Dinámica del taller"
+            href: posts/2022-08-28-presentacion/index.html
+          - text: "Cálculo actual de IIE"
+            href: posts/2022-08-28-calculo-iie-actual/index.html
+      - text: "Día 2"
+        menu:
+          href: posts/welcome/index.html
+      - text: "Día 3"
+        menu:
+          href: posts/welcome/index.html
     - text: "Inicio"
       href: index.html
     - text: "De qué trata"
