@@ -1,5 +1,5 @@
 ---
-title: "conceptos clave"
+title: "Conceptos clave"
 description: |
   Se describen los principales conceptos y definiciones operativas usadas en el
   sistema de contabilidad ambiental basada en ecosistemas (SEEA EA)
@@ -23,7 +23,6 @@ En esta presentación buscamos compartir estructura conceptual y las definicione
 Lo que sigue es el vínculo a la presentación que usaremos para discutir el tema.
 
 
-<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTHeokrZ8-W3Hvjh5ktqfja_OFKdBxXCaySbhTDkhtndbaBxDjtD0qJYkfR55uZtT7fXVQEiPI9TK6U/embed?start=false&loop=false&delayms=3000" frameborder="0" width="1280" height="749" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" data-external="1"></iframe>
-
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQZDkp3qiOVeGb9kPrC9jS4-9xL1JY2j9c0xMKkil_cR64v8rE1DUgKRBL4c0QMyA/embed?start=false&loop=false&delayms=3000" frameborder="0" width="1280" height="749" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 
 

@@ -18,8 +18,8 @@
   },
   {
     "path": "posts/2022-08-28-conceptos-clave/",
-    "title": "conceptos clave",
-    "description": "A short description of the post.",
+    "title": "Conceptos clave",
+    "description": "Se describen los principales conceptos y definiciones operativas usadas en el\nsistema de contabilidad ambiental basada en ecosistemas (SEEA EA)",
     "author": [
       {
         "name": "Octavio Pérez Maqueo",
@@ -30,8 +30,8 @@
     "categories": [],
     "contents": "\r\nEn esta presentación buscamos compartir estructura conceptual y las\r\ndefiniciones operativas de los elementos que intervienen la integración\r\nde un sistema de contabilidad ambiental y económica basado en\r\necosistemas (SCAE\r\nCE, SEEA EA en inglés). El objetivo que proponemos para esta\r\nparticipación es:\r\n\r\nEl participante identifica los conceptos clave de la tipología SCAE\r\nEA y conoce la forma como se aplicó el enfoque en el piloto mexicano\r\n\r\nLo que sigue es el vínculo a la presentación que usaremos para\r\ndiscutir el tema.\r\n\r\n\r\n\r\n\r\n\r\n",
     "preview": {},
-    "last_modified": "2022-08-28T17:23:05-05:00",
-    "input_file": {}
+    "last_modified": "2022-08-28T21:40:52-05:00",
+    "input_file": "conceptos-clave.knit.md"
   },
   {
     "path": "posts/2022-08-28-presentacion/",
