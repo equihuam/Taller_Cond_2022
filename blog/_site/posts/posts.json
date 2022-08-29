@@ -2,18 +2,18 @@
   {
     "path": "posts/2022-08-28-calculo-iie-actual/",
     "title": "Calculo de IIE actual",
-    "description": "A short description of the post.",
+    "description": "Conceptos, herramientas y mecanísmo de cálculo usado para el cómputo del\níndice de integridad ecosistémica basado en redes bayesianas.",
     "author": [
       {
-        "name": "Octavio Pérez Maqueo",
+        "name": "Miguel Equihua Zamora",
         "url": {}
       }
     ],
     "date": "2022-08-28",
     "categories": [],
-    "contents": "\r\nEn esta presentación se describen los conceptos utilizados para\r\nintegrar la estrategia analítica basada en redes bayesianas que\r\ncondujo al cómputo del índice de integridad ecosistémica que se empleó\r\nen el proyecto piloto NCAVES\r\nen el que participó México. Así se obtuvieron estimadores de\r\ncondición para todos los ecosistemas del país en pixeles con resolución\r\nde 250m. Las fechas nominales de estos cálculos son 2004 y 2018.\r\n\r\n\r\n\r\n\r\n\r\n",
+    "contents": "\r\nEn esta presentación se describen los conceptos utilizados para\r\nintegrar la estrategia analítica basada en redes bayesianas que\r\ncondujo al cómputo del índice de integridad ecosistémica que se empleó\r\nen el proyecto piloto NCAVES\r\nen el que participó México. Así se obtuvieron estimadores de\r\ncondición para todos los ecosistemas del país en pixeles con resolución\r\nde 250m. Las fechas nominales de estos cálculos son 2004 y 2018. En esta\r\ncharla nos proponemos el siguiente objetivo.\r\n\r\nEl participante conoce la metodología para el cálculo del índice de\r\nintegridad ecosistémica (IIE) y las oportunidades que ofrece la\r\naproximación empleada.\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
     "preview": {},
-    "last_modified": "2022-08-28T21:24:58-05:00",
+    "last_modified": "2022-08-28T21:59:55-05:00",
     "input_file": "calculo-iie-actual.knit.md"
   },
   {
