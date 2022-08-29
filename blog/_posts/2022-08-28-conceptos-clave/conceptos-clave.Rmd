@@ -1,7 +1,8 @@
 ---
 title: "conceptos clave"
 description: |
-  A short description of the post.
+  Se describen los principales conceptos y definiciones operativas usadas en el
+  sistema de contabilidad ambiental basada en ecosistemas (SEEA EA)
 author: Octavio Pérez Maqueo
 date: 2022-08-28
 output:

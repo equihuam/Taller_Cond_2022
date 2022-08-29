@@ -1,7 +1,7 @@
 [
   {
     "path": "posts/2022-08-28-calculo-iie-actual/",
-    "title": "Calculo-IIE-actual",
+    "title": "Calculo de IIE actual",
     "description": "A short description of the post.",
     "author": [
       {
@@ -11,9 +11,9 @@
     ],
     "date": "2022-08-28",
     "categories": [],
-    "contents": "\r\n\r\n\r\n\r\n\r\n\r\n",
+    "contents": "\r\nEn esta presentación se describen los conceptos utilizados para\r\nintegrar la estrategia analítica basada en redes bayesianas que\r\ncondujo al cómputo del índice de integridad ecosistémica que se empleó\r\nen el proyecto piloto NCAVES\r\nen el que participó México. Así se obtuvieron estimadores de\r\ncondición para todos los ecosistemas del país en pixeles con resolución\r\nde 250m. Las fechas nominales de estos cálculos son 2004 y 2018.\r\n\r\n\r\n\r\n\r\n\r\n",
     "preview": {},
-    "last_modified": "2022-08-28T20:57:44-05:00",
+    "last_modified": "2022-08-28T21:15:42-05:00",
     "input_file": {}
   },
   {
