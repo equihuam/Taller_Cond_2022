@@ -1,0 +1,94 @@
+---
+title: "Introducción a rmarkdown"
+author: "Miguel Equihua"
+date: "8/30/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# R Markdown
+
+Este es un documento de R Markdown. Markdown es una sintáxis simple para editar HTMLs, PDFs y documentos de Microsoft Word. Para más detalles ver: <http://rmarkdown.rstudio.com>.
+
+Cuando presionas el botón **Knit**  un documento será generado que incluye tanto el texto plano que incluyas, como código HTML, código matemático LaTeX y código R. Estos pueden ser desplegados para fines didácticos o pueden ser ocultados para simplemente generar un documento sin código.
+
+# Distribución de IE por municipio para Yucatán
+
+Por poner un ejemplo podemos cargar el mapa de IE correspondiente al estado de Yucatán utilizando el paquete terra.
+
+```{r , echo=TRUE}
+library("terra")
+
+ie_yucatan <- rast("../data/ie/ie_yucatan_2018.tif")
+
+```
+
+Luego podemos cargar un shapefile de los municipios del estado.
+
+```{r , echo=TRUE}
+
+mu_yucatan <- vect("../data/shapefiles/Basemap_municipios.shp")
+
+```
+
+Pero como podemos ver tienen proyecciones ligeramente distintas.
+
+```{r , echo=TRUE}
+crs(ie_yucatan, proj = TRUE)
+crs(mu_yucatan, proj = TRUE)
+
+```
+
+Podemos reproyectar el shapefile sobre el vuelo.
+
+```{r , echo=TRUE}
+mu_yucatan <- project(mu_yucatan, crs(ie_yucatan))
+
+```
+
+Luego extraer los pixeles correspondientes a cada municipio.
+
+```{r , echo=TRUE}
+mu_yucatan_ei <- extract(ie_yucatan, mu_yucatan)
+mu_yucatan_ei <- mu_yucatan_ei[complete.cases(mu_yucatan_ei),]
+
+```
+
+Para luego, finalmente, ver la distribución de IE por municipio:
+
+```{r , echo=TRUE, out.width="100%",fig.dim = c(10, 24)}
+library("ggplot2")
+library("ggridges")
+library("tidyverse")
+
+mu_yucatan_ei <- right_join(mu_yucatan_ei, as.data.frame(mu_yucatan), 
+                            by = c("ID" = "OID"))
+
+mu_mean <- group_by(mu_yucatan_ei, NOMGEO) %>%
+           summarise(meanei = mean(ie_yucatan_2018, na.rm = TRUE))%>%
+            arrange(-meanei)
+
+mu_yucatan_ei$NOMGEO <- factor(mu_yucatan_ei$NOMGEO,
+                                levels = rev(mu_mean$NOMGEO))
+                     
+ggplot(mu_yucatan_ei,
+       aes(x = ie_yucatan_2018, y = NOMGEO, fill = "darkred")) +
+  geom_density_ridges(fill = "dark red", alpha = 0.6) +
+  theme_ridges() + 
+  xlim(0, 1)+
+  theme(
+    legend.position="none",
+    panel.spacing = unit(0.1, "lines"),
+    strip.text.x = element_text(size = 8)) +
+  xlab("Integridad Ecosistémica") + 
+  ylab(" ")
+
+```
+
+
+
+# Parámetros de los bloques de código
+De haberse escrito `echo = FALSE` el código no hubiera sido desplegado.
