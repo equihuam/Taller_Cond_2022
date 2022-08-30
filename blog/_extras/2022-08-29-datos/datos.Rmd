@@ -1,9 +1,10 @@
 ---
 title: "Datos"
 description: |
-  A short description of the post.
+  Datos compartidos para hacer los ejercicios del taller e incluso algunas otras
+  tareas que consideren de interés.
 author:
-  - name: Unknown
+  - name: Miguel Equihua Zamora, Julián Equihua Benítez
 date: 2022-08-29
 output:
   distill::distill_article:
@@ -22,6 +23,6 @@ knitr::opts_chunk$set(echo = FALSE)
 knitr::include_graphics("../../figuras/uso_datos.jpg")
 ```
 
-Los datos para los ejercisio y posiblemente ejercicios que quieran hacer por su cuenta están en la [carpeta datos que hemos puesto en Github](https://github.com/equihuam/Taller_Cond_2022/tree/main/data). La plataforma Github no admite archivos mayores a 100 megas. Su intención es básicamente almacenar documentos de texto simples. De ahí que hemos visto la conveniencia de utilizar otra [carpeta en Google Drive](https://drive.google.com/drive/folders/1idaJ75uXNmON-PLF-dxAVbdvKQZ2mdYr?usp=sharing) que hemos definido compartida, con acceso público general, sólo para lectura.
+Los datos para los ejercicios y posiblemente ejercicios que quieran hacer por su cuenta están en la [carpeta de datos que hemos puesto en Github](https://github.com/equihuam/Taller_Cond_2022/tree/main/data). La plataforma Github no admite archivos mayores a 100 megas. Su intención es básicamente almacenar documentos de texto simples, como los que tendría el código de un programa de cómputo. De ahí que hemos visto la conveniencia de utilizar otra [carpeta de datos en Google Drive](https://drive.google.com/drive/folders/1idaJ75uXNmON-PLF-dxAVbdvKQZ2mdYr?usp=sharing) que hemos compartido con acceso público general, sólo para lectura.
 
 
