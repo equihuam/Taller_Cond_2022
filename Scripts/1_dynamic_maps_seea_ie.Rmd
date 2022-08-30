@@ -1,0 +1,189 @@
+---
+title: "SEEA - Ecosystem Accounting - Mexico"
+html_document: default
+theme: spacelab
+---
+```{r, echo=FALSE}
+htmltools::img(src = knitr::image_uri("D:/work9seea/2_condition/data_maps/logos_v.png"), 
+               alt = 'logo', 
+               style = 'position:absolute; top:0; right:0; padding:10px;')
+```  
+
+
+```{r, echo=FALSE,warning=FALSE,message=FALSE}
+# load packages
+library("rgdal")
+library("raster")
+library("leaflet")
+library("leaflet.extras")
+library("dplyr")
+library("readxl")
+library("ggplot2")
+library("plotly")
+library("tibble")
+
+
+
+```
+
+
+## Ecosystem Integrity.
+
+The Ecocystem Integrity Index produced at a national scale for Mexico for the years 2018 and 2004 is a continuous variable ranging from 0 (worst) to 1 (best). We have discretized this continuous set of values into 10 levels by means of equal interval bins. This allows the visualization of the spatial configuration of these EI levels over the whole of Mexico which is presented in the following dynamic map for the year 2018.
+
+
+```{r, echo=FALSE,warning=FALSE,message=FALSE}
+
+#mapviewOptions(platform="leaflet",mapview.maxpixels=Inf,plainview.maxpixels=Inf,raster.size=Inf)
+#mapview::mapview(r,legend = TRUE,maxpixels = 103002200,na.color="transparent")
+
+# rasters
+ie_map = raster("D:/work7/ie_products/2018_v2/ie_2018_st_v2_wgs84.tif")
+
+pal_ie = colorBin(palette="RdYlGn",
+               bins=10,
+               pretty=FALSE,
+               domain=c(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+               na.color = "transparent")
+
+# polygons
+# anps
+anps = readOGR("D:/work2/20180906_dalbergias/entrega_final/modelos_hist_stats/anps_selection_shps/ANPTerr175_2017.shp","ANPTerr175_2017",encoding = "UTF-8",stringsAsFactors = FALSE,verbose=FALSE)
+anps@data=data.frame(NOMBRE=anps@data$NOMBRE,stringsAsFactors = FALSE)
+
+estados = readOGR("D:/work2/20180906_dalbergias/estados/México_Estados.shp","México_Estados",
+                 encoding = "UTF-8",stringsAsFactors = FALSE,verbose=FALSE)
+estados$CODIGO=NULL
+
+
+m <- leaflet() %>%
+  addProviderTiles('Esri.WorldImagery') %>%
+  addFullscreenControl()
+
+m %>%
+
+  addRasterImage(ie_map, opacity = 0.8 , colors=pal_ie,group="Ecosystem Integrity 2018",
+                 maxBytes = 100 * 1024 *       1024) %>%
+
+      addLegend(pal=pal_ie,values=c(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+                position="bottomright",group="Ecosistem Integrity 2018",opacity = 1)%>%
+  
+      addPolygons(data=anps,color = "#3306ff",fillColor = "#3306ff" ,fillOpacity = 0.2,weight=2.5,
+                  group = "PNAs",popup=anps@data$NOMBRE)%>%
+      addPolygons(data=estados,color = "#000000",fillOpacity = 0,weight=2,
+              group = "States",popup=estados@data$ESTADO)%>%
+      addLegend(labels=c("States"),colors="#000000",position="bottomright",group="States",
+                opacity = 1)%>%
+      addLegend(labels=c("PNAs"),colors="#3306ff",position="bottomright",group="PNAs",
+            opacity = 1)%>%
+  
+  hideGroup("PNAs") %>%
+
+  hideGroup("States") %>%
+
+
+  # Layers control
+  addLayersControl(position="topleft",
+    overlayGroups = c("Ecosystem Integrity 2018","PNAs","States"),
+    options = layersControlOptions(collapsed = FALSE)
+  )%>%
+  addResetMapButton()
+
+```  
+
+These ordinal EI levels can also be used to analyze the condition of each INEGI vegetation type. The amount of squared kilometers that belong to each EI level per vegetation type is presented in the following chart. 
+
+```{r, echo=FALSE,warning=FALSE,message=FALSE}
+# Load inegi data
+inegi = read.csv("D:/work9seea/1_extension2/tables/final_extension.csv",header=TRUE)
+names(inegi)[1]="serie6_ipccv3_R_1_sinSec_wmsk"
+# Load cuts data
+cuts = read_excel("D:/work9seea/2_condition/reports/SEEA_extension_y_eicuts_v3.xlsx")
+cuts = as.data.frame(cuts)
+cuts$cuts = factor(cuts$cuts, levels = unique(cuts$cuts))
+cuts = merge(cuts,inegi,by="serie6_ipccv3_R_1_sinSec_wmsk")
+cuts$veg2 = factor(cuts$veg2, levels = unique(cuts$veg2[order(cuts$s6)]))
+cuts$iecuts2018p = round(cuts$iecuts2018p,digits=3)
+stacked = plot_ly(data = cuts,
+                  x = ~iecuts2018, 
+                  y = ~veg2, 
+                  color= ~cuts,
+                  colors = 'RdYlGn',
+                  type = 'bar') %>% 
+  layout(
+    yaxis = list(title = ''),
+    xaxis = list(title = 'km^2'),
+    barmode = 'stack')
+
+stacked
+
+```  
+
+Naturally this only informs of the crude extension of high and low EI levels per INEGI class, in order to be able to compare the distribution of EI levels between INEGI vegetation types we calculated the proportion of  each EI level within these types. 
+
+```{r, echo=FALSE,warning=FALSE,message=FALSE}
+
+stacked = plot_ly(data = cuts,
+                  x = ~iecuts2018p, 
+                  y = ~veg2, 
+                  color= ~cuts,
+                  colors = 'RdYlGn',
+                  type = 'bar') %>% 
+                  layout(
+                         yaxis = list(title = ''),
+                         xaxis = list(title = '%'),
+                         barmode = 'stack')
+
+stacked
+
+```  
+
+The previous information is useful to understand the amount and distribution of good and not-so-good ecosystem conditions throughout the country. Unfortunately it does not provide a simplified numerical answer to the condition question which makes it problematic for tracking changes in condition through time. To tackle this we have calculated the Natural Capital Index (Czúcz, 2011). This index reconciles information about ecosystem extensión and ecosystem condition using the following mathematical expression: 
+
+\begin{align*}
+NCI &= \frac{1}{A_{r}}\sum_{i \in S_{r}}q_{i} A_{i}\\
+\end{align*}
+
+Where:
+$A_{r}$ is the area of the examined region (in arbitrary units, e.g. km^2), $S_{r}$ is (the set of) all the individual habitat patches within the examined region, $A_{i}$ is the the estimated area of a habitat patch (in the same units as $A_{r}$) and $q_{i}$ is the the estimated quality of the habitat patch.
+
+In our case, our set of all individual habitat patches ($S_{r}$) are 250m pixels as this is the resolution of our vegetation (INEGI) and Ecosistem Integrity cartography. $A_{i}$ is constant at 0.0625 km^2 per pixel. And $A_{r}$ is the extension of each vegetation class also in km^2 for our base date of 2004. 
+
+
+```{r, echo=FALSE,warning=FALSE,message=FALSE}
+
+##################################################################################
+dat = read_excel("D:/work9seea/2_condition/reports/SEEA_extension_y_capitalnatural_v3_km2.xlsx")
+
+# S6
+dat$inegi_nom = factor(dat$inegi_nom, levels = dat$inegi_nom[order(dat$extension2014)])
+dat$capitalnatural2018 = round(dat$capitalnatural2018)
+fig <- plot_ly(dat, x = ~capitalnatural2018, y = ~inegi_nom , type = 'bar', orientation = "h",
+               marker = list(color = dat$color.y,
+                             line = list(color = 'black',
+                                         width = 1)))
+fig <- fig %>% layout(title = "Capital Natural - INEGI s6",
+                      xaxis = list(title = "km^2",range = c(0,450000)),
+                      yaxis = list(title = ""))
+
+fig
+
+# S6
+dat$c2018 = round(dat$c2018,2)
+fig <- plot_ly(dat, x = ~c2018, y = ~inegi_nom , type = 'bar', orientation = "h",
+               marker = list(color = "green",
+                             line = list(color = 'black',
+                                         width = 1)))
+fig <- fig %>% layout(title = "Capacidad - INEGI s6",
+                      xaxis = list(title = "%",range = c(0,1)),
+                      yaxis = list(title = ""))
+
+fig
+```  
+
+
+## References.
+
+Czúcz B., Molnár Zs, Horváth F, Nagy G G, Botta-Dukát Z, Török K: Using the natural capital
+index framework as a scalable aggregation methodology for local and regional biodiversity indicators.
+Journal for Nature Conservation. doi:10.1016/j.jnc.2011.11.002
