@@ -1,5 +1,5 @@
 ---
-title: "interoperabilidad"
+title: "Interoperabilidad"
 description: |
   La interoperabilidad es fundamental para la operación intersectorial e incluso
   interdisciplinar.
