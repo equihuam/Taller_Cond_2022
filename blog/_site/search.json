@@ -6,21 +6,21 @@
       "description": "Material de exposición y discusión en torno al cálculo del índice de integridad\necosistémica en México. Se describe principalmente el enfoque basado en redes bayesianas ",
       "author": [],
       "contents": "\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-08-29T20:48:17-05:00"
+      "last_modified": "2022-08-29T21:10:36-05:00"
     },
     {
       "path": "extras.html",
       "title": "Condición: IIE",
       "author": [],
       "contents": "\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-08-29T20:48:25-05:00"
+      "last_modified": "2022-08-29T21:10:41-05:00"
     },
     {
       "path": "index.html",
       "title": "Condición: IIE",
       "author": [],
       "contents": "\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-08-29T20:48:29-05:00"
+      "last_modified": "2022-08-29T21:10:44-05:00"
     }
   ],
   "collections": ["posts/posts.json", "extras/extras.json"]

@@ -3,17 +3,12 @@
     "path": "extras/2022-08-29-datos/",
     "title": "Datos",
     "description": "Datos compartidos para hacer los ejercicios del taller e incluso algunas otras\ntareas que consideren de interés.",
-    "author": [
-      {
-        "name": "Miguel Equihua Zamora, Julián Equihua Benítez",
-        "url": {}
-      }
-    ],
+    "author": [],
     "date": "2022-08-29",
     "categories": [],
     "contents": "\r\n\r\n\r\n\r\nLos datos para los ejercicios y posiblemente ejercicios que quieran\r\nhacer por su cuenta están en la carpeta\r\nde datos que hemos puesto en Github. La plataforma Github no admite\r\narchivos mayores a 100 megas. Su intención es básicamente almacenar\r\ndocumentos de texto simples, como los que tendría el código de un\r\nprograma de cómputo. De ahí que hemos visto la conveniencia de utilizar\r\notra carpeta\r\nde datos en Google Drive que hemos compartido con acceso público\r\ngeneral, sólo para lectura.\r\n\r\n\r\n\r\n",
     "preview": "extras/2022-08-29-datos/../../figuras/uso_datos.jpg",
-    "last_modified": "2022-08-29T20:46:50-05:00",
+    "last_modified": "2022-08-29T21:08:29-05:00",
     "input_file": {}
   }
 ]
