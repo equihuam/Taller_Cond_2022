@@ -92,3 +92,5 @@ ggplot(mu_yucatan_ei,
 
 # Parámetros de los bloques de código
 De haberse escrito `echo = FALSE` el código no hubiera sido desplegado.
+
+

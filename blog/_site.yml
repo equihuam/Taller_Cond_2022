@@ -5,24 +5,29 @@ description: |
   estimado con base en redes bayesianas
 output_dir: "_site"
 favicon: figuras/i-Gamma-1.ico
+collections:
+  posts: 
+    categories: true
+  extras:
+    categories: true
 navbar:
   logo:
     image: figuras/i-Gamma-1.png
   right:
     - text: "Días"
       menu:
-      - text: "Día 1"
+      - text: "Día 29"
         menu:
           - text: "Bienvenida"
             href: posts/welcome/index.html
           - text: "Dinámica del taller"
-            href: posts/2022-08-28-presentacion/index.html
+            href: posts/2022-08-26-dinmica-del-taller/index.html
           - text: "Cálculo actual de IIE"
             href: posts/2022-08-28-calculo-iie-actual/index.html
-      - text: "Día 2"
+      - text: "Día 30"
         menu:
           href: posts/welcome/index.html
-      - text: "Día 3"
+      - text: "Día 31"
         menu:
           href: posts/welcome/index.html
     - text: "Inicio"
