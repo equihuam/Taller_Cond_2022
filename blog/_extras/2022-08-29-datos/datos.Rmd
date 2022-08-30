@@ -1,0 +1,27 @@
+---
+title: "Datos"
+description: |
+  A short description of the post.
+author:
+  - name: Unknown
+date: 2022-08-29
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+
+```{r, echo = FALSE, fig.align = 'center', out.width = '30%'}
+
+knitr::include_graphics("../../figuras/uso_datos.jpg")
+```
+
+Los datos para los ejercisio y posiblemente ejercicios que quieran hacer por su cuenta están en la [carpeta datos que hemos puesto en Github](https://github.com/equihuam/Taller_Cond_2022/tree/main/data). La plataforma Github no admite archivos mayores a 100 megas. Su intención es básicamente almacenar documentos de texto simples. De ahí que hemos visto la conveniencia de utilizar otra [carpeta en Google Drive](https://drive.google.com/drive/folders/1idaJ75uXNmON-PLF-dxAVbdvKQZ2mdYr?usp=sharing) que hemos definido compartida, con acceso público general, sólo para lectura.
+
+

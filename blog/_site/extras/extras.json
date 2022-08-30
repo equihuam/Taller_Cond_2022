@@ -1,0 +1,19 @@
+[
+  {
+    "path": "extras/2022-08-29-datos/",
+    "title": "Datos",
+    "description": "A short description of the post.",
+    "author": [
+      {
+        "name": "Unknown",
+        "url": {}
+      }
+    ],
+    "date": "2022-08-29",
+    "categories": [],
+    "contents": "\r\n\r\n\r\n\r\nLos datos para los ejercisio y posiblemente ejercicios que quieran\r\nhacer por su cuenta están en la carpeta\r\ndatos que hemos puesto en Github. La plataforma Github no admite\r\narchivos mayores a 100 megas. Su intención es básicamente almacenar\r\ndocumentos de texto simples. De ahí que hemos visto la conveniencia de\r\nutilizar otra carpeta\r\nen Google Drive que hemos definido compartida, con acceso público\r\ngeneral, sólo para lectura.\r\n\r\n\r\n\r\n",
+    "preview": "extras/2022-08-29-datos/../../figuras/uso_datos.jpg",
+    "last_modified": "2022-08-29T20:02:09-05:00",
+    "input_file": {}
+  }
+]

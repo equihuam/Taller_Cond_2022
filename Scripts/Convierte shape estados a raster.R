@@ -7,9 +7,11 @@ library(RColorBrewer)
 library(paletteer)
 
 # Ubicación archivo "ESRI-shape" de estados de la república mexicana
-mapas_dir <- "z:/Datos/layers_harmon"
-edos_arch <- list.files(mapas_dir, pattern = "^00.*shp$", full.names = TRUE)
-ie2018_r_arch <- list.files(mapas_dir, pattern = "^ie_2018.*.tif$", full.names = TRUE)
+mapas_dir <- "../datos/"
+edos_arch <- list.files(mapas_dir, pattern = "^00.*shp$", 
+                        full.names = TRUE, recursive = TRUE)
+ie2018_r_arch <- list.files(mapas_dir, pattern = "^ie_2018.*.tif$", 
+                            full.names = TRUE, recursive = TRUE)
 
 # Hacer todo con TERRA para leer vectores y raster
 edos_shp_tr <- vect(edos_arch)
