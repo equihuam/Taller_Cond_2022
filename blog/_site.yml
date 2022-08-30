@@ -14,8 +14,10 @@ navbar:
   logo:
     image: figuras/i-Gamma-1.png
   right:
-    - text: "Datos"
-      href: extras.html
+    - text: "Extras"
+      menu:
+        - text: "Datos"
+          href: datos.html
     - text: "Inicio"
       href: index.html
     - text: "De qué trata"

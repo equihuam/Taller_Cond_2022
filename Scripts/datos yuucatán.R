@@ -1,6 +1,6 @@
 library(terra)
 
-# Ubicación archivo "ESRI-shape" de estados de la repúba mexicana
+# Ubicación archivo "ESRI-shape" de estados de la república mexicana
 mapas_dir <- "../data/indep_vars"
 lst_gtif <- list.files(mapas_dir, ".tif$", full.names = TRUE)
 
@@ -37,3 +37,7 @@ tiempo_fin - tiempo_inicio
 
 write.csv(datos_tbl, file = paste0(mapas_dir,"/datos_yuc_2018.csv"), 
           na = "*", row.names = FALSE, quote = FALSE)
+
+# library(data.table)
+# fwrite(nueva_tabla, file = "../layers_harmon/Nueva_tabla.csv", sep = ",", 
+#       quote = FALSE, na = "*", row.names = FALSE, showProgress = TRUE)

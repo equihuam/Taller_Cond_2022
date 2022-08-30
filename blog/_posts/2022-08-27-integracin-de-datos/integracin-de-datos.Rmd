@@ -166,7 +166,7 @@ cierta ruta que tengan una extensión (.tif).
 library("tools")
 
 # Lista de los rasters considerados variables explicativas.
-ruta_indep = list_files_with_exts("./indep_var_paths",
+ruta_indep = list_files_with_exts("../../../data/indep_vars",
                                   exts = "tif")
 
 ruta_indep
