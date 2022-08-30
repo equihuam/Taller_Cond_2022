@@ -1673,7 +1673,7 @@ el proceso.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>tiempo_fin</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span><span class='op'>(</span><span class='op'>)</span></span>
 <span><span class='va'>tiempo_fin</span> <span class='op'>-</span> <span class='va'>tiempo_inicio</span></span></code></pre>
 </div>
-<pre><code>Time difference of 24.61048 secs</code></pre>
+<pre><code>Time difference of 16.01575 secs</code></pre>
 </div>
 <p>Ahora sólo resta guardar los datos en algun lugar de mi conveniencia.
 Lo haré en este caso con la biblioteca <strong>data.table</strong> que
@@ -1689,7 +1689,7 @@ consumo humano.</p>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://r-datatable.com'>data.table</a></span><span class='op'>)</span></span>
 <span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/fwrite.html'>fwrite</a></span><span class='op'>(</span><span class='va'>datos_tbl</span>, <span class='co'># datos obtenidos en el proceso anterior</span></span>
-<span>          file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>mapas_dir</span>,<span class='st'>"datos_yuc_2018.csv"</span><span class='op'>)</span>, <span class='co'># destino y nombre del archivo</span></span>
+<span>          file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>mapas_dir</span>,<span class='st'>"../../../data/indep_vars/datos_yuc_2018.csv"</span><span class='op'>)</span>, <span class='co'># destino y nombre del archivo</span></span>
 <span>                        sep <span class='op'>=</span> <span class='st'>","</span>,           <span class='co'># La coma que separa los valores</span></span>
 <span>                        quote <span class='op'>=</span> <span class='cn'>FALSE</span>,       <span class='co'># No quiero que ponga los nombres entre comillas</span></span>
 <span>                        na <span class='op'>=</span> <span class='st'>"*"</span>,            <span class='co'># Netica utiliza * como indicador de dato faltante</span></span>

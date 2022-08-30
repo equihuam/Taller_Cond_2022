@@ -76,7 +76,7 @@ Ahora sólo resta guardar los datos en algun lugar de mi conveniencia. Lo haré 
 ```{r echo=TRUE}
 library(data.table)
 fwrite(datos_tbl, # datos obtenidos en el proceso anterior
-          file = paste0(mapas_dir,"datos_yuc_2018.csv"), # destino y nombre del archivo
+          file = paste0(mapas_dir,"../../../data/indep_vars/datos_yuc_2018.csv"), # destino y nombre del archivo
                         sep = ",",           # La coma que separa los valores
                         quote = FALSE,       # No quiero que ponga los nombres entre comillas
                         na = "*",            # Netica utiliza * como indicador de dato faltante
