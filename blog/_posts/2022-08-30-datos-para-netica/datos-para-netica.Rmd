@@ -88,7 +88,7 @@ tiempo_fin = Sys.time()
 tiempo_terra <- tiempo_fin - tiempo_inicio
 ```
 
-### COmparación de tiempos
+### Comparación de tiempos
 
 |Biblioteca |tiempo |
 |-----------|------|
@@ -98,7 +98,7 @@ tiempo_terra <- tiempo_fin - tiempo_inicio
 
 Los procesos que aplicamos ¿producen los mismos resultados?. Podemos usar esté código para explorar la cuestión
 
-```{r}
+```{r echo=TRUE}
 library(tidyverse)
 nombres <- names(datos_trr_tbl) # X, Y van en minúsculas
 nombres[1:2] <- c("x", "y")
@@ -132,7 +132,7 @@ Con este proceso hemos preparado una tabla de datos adecuada para ser leída en 
 
 En Netica se necesitará un pequeño *archivo de control* que especifica los datos que deseamos recuperar al procesar un nuevo archivo de datos. Para simplificar las cosas lo haremos desde aquí.
 
-```{r}
+```{r echo=TRUE}
 # Genera archivo de control para Netica
 lineas <- "expval(integridad)"  # Anota el valor esperado según la evidencia dada
 
@@ -144,7 +144,7 @@ write(lineas, paste0(mapas_dir, "/control_iie_netica.txt"), sep = "\n") # dato p
 
 Una vez entrenado el modelo de *red bayesiana* y procesados los casos base para el mapeo, tenemos un mapa de valore *predichos*. Dada la especificación del *archivo de control*, ese archivo de salida tendrá una sola columna y tantos renglones como los que tenemos en el archivo de datos utilizaado como fuente de evidencia. El orden de los casos es también el mismo del archivo de datos, así que podemos agregar la nueva comuna del índice de integridad a la tabla que procesamos anteriormente para generar los datos.
 
-```{r}
+```{r echo=TRUE}
 ie_dato <- fread(paste0(mapas_dir, "/salida.txt"), header = TRUE, col.names = "iie")
 
 # Lo normalizo para expresarlo entre 0 (nula iie) y 100 (alta iie)
@@ -155,7 +155,7 @@ knitr::kable(head(datos_tbl_ie), caption = "Datos lat-lon e iie")
 ```
 Ya tenemos una nueva tabla que incluye coordenadas lat-lon, y el nuevo dato del **índice de integridad ecosistémica**. Sólo resta convertir estos datos en en una tabla adecuada para representación espacial y a partir de ahí generar el **GeoTiff** que represente el resultado que obtuvimos.
 
-```{r}
+```{r echo=TRUE}
 library (sp)
 coordinates(datos_tbl_ie) <-  ~ x + y
 gridded(datos_tbl_ie) <-  TRUE
@@ -164,9 +164,9 @@ plot(datos_tbl_ie)
 
 ```
 
-Ahora convierto esta estructura de dato en uun objeto raster, efectivamente será ya el mapa final en memoria. El que guuardaremos en disco finalmente.
+Ahora convierto esta estructura de dato en uun objeto raster, efectivamente será ya el mapa final en memoria. El que guardaremos en disco finalmente.
 
-```{r}
+```{r echo=TRUE}
 datos_ie_r <- raster(datos_tbl_ie) 
 
 cat("tamaño x, y del pixel: ", res(datos_ie_r))

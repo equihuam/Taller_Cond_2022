@@ -1628,7 +1628,7 @@ la biblioteca <em>terra</em>.</p>
 <span><span class='va'>tiempo_terra</span> <span class='op'>&lt;-</span> <span class='va'>tiempo_fin</span> <span class='op'>-</span> <span class='va'>tiempo_inicio</span></span></code></pre>
 </div>
 </div>
-<h3 id="comparación-de-tiempos">COmparación de tiempos</h3>
+<h3 id="comparación-de-tiempos">Comparación de tiempos</h3>
 <table>
 <thead>
 <tr class="header">
@@ -1639,19 +1639,35 @@ la biblioteca <em>terra</em>.</p>
 <tbody>
 <tr class="odd">
 <td>Raster</td>
-<td>15.4574320316315</td>
+<td>13.8480150699615</td>
 </tr>
 <tr class="even">
 <td>Terra</td>
-<td>14.5813980102539</td>
+<td>14.0024681091309</td>
 </tr>
 </tbody>
 </table>
 <p>Los procesos que aplicamos ¿producen los mismos resultados?. Podemos
 usar esté código para explorar la cuestión</p>
 <div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
+<span><span class='va'>nombres</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>datos_trr_tbl</span><span class='op'>)</span> <span class='co'># X, Y van en minúsculas</span></span>
+<span><span class='va'>nombres</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"x"</span>, <span class='st'>"y"</span><span class='op'>)</span></span>
+<span><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>datos_trr_tbl</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='va'>nombres</span></span>
+<span><span class='fu'><a href='https://rdrr.io/r/base/row.names.html'>row.names</a></span><span class='op'>(</span><span class='va'>datos_trr_tbl</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='cn'>NULL</span>   <span class='co'># Elimino nombres de fila (dato que no necesito aquí)</span></span>
+<span><span class='fu'><a href='https://rdrr.io/r/base/row.names.html'>row.names</a></span><span class='op'>(</span><span class='va'>datos_tbl</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='cn'>NULL</span>       <span class='co'># Elimino nombres de fila (dato que no necesito aquí)</span></span>
+<span></span>
+<span><span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span><span class='op'>(</span><span class='st'>"Las tablas raster y terra:\n"</span><span class='op'>)</span></span></code></pre>
+</div>
 <pre><code>Las tablas raster y terra:</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span><span class='op'>(</span><span class='st'>"¿Tienen la misma estructura?"</span>, <span class='fu'><a href='https://dplyr.tidyverse.org/reference/same_src.html'>same_src</a></span><span class='op'>(</span><span class='va'>datos_tbl</span>, <span class='va'>datos_trr_tbl</span><span class='op'>)</span>, <span class='st'>"\n"</span><span class='op'>)</span></span></code></pre>
+</div>
 <pre><code>¿Tienen la misma estructura? TRUE </code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span><span class='op'>(</span><span class='st'>"¿Tienen los mismos datos?"</span>, <span class='fu'><a href='https://rdrr.io/pkg/terra/man/all.equal.html'>all.equal</a></span><span class='op'>(</span><span class='va'>datos_tbl</span>, <span class='va'>datos_trr_tbl</span><span class='op'>)</span>, <span class='st'>"\n"</span><span class='op'>)</span></span></code></pre>
+</div>
 <pre><code>¿Tienen los mismos datos? TRUE </code></pre>
 </div>
 <h2 id="guardar-la-tabla-en-disco">Guardar la tabla en disco</h2>
@@ -1684,7 +1700,12 @@ de los datos que utilizaremos en la contabilidad.</p>
 especifica los datos que deseamos recuperar al procesar un nuevo archivo
 de datos. Para simplificar las cosas lo haremos desde aquí.</p>
 <div class="layout-chunk" data-layout="l-body">
-
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'># Genera archivo de control para Netica</span></span>
+<span><span class='va'>lineas</span> <span class='op'>&lt;-</span> <span class='st'>"expval(integridad)"</span>  <span class='co'># Anota el valor esperado según la evidencia dada</span></span>
+<span></span>
+<span><span class='fu'><a href='https://rdrr.io/r/base/write.html'>write</a></span><span class='op'>(</span><span class='va'>lineas</span>, <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>mapas_dir</span>, <span class='st'>"/control_iie_netica.txt"</span><span class='op'>)</span>, sep <span class='op'>=</span> <span class='st'>"\n"</span><span class='op'>)</span> <span class='co'># dato por línea "\n"</span></span></code></pre>
+</div>
 </div>
 <h2 id="mapear-resultados-de-netica">Mapear resultados de Netica</h2>
 <p>Una vez entrenado el modelo de <em>red bayesiana</em> y procesados
@@ -1697,6 +1718,15 @@ archivo de datos, así que podemos agregar la nueva comuna del índice de
 integridad a la tabla que procesamos anteriormente para generar los
 datos.</p>
 <div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>ie_dato</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/fread.html'>fread</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>mapas_dir</span>, <span class='st'>"/salida.txt"</span><span class='op'>)</span>, header <span class='op'>=</span> <span class='cn'>TRUE</span>, col.names <span class='op'>=</span> <span class='st'>"iie"</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='co'># Lo normalizo para expresarlo entre 0 (nula iie) y 100 (alta iie)</span></span>
+<span><span class='va'>ie_dato</span> <span class='op'>&lt;-</span> <span class='fl'>100</span> <span class='op'>*</span> <span class='op'>(</span><span class='fl'>18</span> <span class='op'>-</span> <span class='va'>ie_dato</span><span class='op'>)</span> <span class='op'>/</span> <span class='fl'>18</span></span>
+<span></span>
+<span><span class='va'>datos_tbl_ie</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>datos_tbl</span><span class='op'>[</span>,<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span><span class='op'>)</span><span class='op'>]</span>, <span class='va'>ie_dato</span><span class='op'>)</span> </span>
+<span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>datos_tbl_ie</span><span class='op'>)</span>, caption <span class='op'>=</span> <span class='st'>"Datos lat-lon e iie"</span><span class='op'>)</span></span></code></pre>
+</div>
 <table>
 <caption><span id="tab:unnamed-chunk-8">Table 1: </span>Datos lat-lon e iie</caption>
 <thead>
@@ -1746,17 +1776,38 @@ resta convertir estos datos en en una tabla adecuada para representación
 espacial y a partir de ahí generar el <strong>GeoTiff</strong> que
 represente el resultado que obtuvimos.</p>
 <div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span> <span class='op'>(</span><span class='va'><a href='https://github.com/edzer/sp/'>sp</a></span><span class='op'>)</span></span>
+<span><span class='fu'><a href='https://rdrr.io/pkg/sp/man/coordinates.html'>coordinates</a></span><span class='op'>(</span><span class='va'>datos_tbl_ie</span><span class='op'>)</span> <span class='op'>&lt;-</span>  <span class='op'>~</span> <span class='va'>x</span> <span class='op'>+</span> <span class='va'>y</span></span>
+<span><span class='fu'><a href='https://rdrr.io/pkg/sp/man/gridded-methods.html'>gridded</a></span><span class='op'>(</span><span class='va'>datos_tbl_ie</span><span class='op'>)</span> <span class='op'>&lt;-</span>  <span class='cn'>TRUE</span></span>
+<span><span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>datos_tbl_ie</span><span class='op'>)</span></span></code></pre>
+</div>
 <pre><code>[1] &quot;SpatialPixelsDataFrame&quot;
 attr(,&quot;package&quot;)
 [1] &quot;sp&quot;</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>datos_tbl_ie</span><span class='op'>)</span></span></code></pre>
+</div>
 <p><img src="datos-para-netica_files/figure-html5/unnamed-chunk-9-1.png" width="624" /></p>
 </div>
 <p>Ahora convierto esta estructura de dato en uun objeto raster,
-efectivamente será ya el mapa final en memoria. El que guuardaremos en
+efectivamente será ya el mapa final en memoria. El que guardaremos en
 disco finalmente.</p>
 <div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>datos_ie_r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/raster/man/raster.html'>raster</a></span><span class='op'>(</span><span class='va'>datos_tbl_ie</span><span class='op'>)</span> </span>
+<span></span>
+<span><span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span><span class='op'>(</span><span class='st'>"tamaño x, y del pixel: "</span>, <span class='fu'><a href='https://rdrr.io/pkg/terra/man/dimensions.html'>res</a></span><span class='op'>(</span><span class='va'>datos_ie_r</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+</div>
 <pre><code>tamaño x, y del pixel:  250 250</code></pre>
-<p><img src="datos-para-netica_files/figure-html5/unnamed-chunk-10-1.png" width="624" /></p>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>datos_ie_r</span><span class='op'>)</span></span></code></pre>
+</div>
+<img src="datos-para-netica_files/figure-html5/unnamed-chunk-10-1.png" width="624" />
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/pkg/terra/man/writeRaster.html'>writeRaster</a></span><span class='op'>(</span><span class='va'>datos_ie_r</span>, filename<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>mapas_dir</span>, <span class='st'>"/../ie/iie_yucatan.tif"</span><span class='op'>)</span>, </span>
+<span>            format<span class='op'>=</span><span class='st'>"GTiff"</span>, overwrite<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span></code></pre>
+</div>
 </div>
 <p>Hemos llegado al final del proceso y ya tenemos el mapa del índice de
 integridad ecosistémica en el disco.</p>
