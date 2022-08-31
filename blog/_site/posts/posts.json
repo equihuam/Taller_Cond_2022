@@ -19,6 +19,25 @@
     "input_file": "flujos-de-trabajo.knit.md"
   },
   {
+    "path": "posts/2022-08-31-introduccin/",
+    "title": "Introducción",
+    "description": "Se presenta el marco conceptual general del nuevo sistema de contabilidad ambiental\nSEEA EA y su contexto naciona e internacional de desarrollo.",
+    "author": [
+      {
+        "name": "Francisco Guillén Martín",
+        "url": {
+          "https://taller-cuenta-condicion.netlify.app": {}
+        }
+      }
+    ],
+    "date": "2022-08-31",
+    "categories": [],
+    "contents": "\r\n\r\n\r\n\r\nMi carrera profesional se ha desarrollado principalmente en el sector\r\npúblico en la que tengo más de 30 años. Particularmente he trabajado\r\npara el Instituto Nacional de Estadística y Geografía\r\n(INEGI). Hace años tuve la oportunidad de dar a conocer\r\nla primera serie anual del Producto Interno Bruto por Entidad\r\nFederativa. Fui iniciador y coordinador del proyecto denominado\r\nSistema de Cuentas Económicas y Ecológicas de México\r\n(SCEEM). Fui iniciador y coordinador del nuevo proyecto\r\ndenominado Sistema de Cuentas Económicas y Ecológicas de México\r\n(SCEEM), llevado a cabo por el INEGI y\r\nauspiciado por la Organización de las Naciones Unidas y el\r\nBanco Mundial, proyecto pionero en su tipo a nivel mundial.\r\nActualmente soy Director General Adjunto de Cuentas Nacionales del\r\nINEGI, así que tengo bajo mi responsabilidad el\r\nSistema de Cuentas Nacionales de México en su conjunto.\r\nParticipo en el Buro de Expertos de Cuentas Nacionales y\r\nFinancieras de la OCDE. También he participado en\r\nvarios grupos de expertos asociados a la economía y medio ambiente.\r\n\r\n\r\n\r\n\r\n\r\n",
+    "preview": "posts/2022-08-31-introduccin/../../figuras/paco.png",
+    "last_modified": "2022-08-31T18:24:01-05:00",
+    "input_file": "introduccin.knit.md"
+  },
+  {
     "path": "posts/2022-08-30-datos-para-netica/",
     "title": "Prepara datos para modelar",
     "description": "Procedimiento de preparción de datos a partir de GeoTiffs para producir datos tabulares\nmás adecuados para el análisis estadístico.",

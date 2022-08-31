@@ -17,13 +17,13 @@ histograma_ie <- function(df_ie){
 }
 
 plan <- drake_plan(
-    raw_data = rast(ruta_ie),
+    rast_ie = rast(ruta_ie),
     
     data = rast_ie %>% as.data.frame(),
     
     histograma = histograma_ie(data),
     
-    ggsave("../figuras/histograma_yucatan_ie.png")
+    ggsave("../blog/figuras/histograma_yucatan_ie.png")
 )
 
 
