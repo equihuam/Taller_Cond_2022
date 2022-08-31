@@ -120,7 +120,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["datos-para-netica_files/anchor-4.2.2/anchor.min.js","datos-para-netica_files/bowser-1.9.3/bowser.min.js","datos-para-netica_files/distill-2.2.21/template.v2.js","datos-para-netica_files/header-attrs-2.14/header-attrs.js","datos-para-netica_files/jquery-3.6.0/jquery-3.6.0.js","datos-para-netica_files/jquery-3.6.0/jquery-3.6.0.min.js","datos-para-netica_files/jquery-3.6.0/jquery-3.6.0.min.map","datos-para-netica_files/popper-2.6.0/popper.min.js","datos-para-netica_files/tippy-6.2.7/tippy-bundle.umd.min.js","datos-para-netica_files/tippy-6.2.7/tippy-light-border.css","datos-para-netica_files/tippy-6.2.7/tippy.css","datos-para-netica_files/tippy-6.2.7/tippy.umd.min.js","datos-para-netica_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["datos-para-netica_files/anchor-4.2.2/anchor.min.js","datos-para-netica_files/bowser-1.9.3/bowser.min.js","datos-para-netica_files/distill-2.2.21/template.v2.js","datos-para-netica_files/figure-html5/unnamed-chunk-10-1.png","datos-para-netica_files/figure-html5/unnamed-chunk-9-1.png","datos-para-netica_files/header-attrs-2.14/header-attrs.js","datos-para-netica_files/jquery-3.6.0/jquery-3.6.0.js","datos-para-netica_files/jquery-3.6.0/jquery-3.6.0.min.js","datos-para-netica_files/jquery-3.6.0/jquery-3.6.0.min.map","datos-para-netica_files/popper-2.6.0/popper.min.js","datos-para-netica_files/tippy-6.2.7/tippy-bundle.umd.min.js","datos-para-netica_files/tippy-6.2.7/tippy-light-border.css","datos-para-netica_files/tippy-6.2.7/tippy.css","datos-para-netica_files/tippy-6.2.7/tippy.umd.min.js","datos-para-netica_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2151,17 +2151,15 @@ estadístico.</p></p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="../../figuras/Proceso_datos_redes.jpg" width="80%" style="display: block; margin: auto;" /></p>
 </div>
-<div class="layout-chunk" data-layout="l-body">
-
-</div>
 <p>Aunque este proceso puede hacerse con la nueva biblioteca
-<em>terra</em>, en realidad hoy por hoy, la biblioteca <em>raster</em>
-es más eficiente y conveniente para hacer la tarea que nos proponemos
-resolver. Lo que haremos es leer un montón de archivos <em>raster</em>
-en formato <em>GeoTiff</em>. Generaremos unna colección congruente con
-ellos en términos de que comparten proyección y extensión y luego
-haremos una transformación de los objetos de datos para producir una
-tabla convencional de datos.</p>
+<em>terra</em>. Se dice que la biblioteca <em>raster</em> es más
+eficiente y conveniente para hacer la tarea que nos proponemos resolver,
+sin embargo, <em>terra</em> está evolucionando y podría ya no ser así.
+Lo que haremos aquí es leer un montón de archivos <em>raster</em> en
+formato <em>GeoTiff</em>. Generaremos una colección congruente con ellos
+en términos de que comparten proyección y extensión y luego haremos una
+transformación de los objetos de datos para producir una tabla
+convencional de datos.</p>
 <h2 id="localización-de-los-archivos">Localización de los archivos</h2>
 <p>En la seción de ayer usamos la biblioteca <em>tools</em> y de ella la
 función <code>list_files_with_exts</code>. Volvamos a hacerlo.</p>
@@ -2171,8 +2169,7 @@ función <code>list_files_with_exts</code>. Volvamos a hacerlo.</p>
 <span><span class='va'>mapas_dir</span> <span class='op'>&lt;-</span> <span class='st'>"../../../data/indep_vars"</span></span>
 <span></span>
 <span><span class='co'># Lista de los rasters considerados variables explicativas.</span></span>
-<span><span class='va'>lst_gtif</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/tools/fileutils.html'>list_files_with_exts</a></span><span class='op'>(</span><span class='st'>"../../../data/indep_vars"</span>,</span>
-<span>                                  exts <span class='op'>=</span> <span class='st'>"tif"</span><span class='op'>)</span></span>
+<span><span class='va'>lst_gtif</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/tools/fileutils.html'>list_files_with_exts</a></span><span class='op'>(</span><span class='va'>mapas_dir</span>, exts <span class='op'>=</span> <span class='st'>"tif"</span><span class='op'>)</span></span>
 <span><span class='va'>lst_gtif</span></span></code></pre>
 </div>
 <pre><code> [1] &quot;../../../data/indep_vars/AlturaFusteLimpio_desvest_250m.tif&quot;
@@ -2183,20 +2180,21 @@ función <code>list_files_with_exts</code>. Volvamos a hacerlo.</p>
  [6] &quot;../../../data/indep_vars/DiametroCopa_media_250m.tif&quot;       
  [7] &quot;../../../data/indep_vars/DiametroNormal_desvest_250m.tif&quot;   
  [8] &quot;../../../data/indep_vars/DiametroNormal_media_250m.tif&quot;     
- [9] &quot;../../../data/indep_vars/net_photo_mean.tif&quot;                
-[10] &quot;../../../data/indep_vars/net_photo_mean_lluvias.tif&quot;        
-[11] &quot;../../../data/indep_vars/net_photo_mean_secas.tif&quot;          
-[12] &quot;../../../data/indep_vars/net_photo_sd.tif&quot;                  
-[13] &quot;../../../data/indep_vars/presenciaArbolesMuertos_250m.tif&quot;  
-[14] &quot;../../../data/indep_vars/presenciaInsectos_250m.tif&quot;        
-[15] &quot;../../../data/indep_vars/propor_bosque.tif&quot;                 
-[16] &quot;../../../data/indep_vars/propor_pastizaloagricultura.tif&quot;   
-[17] &quot;../../../data/indep_vars/propor_selva.tif&quot;                  
-[18] &quot;../../../data/indep_vars/propor_suelodesnudo.tif&quot;           
-[19] &quot;../../../data/indep_vars/propor_urbano.tif&quot;                 
-[20] &quot;../../../data/indep_vars/srtm90m_mean250m.tif&quot;              
-[21] &quot;../../../data/indep_vars/srtm90m_range250m.tif&quot;             
-[22] &quot;../../../data/indep_vars/zvh_31_lcc_h.tif&quot;                  </code></pre>
+ [9] &quot;../../../data/indep_vars/hemerobia_250m.tif&quot;                
+[10] &quot;../../../data/indep_vars/net_photo_mean.tif&quot;                
+[11] &quot;../../../data/indep_vars/net_photo_mean_lluvias.tif&quot;        
+[12] &quot;../../../data/indep_vars/net_photo_mean_secas.tif&quot;          
+[13] &quot;../../../data/indep_vars/net_photo_sd.tif&quot;                  
+[14] &quot;../../../data/indep_vars/presenciaArbolesMuertos_250m.tif&quot;  
+[15] &quot;../../../data/indep_vars/presenciaInsectos_250m.tif&quot;        
+[16] &quot;../../../data/indep_vars/propor_bosque.tif&quot;                 
+[17] &quot;../../../data/indep_vars/propor_pastizaloagricultura.tif&quot;   
+[18] &quot;../../../data/indep_vars/propor_selva.tif&quot;                  
+[19] &quot;../../../data/indep_vars/propor_suelodesnudo.tif&quot;           
+[20] &quot;../../../data/indep_vars/propor_urbano.tif&quot;                 
+[21] &quot;../../../data/indep_vars/srtm90m_mean250m.tif&quot;              
+[22] &quot;../../../data/indep_vars/srtm90m_range250m.tif&quot;             
+[23] &quot;../../../data/indep_vars/zvh_31_lcc_h.tif&quot;                  </code></pre>
 </div>
 <p>Pueden ver que hemos encontrado 25 capas de información. Cada una de
 ellas aportará una columna de datos a nuestra tabla. Para hacer esto lo
@@ -2209,106 +2207,88 @@ que haremos es:</p>
 <li>Convertir los puntos en una tabla en la que cada capa aporta una
 columna.</li>
 </ol>
-<p>Puede convenir tomarle el tiempo a este proceso, así que les mostraré
-como hacerlo. Simplemente lo que haré es tomar nota de la hora de
-arranque del proceso y luego al final el tiempo de salida. Calculo la
-diferencia entre estos dos valores y tengo una buena idea de cuanto tomo
-el proceso.</p>
+<p>La tabla que queremos debería tener valores para todas las
+variablesNoté que rasterToPoints deja pasar algunos datos faltantes que
+no deberían faltar!!!, Quizás sean resultado de algunas incongruencias
+en la representación geográfica entre los mapas. Desde luego el tema
+podría requerir una valoración más cuidadosa, pero para fines prácticos
+se puede optar por generar una tabla en la que todas las columnas tienen
+datos. La función de <em>R</em> <code>complete.cases()</code>permite
+incorporar esta consideración en la construcción de la tabla para omitir
+todos los registros (casos o renglones) que no tengan valores válidos
+para todas las variables. Esto lo hace <em>terra</em> en forma
+predeterminada, así que en este caso también sirve para obtener un
+resultado comparable.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>tiempo_inicio</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span><span class='op'>(</span><span class='op'>)</span></span>
-<span><span class='va'>datos_brk</span> <span class='op'>&lt;-</span> <span class='fu'>raster</span><span class='op'>(</span><span class='va'>lst_gtif</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span> <span class='co'># tengo que iniciar el ladrillo, así que lo hago aquí    </span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://rspatial.org/raster'>raster</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://rspatial.org/terra/'>terra</a></span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>tiempo_inicio</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span><span class='va'>datos_brk</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/raster/man/brick.html'>brick</a></span><span class='op'>(</span><span class='va'>lst_gtif</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span>         <span class='co'># tengo que iniciar el ladrillo, así que lo hago aquí</span></span>
 <span><span class='kw'>for</span> <span class='op'>(</span><span class='va'>r</span> <span class='kw'>in</span> <span class='va'>lst_gtif</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>lst_gtif</span><span class='op'>)</span><span class='op'>]</span><span class='op'>)</span> <span class='co'># como ya use este mapa, el ciclo empieza en el mapa 2</span></span>
 <span><span class='op'>{</span></span>
-<span>  <span class='va'>datos_brk</span> <span class='op'>&lt;-</span> <span class='fu'>addLayer</span><span class='op'>(</span><span class='va'>datos_brk</span>, <span class='fu'>raster</span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span></span>
+<span>  <span class='va'>datos_brk</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/raster/man/addLayer.html'>addLayer</a></span><span class='op'>(</span><span class='va'>datos_brk</span>, <span class='fu'><a href='https://rdrr.io/pkg/raster/man/raster.html'>raster</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span></span>
 <span><span class='op'>}</span></span>
 <span></span>
-<span><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>datos_brk</span><span class='op'>)</span></span></code></pre>
+<span><span class='va'>datos_tbl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/raster/man/rasterToPoints.html'>rasterToPoints</a></span><span class='op'>(</span><span class='va'>datos_brk</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># aquí ocurre la magia: imágen a tabla!!</span></span>
+<span><span class='va'>datos_tbl</span> <span class='op'>&lt;-</span> <span class='va'>datos_tbl</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/stats/complete.cases.html'>complete.cases</a></span><span class='op'>(</span><span class='va'>datos_tbl</span><span class='op'>)</span>, <span class='op'>]</span>   <span class='co'># elimina filas con datos incompletos</span></span>
+<span><span class='va'>tiempo_fin</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span><span class='va'>tiempo_raster</span> <span class='op'>&lt;-</span> <span class='va'>tiempo_fin</span> <span class='op'>-</span> <span class='va'>tiempo_inicio</span></span>
+<span></span>
+<span><span class='va'>datos_tbl_na</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/raster/man/rasterToPoints.html'>rasterToPoints</a></span><span class='op'>(</span><span class='va'>datos_brk</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># tabla con todo</span></span>
+<span><span class='va'>datos_tbl_na</span> <span class='op'>&lt;-</span> <span class='va'>datos_tbl_na</span><span class='op'>[</span><span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/stats/complete.cases.html'>complete.cases</a></span><span class='op'>(</span><span class='va'>datos_tbl_na</span><span class='op'>)</span>,<span class='op'>]</span> <span class='co'># tabla con casos incompletos</span></span></code></pre>
 </div>
-<pre><code> [1] &quot;AlturaFusteLimpio_desvest_250m&quot; &quot;AlturaFusteLimpio_media_250m&quot;  
- [3] &quot;AlturaTotal_desvest_250m&quot;       &quot;AlturaTotal_media_250m&quot;        
- [5] &quot;DiametroCopa_desvest_250m&quot;      &quot;DiametroCopa_media_250m&quot;       
- [7] &quot;DiametroNormal_desvest_250m&quot;    &quot;DiametroNormal_media_250m&quot;     
- [9] &quot;net_photo_mean&quot;                 &quot;net_photo_mean_lluvias&quot;        
-[11] &quot;net_photo_mean_secas&quot;           &quot;net_photo_sd&quot;                  
-[13] &quot;presenciaArbolesMuertos_250m&quot;   &quot;presenciaInsectos_250m&quot;        
-[15] &quot;propor_bosque&quot;                  &quot;propor_pastizaloagricultura&quot;   
-[17] &quot;propor_selva&quot;                   &quot;propor_suelodesnudo&quot;           
-[19] &quot;propor_urbano&quot;                  &quot;srtm90m_mean250m&quot;              
-[21] &quot;srtm90m_range250m&quot;              &quot;zvh_31_lcc_h&quot;                  </code></pre>
+</div>
+<p>Con fines didácticos y si no por llana curiosidad, les propongo
+comparar el tiempo que nos toma hacer la tarea que nos propusimos con la
+biblioteca <em>raster</em>, en contraste con el que nos toma hacerlo con
+la biblioteca <em>terra</em>.</p>
+<div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>datos_tbl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='fu'>rasterToPoints</span><span class='op'>(</span><span class='va'>datos_brk</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># aquí ocurre la magia imágen a tabla!!!</span></span>
-<span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>datos_tbl</span><span class='op'>)</span></span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://r-spatial.github.io/sf/'>sf</a></span><span class='op'>)</span></span>
+<span><span class='co'># La misma tarea de conversión de geotiffs a tabla, pero ahora con terra</span></span>
+<span><span class='va'>tiempo_inicio</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span><span class='va'>datos_trr</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/terra/man/rast.html'>rast</a></span><span class='op'>(</span><span class='va'>lst_gtif</span><span class='op'>)</span>    <span class='co'># no necesito un for, ddirectamente procesa la lista de archivos</span></span>
+<span><span class='va'>datos_trr_v</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/terra/man/as.spatvector.html'>as.points</a></span><span class='op'>(</span><span class='va'>datos_trr</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='co'># convierte en vectorial de puntos </span></span>
+<span></span>
+<span><span class='va'>datos_trr_sf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://r-spatial.github.io/sf/reference/st_as_sf.html'>st_as_sf</a></span><span class='op'>(</span><span class='va'>datos_trr_v</span>, coords <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"x"</span>, <span class='st'>"y"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>coords_trr</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='fu'><a href='https://r-spatial.github.io/sf/reference/st_coordinates.html'>st_coordinates</a></span><span class='op'>(</span><span class='va'>datos_trr_sf</span><span class='op'>$</span><span class='va'>geometry</span><span class='op'>)</span><span class='op'>)</span></span>
+<span><span class='va'>datos_trr_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>datos_trr_sf</span><span class='op'>)</span></span>
+<span><span class='va'>datos_trr_tbl</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='va'>coords_trr</span>, <span class='va'>datos_trr_df</span><span class='op'>)</span></span>
+<span><span class='va'>datos_trr_tbl</span> <span class='op'>&lt;-</span> <span class='va'>datos_trr_tbl</span><span class='op'>[</span>, <span class='op'>-</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>datos_trr_tbl</span><span class='op'>)</span><span class='op'>]</span>  <span class='co'># elimino la última columna (geometry)</span></span>
+<span><span class='va'>tiempo_fin</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span><span class='va'>tiempo_terra</span> <span class='op'>&lt;-</span> <span class='va'>tiempo_fin</span> <span class='op'>-</span> <span class='va'>tiempo_inicio</span></span></code></pre>
 </div>
-<pre><code>        x       y AlturaFusteLimpio_desvest_250m
-1 3939125 1135625                     0.00000000
-2 3939375 1135625                     0.54562950
-3 3939625 1135625                     0.02781332
-4 3939875 1135625                     0.02781332
-5 3940125 1135625                     0.02781332
-6 3940375 1135625                     0.02781332
-  AlturaFusteLimpio_media_250m AlturaTotal_desvest_250m
-1                   0.00000000              0.000000000
-2                   1.16930819              0.693956196
-3                   0.03184322              0.008685708
-4                   0.03184322              0.008685708
-5                   0.03184322              0.008685708
-6                   0.03184322              0.008685708
-  AlturaTotal_media_250m DiametroCopa_desvest_250m
-1              0.0000000                0.02296904
-2              4.6368446                0.17380011
-3              0.0426484                0.07168859
-4              0.0426484                0.07168859
-5              0.0426484                0.07168859
-6              0.0426484                0.07168859
-  DiametroCopa_media_250m DiametroNormal_desvest_250m
-1              0.02391556                  0.00000000
-2              0.19083574                  0.78119290
-3              0.01392496                  0.03274944
-4              0.01392496                  0.03274944
-5              0.01392496                  0.03274944
-6              0.01392496                  0.03274944
-  DiametroNormal_media_250m net_photo_mean net_photo_mean_lluvias
-1                0.00000000              0                      0
-2                1.10098600              0                      0
-3                0.07778671              0                      0
-4                0.07778671              0                      0
-5                0.07778671              0                      0
-6                0.07778671              0                      0
-  net_photo_mean_secas net_photo_sd presenciaArbolesMuertos_250m
-1                    0            0                           NA
-2                    0            0                           NA
-3                    0            0                           NA
-4                    0            0                           NA
-5                    0            0                           NA
-6                    0            0                           NA
-  presenciaInsectos_250m propor_bosque propor_pastizaloagricultura
-1                     NA             0                           0
-2                     NA             0                           0
-3                     NA             0                           0
-4                     NA             0                           0
-5                     NA             0                           0
-6                     NA             0                           0
-  propor_selva propor_suelodesnudo propor_urbano srtm90m_mean250m
-1            0                   0      2.469136              2.0
-2            0                   0      0.000000              3.5
-3            0                   0      0.000000               NA
-4            0                   0      2.469136               NA
-5            0                   0      2.222222               NA
-6            0                   0      0.000000               NA
-  srtm90m_range250m zvh_31_lcc_h
-1                 0           15
-2                 1           15
-3                NA           15
-4                NA           15
-5                NA           15
-6                NA           15</code></pre>
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>tiempo_fin</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span><span class='op'>(</span><span class='op'>)</span></span>
-<span><span class='va'>tiempo_fin</span> <span class='op'>-</span> <span class='va'>tiempo_inicio</span></span></code></pre>
 </div>
-<pre><code>Time difference of 16.01575 secs</code></pre>
+<h3 id="comparación-de-tiempos">COmparación de tiempos</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Biblioteca</th>
+<th>tiempo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Raster</td>
+<td>15.4574320316315</td>
+</tr>
+<tr class="even">
+<td>Terra</td>
+<td>14.5813980102539</td>
+</tr>
+</tbody>
+</table>
+<p>Los procesos que aplicamos ¿producen los mismos resultados?. Podemos
+usar esté código para explorar la cuestión</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre><code>Las tablas raster y terra:</code></pre>
+<pre><code>¿Tienen la misma estructura? TRUE </code></pre>
+<pre><code>¿Tienen los mismos datos? TRUE </code></pre>
 </div>
+<h2 id="guardar-la-tabla-en-disco">Guardar la tabla en disco</h2>
 <p>Ahora sólo resta guardar los datos en algun lugar de mi conveniencia.
 Lo haré en este caso con la biblioteca <strong>data.table</strong> que
 es super eficiente para datos grandes, así que conviene que la conozcan.
@@ -2323,7 +2303,7 @@ consumo humano.</p>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://r-datatable.com'>data.table</a></span><span class='op'>)</span></span>
 <span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/fwrite.html'>fwrite</a></span><span class='op'>(</span><span class='va'>datos_tbl</span>, <span class='co'># datos obtenidos en el proceso anterior</span></span>
-<span>          file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>mapas_dir</span>,<span class='st'>"../../../data/indep_vars/datos_yuc_2018.csv"</span><span class='op'>)</span>, <span class='co'># destino y nombre del archivo</span></span>
+<span>          file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>mapas_dir</span>, <span class='st'>"/datos_yuc_2018.csv"</span><span class='op'>)</span>, <span class='co'># destino y nombre del archivo</span></span>
 <span>                        sep <span class='op'>=</span> <span class='st'>","</span>,           <span class='co'># La coma que separa los valores</span></span>
 <span>                        quote <span class='op'>=</span> <span class='cn'>FALSE</span>,       <span class='co'># No quiero que ponga los nombres entre comillas</span></span>
 <span>                        na <span class='op'>=</span> <span class='st'>"*"</span>,            <span class='co'># Netica utiliza * como indicador de dato faltante</span></span>
@@ -2334,7 +2314,87 @@ consumo humano.</p>
 <p>Con este proceso hemos preparado una tabla de datos adecuada para ser
 leída en NETICA y podemos continuar con el procedimiento de construcción
 de los datos que utilizaremos en la contabilidad.</p>
-<div class="sourceCode" id="cb5"><pre
+<p>En Netica se necesitará un pequeño <em>archivo de control</em> que
+especifica los datos que deseamos recuperar al procesar un nuevo archivo
+de datos. Para simplificar las cosas lo haremos desde aquí.</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<h2 id="mapear-resultados-de-netica">Mapear resultados de Netica</h2>
+<p>Una vez entrenado el modelo de <em>red bayesiana</em> y procesados
+los casos base para el mapeo, tenemos un mapa de valore
+<em>predichos</em>. Dada la especificación del <em>archivo de
+control</em>, ese archivo de salida tendrá una sola columna y tantos
+renglones como los que tenemos en el archivo de datos utilizaado como
+fuente de evidencia. El orden de los casos es también el mismo del
+archivo de datos, así que podemos agregar la nueva comuna del índice de
+integridad a la tabla que procesamos anteriormente para generar los
+datos.</p>
+<div class="layout-chunk" data-layout="l-body">
+<table>
+<caption><span id="tab:unnamed-chunk-8">Table 1: </span>Datos lat-lon e iie</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">x</th>
+<th style="text-align: right;">y</th>
+<th style="text-align: right;">iie</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">3935625</td>
+<td style="text-align: right;">1135375</td>
+<td style="text-align: right;">15.43778</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3932125</td>
+<td style="text-align: right;">1135125</td>
+<td style="text-align: right;">68.02300</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3932375</td>
+<td style="text-align: right;">1135125</td>
+<td style="text-align: right;">80.22961</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3932625</td>
+<td style="text-align: right;">1135125</td>
+<td style="text-align: right;">83.39072</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3932875</td>
+<td style="text-align: right;">1135125</td>
+<td style="text-align: right;">78.98461</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3933125</td>
+<td style="text-align: right;">1135125</td>
+<td style="text-align: right;">81.42372</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Ya tenemos una nueva tabla que incluye coordenadas lat-lon, y el
+nuevo dato del <strong>índice de integridad ecosistémica</strong>. Sólo
+resta convertir estos datos en en una tabla adecuada para representación
+espacial y a partir de ahí generar el <strong>GeoTiff</strong> que
+represente el resultado que obtuvimos.</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre><code>[1] &quot;SpatialPixelsDataFrame&quot;
+attr(,&quot;package&quot;)
+[1] &quot;sp&quot;</code></pre>
+<p><img src="datos-para-netica_files/figure-html5/unnamed-chunk-9-1.png" width="624" /></p>
+</div>
+<p>Ahora convierto esta estructura de dato en uun objeto raster,
+efectivamente será ya el mapa final en memoria. El que guuardaremos en
+disco finalmente.</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre><code>tamaño x, y del pixel:  250 250</code></pre>
+<p><img src="datos-para-netica_files/figure-html5/unnamed-chunk-10-1.png" width="624" /></p>
+</div>
+<p>Hemos llegado al final del proceso y ya tenemos el mapa del índice de
+integridad ecosistémica en el disco.</p>
+<div class="sourceCode" id="cb7"><pre
 class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->

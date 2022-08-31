@@ -23,12 +23,8 @@ knitr::opts_chunk$set(echo = FALSE)
 knitr::include_graphics("../../figuras/Proceso_datos_redes.jpg")
 ```
 
-```{r}
-library(raster)
 
-```
-
-Aunque este proceso puede hacerse con la nueva biblioteca *terra*, en realidad hoy por hoy, la biblioteca *raster* es más eficiente y conveniente para hacer la tarea que nos proponemos resolver. Lo que haremos es leer un montón de archivos *raster* en formato *GeoTiff*. Generaremos unna colección congruente con ellos en términos de que comparten proyección y extensión y luego haremos una transformación de los objetos de datos para producir una tabla convencional de datos.
+Aunque este proceso puede hacerse con la nueva biblioteca *terra*. Se dice que la biblioteca *raster* es más eficiente y conveniente para hacer la tarea que nos proponemos resolver, sin embargo, *terra* está evolucionando y podría ya no ser así. Lo que haremos aquí es leer un montón de archivos *raster* en formato *GeoTiff*. Generaremos una colección congruente con ellos en términos de que comparten proyección y extensión y luego haremos una transformación de los objetos de datos para producir una tabla convencional de datos.
 
 ## Localización de los archivos
 
@@ -39,10 +35,8 @@ library("tools")
 mapas_dir <- "../../../data/indep_vars"
 
 # Lista de los rasters considerados variables explicativas.
-lst_gtif <- list_files_with_exts("../../../data/indep_vars",
-                                  exts = "tif")
+lst_gtif <- list_files_with_exts(mapas_dir, exts = "tif")
 lst_gtif
-
 ```
 
 Pueden ver que hemos encontrado 25 capas de información. Cada una de ellas aportará una columna de datos a nuestra tabla. Para hacer esto lo que haremos es:
@@ -51,32 +45,81 @@ Pueden ver que hemos encontrado 25 capas de información. Cada una de ellas apor
 2. Convertir la colección de objectos raster a una colección de puntos *vectoriales.
 3. Convertir los puntos en una tabla en la que cada capa aporta una columna.
 
-Puede convenir tomarle el tiempo a este proceso, así que les mostraré como hacerlo. Simplemente lo que haré es tomar nota de la hora de arranque del proceso y luego al final el tiempo de salida. Calculo la diferencia entre estos dos valores y tengo una buena idea de cuanto tomo el proceso.
+La tabla que queremos debería tener valores para todas las variablesNoté que rasterToPoints deja pasar algunos datos faltantes que no deberían faltar!!!, Quizás sean resultado de algunas incongruencias en la representación geográfica entre los mapas. Desde luego el tema podría requerir una valoración más cuidadosa, pero para fines prácticos se puede optar por generar una tabla en la que todas las columnas tienen datos. La función de *R* `complete.cases()`permite incorporar esta consideración en la construcción de la tabla para omitir todos los registros (casos o renglones) que no tengan valores válidos para todas las variables. Esto lo hace *terra* en forma predeterminada, así que en este caso también sirve para obtener un resultado comparable.
+
 
 ```{r echo=TRUE}
+library(raster)
+library(terra)
+
 tiempo_inicio <- Sys.time()
-datos_brk <- raster(lst_gtif[1]) # tengo que iniciar el ladrillo, así que lo hago aquí    
+datos_brk <- brick(lst_gtif[1])         # tengo que iniciar el ladrillo, así que lo hago aquí
 for (r in lst_gtif[2:length(lst_gtif)]) # como ya use este mapa, el ciclo empieza en el mapa 2
 {
   datos_brk <- addLayer(datos_brk, raster(r))
 }
 
-names(datos_brk)
-datos_tbl <- as.data.frame(rasterToPoints(datos_brk)) # aquí ocurre la magia imágen a tabla!!!
-head(datos_tbl)
+datos_tbl <- as.data.frame(rasterToPoints(datos_brk)) # aquí ocurre la magia: imágen a tabla!!
+datos_tbl <- datos_tbl[complete.cases(datos_tbl), ]   # elimina filas con datos incompletos
 tiempo_fin = Sys.time()
-tiempo_fin - tiempo_inicio
+tiempo_raster <- tiempo_fin - tiempo_inicio
+
+datos_tbl_na <- as.data.frame(rasterToPoints(datos_brk)) # tabla con todo
+datos_tbl_na <- datos_tbl_na[!complete.cases(datos_tbl_na),] # tabla con casos incompletos
 
 ```
 
+Con fines didácticos y si no por llana curiosidad, les propongo comparar el tiempo que nos toma hacer la tarea que nos propusimos con la biblioteca *raster*, en contraste con el que nos toma hacerlo con la biblioteca *terra*.
 
+```{r echo=TRUE}
+library(sf)
+# La misma tarea de conversión de geotiffs a tabla, pero ahora con terra
+tiempo_inicio <- Sys.time()
+datos_trr <- rast(lst_gtif)    # no necesito un for, ddirectamente procesa la lista de archivos
+datos_trr_v <- as.points(datos_trr, na.rm = TRUE) # convierte en vectorial de puntos 
+
+datos_trr_sf <- st_as_sf(datos_trr_v, coords = c("x", "y"))
+
+coords_trr <- as.data.frame(st_coordinates(datos_trr_sf$geometry))
+datos_trr_df <- as.data.frame(datos_trr_sf)
+datos_trr_tbl <- cbind(coords_trr, datos_trr_df)
+datos_trr_tbl <- datos_trr_tbl[, -length(datos_trr_tbl)]  # elimino la última columna (geometry)
+tiempo_fin = Sys.time()
+tiempo_terra <- tiempo_fin - tiempo_inicio
+```
+
+### COmparación de tiempos
+
+|Biblioteca |tiempo |
+|-----------|------|
+|Raster     |`r tiempo_raster`|
+|Terra      |`r tiempo_terra`|
+
+
+Los procesos que aplicamos ¿producen los mismos resultados?. Podemos usar esté código para explorar la cuestión
+
+```{r}
+library(tidyverse)
+nombres <- names(datos_trr_tbl) # X, Y van en minúsculas
+nombres[1:2] <- c("x", "y")
+names(datos_trr_tbl) <- nombres
+row.names(datos_trr_tbl) <- NULL   # Elimino nombres de fila (dato que no necesito aquí)
+row.names(datos_tbl) <- NULL       # Elimino nombres de fila (dato que no necesito aquí)
+
+cat("Las tablas raster y terra:\n")
+cat("¿Tienen la misma estructura?", same_src(datos_tbl, datos_trr_tbl), "\n")
+cat("¿Tienen los mismos datos?", all.equal(datos_tbl, datos_trr_tbl), "\n")
+```
+
+
+## Guardar la tabla en disco
 Ahora sólo resta guardar los datos en algun lugar de mi conveniencia. Lo haré en este caso con la biblioteca **data.table** que es super eficiente para datos grandes, así que conviene que la conozcan. Esta biblioteca contiene la función `fwrite` que es la que utilizaremos. Crearemos un archivo **csv** (valores-separados-por-comas). Anote las opciones que requiero para hacer el archivo **csv** como lo necesito. En **R** el símbolo "#" indica que lo que sigue la máquina no debe interpretarlo, así que puede usarse para añadir comentarios para el consumo humano.
 
 
 ```{r echo=TRUE}
 library(data.table)
 fwrite(datos_tbl, # datos obtenidos en el proceso anterior
-          file = paste0(mapas_dir,"../../../data/indep_vars/datos_yuc_2018.csv"), # destino y nombre del archivo
+          file = paste0(mapas_dir, "/datos_yuc_2018.csv"), # destino y nombre del archivo
                         sep = ",",           # La coma que separa los valores
                         quote = FALSE,       # No quiero que ponga los nombres entre comillas
                         na = "*",            # Netica utiliza * como indicador de dato faltante
@@ -85,8 +128,55 @@ fwrite(datos_tbl, # datos obtenidos en el proceso anterior
 
 ```
 
-
 Con este proceso hemos preparado una tabla de datos adecuada para ser leída en NETICA y podemos continuar con el procedimiento de construcción de los datos que utilizaremos en la contabilidad. 
+
+En Netica se necesitará un pequeño *archivo de control* que especifica los datos que deseamos recuperar al procesar un nuevo archivo de datos. Para simplificar las cosas lo haremos desde aquí.
+
+```{r}
+# Genera archivo de control para Netica
+lineas <- "expval(integridad)"  # Anota el valor esperado según la evidencia dada
+
+write(lineas, paste0(mapas_dir, "/control_iie_netica.txt"), sep = "\n") # dato por línea "\n"
+```
+
+
+## Mapear resultados de Netica
+
+Una vez entrenado el modelo de *red bayesiana* y procesados los casos base para el mapeo, tenemos un mapa de valore *predichos*. Dada la especificación del *archivo de control*, ese archivo de salida tendrá una sola columna y tantos renglones como los que tenemos en el archivo de datos utilizaado como fuente de evidencia. El orden de los casos es también el mismo del archivo de datos, así que podemos agregar la nueva comuna del índice de integridad a la tabla que procesamos anteriormente para generar los datos.
+
+```{r}
+ie_dato <- fread(paste0(mapas_dir, "/salida.txt"), header = TRUE, col.names = "iie")
+
+# Lo normalizo para expresarlo entre 0 (nula iie) y 100 (alta iie)
+ie_dato <- 100 * (18 - ie_dato) / 18
+
+datos_tbl_ie <- cbind(datos_tbl[,c(1:2)], ie_dato) 
+knitr::kable(head(datos_tbl_ie), caption = "Datos lat-lon e iie")
+```
+Ya tenemos una nueva tabla que incluye coordenadas lat-lon, y el nuevo dato del **índice de integridad ecosistémica**. Sólo resta convertir estos datos en en una tabla adecuada para representación espacial y a partir de ahí generar el **GeoTiff** que represente el resultado que obtuvimos.
+
+```{r}
+library (sp)
+coordinates(datos_tbl_ie) <-  ~ x + y
+gridded(datos_tbl_ie) <-  TRUE
+class(datos_tbl_ie)
+plot(datos_tbl_ie)
+
+```
+
+Ahora convierto esta estructura de dato en uun objeto raster, efectivamente será ya el mapa final en memoria. El que guuardaremos en disco finalmente.
+
+```{r}
+datos_ie_r <- raster(datos_tbl_ie) 
+
+cat("tamaño x, y del pixel: ", res(datos_ie_r))
+plot(datos_ie_r)
+
+writeRaster(datos_ie_r, filename=paste0(mapas_dir, "/../ie/iie_yucatan.tif"), 
+            format="GTiff", overwrite=TRUE)
+
+```
+Hemos llegado al final del proceso y ya tenemos el mapa del índice de integridad ecosistémica en el disco.
 
 
 
