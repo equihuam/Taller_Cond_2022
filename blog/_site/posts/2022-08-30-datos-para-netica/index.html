@@ -2273,11 +2273,11 @@ la biblioteca <em>terra</em>.</p>
 <tbody>
 <tr class="odd">
 <td>Raster</td>
-<td>13.8480150699615</td>
+<td>14.4171521663666</td>
 </tr>
 <tr class="even">
 <td>Terra</td>
-<td>14.0024681091309</td>
+<td>18.0176389217377</td>
 </tr>
 </tbody>
 </table>
@@ -2435,13 +2435,12 @@ disco finalmente.</p>
 </div>
 <pre><code>tamaño x, y del pixel:  250 250</code></pre>
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>datos_ie_r</span><span class='op'>)</span></span></code></pre>
-</div>
-<img src="datos-para-netica_files/figure-html5/unnamed-chunk-10-1.png" width="624" />
-<div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/pkg/terra/man/writeRaster.html'>writeRaster</a></span><span class='op'>(</span><span class='va'>datos_ie_r</span>, filename<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>mapas_dir</span>, <span class='st'>"/../ie/iie_yucatan.tif"</span><span class='op'>)</span>, </span>
-<span>            format<span class='op'>=</span><span class='st'>"GTiff"</span>, overwrite<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span></code></pre>
+<span>            format<span class='op'>=</span><span class='st'>"GTiff"</span>, overwrite<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>datos_ie_r</span><span class='op'>)</span></span></code></pre>
 </div>
+<p><img src="datos-para-netica_files/figure-html5/unnamed-chunk-10-1.png" width="624" /></p>
 </div>
 <p>Hemos llegado al final del proceso y ya tenemos el mapa del índice de
 integridad ecosistémica en el disco.</p>

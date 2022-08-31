@@ -170,10 +170,11 @@ Ahora convierto esta estructura de dato en uun objeto raster, efectivamente ser�
 datos_ie_r <- raster(datos_tbl_ie) 
 
 cat("tamaño x, y del pixel: ", res(datos_ie_r))
-plot(datos_ie_r)
 
 writeRaster(datos_ie_r, filename=paste0(mapas_dir, "/../ie/iie_yucatan.tif"), 
             format="GTiff", overwrite=TRUE)
+
+plot(datos_ie_r)
 
 ```
 Hemos llegado al final del proceso y ya tenemos el mapa del índice de integridad ecosistémica en el disco.
