@@ -74,7 +74,7 @@ Para comenzar carguemos unos datos ejemplo al espacio de trabajo de R.
 library("raster")
 
 # Cargar un geotiff a R, de hecho el que sirve como evidencia para el modelo de IE.
-ruta_evidencia <- "./delta_vp/hemerobia_250m.tif"
+ruta_evidencia <- "../../../data/delta_vp/hemerobia_250m.tif"
 raster_evidencia <- raster(ruta_evidencia)
 
 raster_evidencia
@@ -232,7 +232,7 @@ rutasAMulti = function(dep_path,
   return(bnbrik)
 }
 
-raster_multi <- rutasAMulti("./delta_vp/hemerobia_250m.tif", ruta_indep)
+raster_multi <- rutasAMulti("../../../data/delta_vp/hemerobia_250m.tif", ruta_indep)
 
 tabla_multi <- as.data.frame(rasterToPoints(raster_multi))
 

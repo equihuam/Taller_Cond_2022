@@ -32,3 +32,6 @@ plan
 vis_drake_graph(plan)
 
 make(plan)
+
+history <- drake_history(analyze = TRUE)
+history

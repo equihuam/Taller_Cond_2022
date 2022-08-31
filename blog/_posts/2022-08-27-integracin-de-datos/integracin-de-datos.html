@@ -1525,7 +1525,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'><a href='https://rspatial.org/raster'>"raster"</a></span><span class='op'>)</span>
 
 <span class='co'># Cargar un geotiff a R, de hecho el que sirve como evidencia para el modelo de IE.</span>
-<span class='va'>ruta_evidencia</span> <span class='op'>&lt;-</span> <span class='st'>"./delta_vp/hemerobia_250m.tif"</span>
+<span class='va'>ruta_evidencia</span> <span class='op'>&lt;-</span> <span class='st'>"../../../data/delta_vp/hemerobia_250m.tif"</span>
 <span class='va'>raster_evidencia</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/raster/man/raster.html'>raster</a></span><span class='op'>(</span><span class='va'>ruta_evidencia</span><span class='op'>)</span>
 
 <span class='va'>raster_evidencia</span>
@@ -1614,34 +1614,34 @@ values     : 0, 18  (min, max)</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'>"tools"</span><span class='op'>)</span>
 
 <span class='co'># Lista de los rasters considerados variables explicativas.</span>
-<span class='va'>ruta_indep</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/tools/fileutils.html'>list_files_with_exts</a></span><span class='op'>(</span><span class='st'>"./indep_var_paths"</span>,
+<span class='va'>ruta_indep</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/tools/fileutils.html'>list_files_with_exts</a></span><span class='op'>(</span><span class='st'>"../../../data/indep_vars"</span>,
                                   exts <span class='op'>=</span> <span class='st'>"tif"</span><span class='op'>)</span>
 
 <span class='va'>ruta_indep</span>
 </code></pre>
 </div>
-<pre><code> [1] &quot;./indep_var_paths/AlturaFusteLimpio_desvest_250m.tif&quot;
- [2] &quot;./indep_var_paths/AlturaFusteLimpio_media_250m.tif&quot;  
- [3] &quot;./indep_var_paths/AlturaTotal_desvest_250m.tif&quot;      
- [4] &quot;./indep_var_paths/AlturaTotal_media_250m.tif&quot;        
- [5] &quot;./indep_var_paths/DiametroCopa_desvest_250m.tif&quot;     
- [6] &quot;./indep_var_paths/DiametroCopa_media_250m.tif&quot;       
- [7] &quot;./indep_var_paths/DiametroNormal_desvest_250m.tif&quot;   
- [8] &quot;./indep_var_paths/DiametroNormal_media_250m.tif&quot;     
- [9] &quot;./indep_var_paths/net_photo_mean.tif&quot;                
-[10] &quot;./indep_var_paths/net_photo_mean_lluvias.tif&quot;        
-[11] &quot;./indep_var_paths/net_photo_mean_secas.tif&quot;          
-[12] &quot;./indep_var_paths/net_photo_sd.tif&quot;                  
-[13] &quot;./indep_var_paths/presenciaArbolesMuertos_250m.tif&quot;  
-[14] &quot;./indep_var_paths/presenciaInsectos_250m.tif&quot;        
-[15] &quot;./indep_var_paths/propor_bosque.tif&quot;                 
-[16] &quot;./indep_var_paths/propor_pastizaloagricultura.tif&quot;   
-[17] &quot;./indep_var_paths/propor_selva.tif&quot;                  
-[18] &quot;./indep_var_paths/propor_suelodesnudo.tif&quot;           
-[19] &quot;./indep_var_paths/propor_urbano.tif&quot;                 
-[20] &quot;./indep_var_paths/srtm90m_mean250m.tif&quot;              
-[21] &quot;./indep_var_paths/srtm90m_range250m.tif&quot;             
-[22] &quot;./indep_var_paths/zvh_31_lcc_h.tif&quot;                  </code></pre>
+<pre><code> [1] &quot;../../../data/indep_vars/AlturaFusteLimpio_desvest_250m.tif&quot;
+ [2] &quot;../../../data/indep_vars/AlturaFusteLimpio_media_250m.tif&quot;  
+ [3] &quot;../../../data/indep_vars/AlturaTotal_desvest_250m.tif&quot;      
+ [4] &quot;../../../data/indep_vars/AlturaTotal_media_250m.tif&quot;        
+ [5] &quot;../../../data/indep_vars/DiametroCopa_desvest_250m.tif&quot;     
+ [6] &quot;../../../data/indep_vars/DiametroCopa_media_250m.tif&quot;       
+ [7] &quot;../../../data/indep_vars/DiametroNormal_desvest_250m.tif&quot;   
+ [8] &quot;../../../data/indep_vars/DiametroNormal_media_250m.tif&quot;     
+ [9] &quot;../../../data/indep_vars/net_photo_mean.tif&quot;                
+[10] &quot;../../../data/indep_vars/net_photo_mean_lluvias.tif&quot;        
+[11] &quot;../../../data/indep_vars/net_photo_mean_secas.tif&quot;          
+[12] &quot;../../../data/indep_vars/net_photo_sd.tif&quot;                  
+[13] &quot;../../../data/indep_vars/presenciaArbolesMuertos_250m.tif&quot;  
+[14] &quot;../../../data/indep_vars/presenciaInsectos_250m.tif&quot;        
+[15] &quot;../../../data/indep_vars/propor_bosque.tif&quot;                 
+[16] &quot;../../../data/indep_vars/propor_pastizaloagricultura.tif&quot;   
+[17] &quot;../../../data/indep_vars/propor_selva.tif&quot;                  
+[18] &quot;../../../data/indep_vars/propor_suelodesnudo.tif&quot;           
+[19] &quot;../../../data/indep_vars/propor_urbano.tif&quot;                 
+[20] &quot;../../../data/indep_vars/srtm90m_mean250m.tif&quot;              
+[21] &quot;../../../data/indep_vars/srtm90m_range250m.tif&quot;             
+[22] &quot;../../../data/indep_vars/zvh_31_lcc_h.tif&quot;                  </code></pre>
 </div>
 <p>Hay muchos tipos de objetos en R (y en todos los lenguajes de programación). Listas, arreglos, matrices, <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/data.frame">data.frames</a>.</p>
 <p>Hay distintas maneras de “recorrer” cada uno de estos objetos pero ver esto a profundidad escapa el alcance de esta sesión. Vamos a ver cómo recorrer una lista. Estas son estructuras lineales, esto es contienen objetos (¡DE CUALQUIER TIPO!) en una única dimensión y estos se pueden seleccionar dando la posición que ocupan en la lista. Como ejemplo la lista de las rutas a rasters es una con longitud 22.</p>
@@ -1651,7 +1651,7 @@ values     : 0, 18  (min, max)</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>ruta_indep</span><span class='op'>[</span><span class='fl'>10</span><span class='op'>]</span>
 </code></pre>
 </div>
-<pre><code>[1] &quot;./indep_var_paths/net_photo_mean_lluvias.tif&quot;</code></pre>
+<pre><code>[1] &quot;../../../data/indep_vars/net_photo_mean_lluvias.tif&quot;</code></pre>
 </div>
 <p>O incluso elegir sólo del 10 al 15.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -1659,12 +1659,12 @@ values     : 0, 18  (min, max)</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>ruta_indep</span><span class='op'>[</span><span class='fl'>10</span><span class='op'>:</span><span class='fl'>15</span><span class='op'>]</span>
 </code></pre>
 </div>
-<pre><code>[1] &quot;./indep_var_paths/net_photo_mean_lluvias.tif&quot;      
-[2] &quot;./indep_var_paths/net_photo_mean_secas.tif&quot;        
-[3] &quot;./indep_var_paths/net_photo_sd.tif&quot;                
-[4] &quot;./indep_var_paths/presenciaArbolesMuertos_250m.tif&quot;
-[5] &quot;./indep_var_paths/presenciaInsectos_250m.tif&quot;      
-[6] &quot;./indep_var_paths/propor_bosque.tif&quot;               </code></pre>
+<pre><code>[1] &quot;../../../data/indep_vars/net_photo_mean_lluvias.tif&quot;      
+[2] &quot;../../../data/indep_vars/net_photo_mean_secas.tif&quot;        
+[3] &quot;../../../data/indep_vars/net_photo_sd.tif&quot;                
+[4] &quot;../../../data/indep_vars/presenciaArbolesMuertos_250m.tif&quot;
+[5] &quot;../../../data/indep_vars/presenciaInsectos_250m.tif&quot;      
+[6] &quot;../../../data/indep_vars/propor_bosque.tif&quot;               </code></pre>
 </div>
 <p>Lo que haremos con esto es leer los rasters uno por uno utilizando un bucle. Los bucles (for loops) son de los paradigmas de iteración más comunes y viejos que hay. De nuevo hay muchas maneras de resolver esto. Si bien no es de las maneras más elegantes de lograr esto, es de utilidad puesto que siempre será posible utilizarlo, en cualquier lenguaje de programación, por lo universal que es.</p>
 <p>Primero un bucle sencillo. Le diremos a la computadora, quiero que cuentes del 1 al 10 y en cada número digas la palabra ‘número’:</p>
@@ -1720,7 +1720,7 @@ values     : 0, 18  (min, max)</code></pre>
   <span class='kw'><a href='https://rdrr.io/r/base/function.html'>return</a></span><span class='op'>(</span><span class='va'>bnbrik</span><span class='op'>)</span>
 <span class='op'>}</span>
 
-<span class='va'>raster_multi</span> <span class='op'>&lt;-</span> <span class='fu'>rutasAMulti</span><span class='op'>(</span><span class='st'>"./delta_vp/hemerobia_250m.tif"</span>, <span class='va'>ruta_indep</span><span class='op'>)</span>
+<span class='va'>raster_multi</span> <span class='op'>&lt;-</span> <span class='fu'>rutasAMulti</span><span class='op'>(</span><span class='st'>"../../../data/delta_vp/hemerobia_250m.tif"</span>, <span class='va'>ruta_indep</span><span class='op'>)</span>
 
 <span class='va'>tabla_multi</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/raster/man/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/raster/man/rasterToPoints.html'>rasterToPoints</a></span><span class='op'>(</span><span class='va'>raster_multi</span><span class='op'>)</span><span class='op'>)</span>
 
