@@ -18,15 +18,17 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-```{r echo = FALSE, fig.align = 'center', out.width = '40%'}
 
-knitr::include_graphics("../../figuras/paco.png")
+```{r, echo = FALSE, fig.align = 'center', out.width = '80%'}
+
+knitr::include_graphics("../../figuras/Francisco-Guillen-Martin-3.png")
+
 ```
 
 
-Mi carrera profesional se ha desarrollado principalmente en el sector público en el que he colaborado por más de 30 años. Particularmente he trabajado para el *Instituto Nacional de Estadística y Geografía* (**INEGI**). Hace años tuve la oportunidad de dar a conocer la primera serie anual del Producto Interno Bruto por Entidad Federativa. Fui iniciador y coordinador del proyecto denominado *Sistema de Cuentas Económicas y Ecológicas de México* (**SCEEM**). Más recientemente, fui iniciador y coordinador del nuevo proyecto denominado *Sistema de Cuentas Económicas y Ecológicas de México* (**SCEEM**), llevado a cabo por el **INEGI** y auspiciado por la *Organización de las Naciones Unidas* y el *Banco Mundial*, proyecto pionero en su tipo a nivel mundial. 
+Mi carrera profesional se ha desarrollado principalmente en el sector público, en el que he colaborado por más de 30 años. Particularmente he trabajado para el *Instituto Nacional de Estadística y Geografía* (**INEGI**). Hace años tuve la oportunidad de dar a conocer la primera serie anual del Producto Interno Bruto por Entidad Federativa. Fui iniciador y coordinador del proyecto denominado *Sistema de Cuentas Económicas y Ecológicas de México* (**SCEEM**). Más recientemente, fui iniciador y coordinador del nuevo proyecto denominado *Sistema de Cuentas Económicas y Ecológicas de México* (**SCEEM**), llevado a cabo por el **INEGI** y auspiciado por la *Organización de las Naciones Unidas* y el *Banco Mundial*, proyecto pionero en su tipo a nivel mundial. 
 
-Participo en el *Buro de Expertos de Cuentas Nacionales y Financieras* de la **OCDE**. También he participado en varios grupos de expertos asociados a la economía y el medio ambiente. Actualmente soy  Director General Adjunto de Cuentas Nacionales del **INEGI**, así que tengo bajo mi responsabilidad el *Sistema de Cuentas Nacionales de México* en su conjunto. Les hablaré sobe el *Sistema de Cuentas de los Ecosistemas de México* y esperamos que:
+Participo en el *Buro de Expertos de Cuentas Nacionales y Financieras* de la **OCDE**. También he participado en varios grupos de expertos asociados a la economía y el medio ambiente. Actualmente soy  Director General Adjunto de Cuentas Nacionales del **INEGI**, así que tengo bajo mi responsabilidad el *Sistema de Cuentas Nacionales de México* en su conjunto. Les hablaré sobe el *Sistema de Cuentas de los Ecosistemas de México*.
 
 > El participante comprende el marco conceptual del **SEEA EA** y su relevancia en el marco de  *beyond GDP* y la agenda de desarrollo sostenible.
 
