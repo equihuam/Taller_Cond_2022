@@ -6,7 +6,7 @@ description: |
 author:
   - name: Francisco Guillén Martín
     url:
-      https://taller-cuenta-condicion.netlify.app: {}
+      https://https://www.inegi.org.mx/contenidos/eventos/2013/fne/S_Francisco_Guillen.pdf
 date: 2022-08-26
 output:
   distill::distill_article:
@@ -19,9 +19,9 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 
-```{r, echo = FALSE, fig.align = 'center', out.width = '80%'}
+```{r, echo = FALSE, fig.align = 'center', out.width = '100%'}
 
-knitr::include_graphics("../../figuras/Francisco-Guillen-Martin.webp")
+knitr::include_graphics("Francisco-guillen.png")
 
 ```
 
