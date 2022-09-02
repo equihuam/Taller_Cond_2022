@@ -50,16 +50,17 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {   }
+  { color: #00769e; background-color: #f1f3f5; }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
+code span { color: #00769e; } /* Normal */
 code span.al { color: #ad0000; } /* Alert */
 code span.an { color: #5e5e5e; } /* Annotation */
-code span.at { } /* Attribute */
+code span.at { color: #657422; } /* Attribute */
 code span.bn { color: #ad0000; } /* BaseN */
 code span.bu { } /* BuiltIn */
-code span.cf { color: #007ba5; } /* ControlFlow */
+code span.cf { color: #00769e; } /* ControlFlow */
 code span.ch { color: #20794d; } /* Char */
 code span.cn { color: #8f5902; } /* Constant */
 code span.co { color: #5e5e5e; } /* Comment */
@@ -73,9 +74,9 @@ code span.fl { color: #ad0000; } /* Float */
 code span.fu { color: #4758ab; } /* Function */
 code span.im { } /* Import */
 code span.in { color: #5e5e5e; } /* Information */
-code span.kw { color: #007ba5; } /* Keyword */
+code span.kw { color: #00769e; } /* Keyword */
 code span.op { color: #5e5e5e; } /* Operator */
-code span.ot { color: #007ba5; } /* Other */
+code span.ot { color: #00769e; } /* Other */
 code span.pp { color: #ad0000; } /* Preprocessor */
 code span.sc { color: #5e5e5e; } /* SpecialChar */
 code span.ss { color: #20794d; } /* SpecialString */
@@ -112,7 +113,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Flujos de trabajo"]},{"type":"character","attributes":{},"value":["¿Por qué conviene hacer pipelines?.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Julián Equihua Benítez"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["https://taller-cuenta-condicion.netlify.app"]}},"value":[{"type":"NULL"}]}]}]},{"type":"character","attributes":{},"value":["2022-08-31"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Flujos de trabajo"]},{"type":"character","attributes":{},"value":["¿Por qué conviene hacer pipelines?.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Julián Equihua Benítez"]}]}]},{"type":"character","attributes":{},"value":["2022-08-31"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -429,10 +430,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     position: relative;
     margin-bottom: 2.5em;
     margin-top: 1.5em;
-  }
-
-  .figure img {
-    width: 100%;
   }
 
   .figure .caption {
@@ -1264,6 +1261,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
+        if ($(this).children()[0].nodeName == "D-FOOTNOTE") {
+          var fn = $(this).children()[0]
+          $(this).html(fn.shadowRoot.querySelector("sup"))
+          $(this).id = fn.id
+          fn.remove()
+        }
         var refs = $(this).attr('data-cites').split(" ");
         var refHtml = refs.map(function(ref) {
           return "<p>" + $('#ref-' + ref).html() + "</p>";
@@ -1278,6 +1281,31 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
           placement: 'bottom-start'
         });
       });
+
+      // fix footnotes in tables (#411)
+      // replacing broken distill.pub feature
+      $('table d-footnote').each(function() {
+        // we replace internal showAtNode methode which is triggered when hovering a footnote
+        this.hoverBox.showAtNode = function(node) {
+          // ported from https://github.com/distillpub/template/pull/105/files
+          calcOffset = function(elem) {
+              let x = elem.offsetLeft;
+              let y = elem.offsetTop;
+              // Traverse upwards until an `absolute` element is found or `elem`
+              // becomes null.
+              while (elem = elem.offsetParent && elem.style.position != 'absolute') {
+                  x += elem.offsetLeft;
+                  y += elem.offsetTop;
+              }
+
+              return { left: x, top: y };
+          }
+          // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetTop
+          const bbox = node.getBoundingClientRect();
+          const offset = calcOffset(node);
+          this.show([offset.left + bbox.width, offset.top + bbox.height]);
+        }
+      })
 
       // clear polling timer
       clearInterval(tid);
@@ -1377,6 +1405,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     // mark non-body figures created by knitr chunks as 100% width
     $('.layout-chunk').each(function(i, val) {
       var figures = $(this).find('img, .html-widget');
+      // ignore leaflet img layers (#106)
+      figures = figures.filter(':not(img[class*="leaflet"])')
       if ($(this).attr('data-layout') !== "l-body") {
         figures.css('width', '100%');
       } else {
@@ -1399,7 +1429,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     // get rid of index.html references in header
     if (window.location.protocol !== "file:") {
       $('.distill-site-header a[href]').each(function(i,val) {
-        $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
+        $(this).attr('href', $(this).attr('href').replace(/^index[.]html/, "./"));
       });
     }
 
@@ -1438,7 +1468,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="flujos-de-trabajo_files/header-attrs-2.11/header-attrs.js"></script>
+  <script src="flujos-de-trabajo_files/header-attrs-2.14/header-attrs.js"></script>
   <script src="flujos-de-trabajo_files/htmlwidgets-1.5.4/htmlwidgets.js"></script>
   <link href="flujos-de-trabajo_files/vis-9.1.0/vis-network.min.css" rel="stylesheet" />
   <script src="flujos-de-trabajo_files/vis-9.1.0/vis-network.min.js"></script>
@@ -1463,7 +1493,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Flujos de trabajo","description":"¿Por qué conviene hacer pipelines?.","authors":[{"author":"Julián Equihua Benítez","authorURL":{"https://taller-cuenta-condicion.netlify.app":{}},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2022-08-31T00:00:00.000+02:00","citationText":"Benítez, 2022"}
+{"title":"Flujos de trabajo","description":"¿Por qué conviene hacer pipelines?.","authors":[{"author":"Julián Equihua Benítez","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2022-08-31T00:00:00.000-05:00","citationText":"Benítez, 2022"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -1480,7 +1510,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 
 <div class="d-byline">
-  Julián Equihua Benítez true 
+  Julián Equihua Benítez  
   
 <br/>2022-08-31
 </div>
@@ -1488,22 +1518,39 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="d-article">
 <h1 id="pipeline">Pipeline</h1>
 <h2 id="qué-es-un-pipeline">¿Qué es un pipeline?</h2>
-<p>Es un conjunto de elementos de procesamiento que se ejecutan en serie. Esto es que la salida de uno de los elementos es la entrada de otro.</p>
-<p>Veamos un esquema sencillo correspondiente a un pipeline para ajustar un modelo de IE.</p>
+<p>Es un conjunto de elementos de procesamiento que se ejecutan en
+serie. Esto es que la salida de uno de los elementos es la entrada de
+otro.</p>
+<p>Veamos un esquema sencillo correspondiente a un pipeline para ajustar
+un modelo de IE.</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="1_pipeline.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
-<p>En las sesiones anteriores visto algunos de los pasos que llevaría a cabo un pipeline de este tipo.</p>
+<p>En las sesiones anteriores visto algunos de los pasos que llevaría a
+cabo un pipeline de este tipo.</p>
 <p>Todo se ha ejecutado a mano pero se mostró:</p>
 <ul>
-<li>Cómo <span style="color:red">cargar</span> el conjunto de rasters correspondientes a la variabel explicativa en memoria e introducirlos a un raster multi-banda.</li>
-<li>El raster multi-banda anterior se debe <span style="color:red">transformar</span> a una tabla de datos para poder llevar a cabo cualquier proceso de analítica.</li>
-<li>En el caso del proceso de validación estadística, la tabla se separa en múltiples conjuntos que iterativamente son utilizados para <span style="color:red">ajustar</span> modelos predictivos (redes bayesianas en nuestro caso).</li>
-<li>Cada modelo predictivo de los anteriores se utiliza para <span style="color:red">predecir</span> sobre el conjunto de datos excluído de su proceso de ajuste.</li>
-<li>El modelo final se <span style="color:red">ajusta</span> sobre la tabla de datos completa.</li>
-<li>Luego el modelo final se utiliza para <span style="color:red">predecir</span> y esta predicción se vuelve el mapa de integridad ecosistémica.</li>
+<li>Cómo <span style="color:red">cargar</span> el conjunto de rasters
+correspondientes a la variabel explicativa en memoria e introducirlos a
+un raster multi-banda.</li>
+<li>El raster multi-banda anterior se debe <span
+style="color:red">transformar</span> a una tabla de datos para poder
+llevar a cabo cualquier proceso de analítica.</li>
+<li>En el caso del proceso de validación estadística, la tabla se separa
+en múltiples conjuntos que iterativamente son utilizados para <span
+style="color:red">ajustar</span> modelos predictivos (redes bayesianas
+en nuestro caso).</li>
+<li>Cada modelo predictivo de los anteriores se utiliza para <span
+style="color:red">predecir</span> sobre el conjunto de datos excluído de
+su proceso de ajuste.</li>
+<li>El modelo final se <span style="color:red">ajusta</span> sobre la
+tabla de datos completa.</li>
+<li>Luego el modelo final se utiliza para <span
+style="color:red">predecir</span> y esta predicción se vuelve el mapa de
+integridad ecosistémica.</li>
 </ul>
-<h2 id="por-qué-construir-un-pipeline">¿Por qué construir un pipeline?</h2>
+<h2 id="por-qué-construir-un-pipeline">¿Por qué construir un
+pipeline?</h2>
 <ul>
 <li>Control</li>
 <li>Reproducibilidad</li>
@@ -1511,81 +1558,152 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <li>Escalabilidad</li>
 </ul>
 <h3 id="control">Control</h3>
-<p>Un pipeline bien organizado hace que el proceso de modelado sea más flexible. En cierto sentido es como tener un buen diagrama de una máquina donde puedes experimentar con/manipular e incluso reemplazar partes.</p>
-<p>Suena un poco evidente, pero si los procesos de <span style="color:red">carga</span> y <span style="color:red">transformación</span> de datos ya funcionan bien, pero el proceso de validación es muy lento, se pueden enfocar los esfuerzos en desarrollarlo de mejor manera. Se debe entender un pipeline justo como parte de una maquinaria, es algo que nos permite encadenar una seria de procesos para llegar a un objetivo u objetivos sin intervención humana. Esto nos lleva a nuestro siguiente punto.</p>
+<p>Un pipeline bien organizado hace que el proceso de modelado sea más
+flexible. En cierto sentido es como tener un buen diagrama de una
+máquina donde puedes experimentar con/manipular e incluso reemplazar
+partes.</p>
+<p>Suena un poco evidente, pero si los procesos de <span
+style="color:red">carga</span> y <span
+style="color:red">transformación</span> de datos ya funcionan bien, pero
+el proceso de validación es muy lento, se pueden enfocar los esfuerzos
+en desarrollarlo de mejor manera. Se debe entender un pipeline justo
+como parte de una maquinaria, es algo que nos permite encadenar una
+seria de procesos para llegar a un objetivo u objetivos sin intervención
+humana. Esto nos lleva a nuestro siguiente punto.</p>
 <h3 id="reproducibilidad">Reproducibilidad</h3>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="3_crisis.jpg" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 <p><a href="https://www.nature.com/articles/533452a">fuente</a></p>
-<p>No es un gran secreto que hay una crisis de <a href="https://ropensci.org/blog/2014/06/09/reproducibility/">reproducibilidad</a> en la ciencia.</p>
-<p>Hay muchas causas para tal crisis pero una de las más modernas es la incapacidad de replicar los resultados por cuestions de administración, procesamiento y análisis de datos.</p>
-<p>Lo primero que se viene a la mente es no tener acceso al software para replicar los resultados, o por usar software propietario y carecer de licencia o porque los autores no compartieron su código. Esto nos lleva a hacer un llamado a utilizar software de código abierto y siempre compartir el código con el que se llevó a cabo un proyecto. Por supuesto esto puede ser más o menos delicado por cuestiones de seguridad.</p>
-<p>Lo segundo que viene a la mente es con qué herramientas se llevan a cabo los procesos. A pesar de vivie en la época del BIG DATA, si somos honestos, casi nadie lleva a cabo sus procesos analíticos con Big Data. La mayoría de los procesos analíticos se llevan a cabo sobre archivos de texto y en excel.</p>
+<p>No es un gran secreto que hay una crisis de <a
+href="https://ropensci.org/blog/2014/06/09/reproducibility/">reproducibilidad</a>
+en la ciencia.</p>
+<p>Hay muchas causas para tal crisis pero una de las más modernas es la
+incapacidad de replicar los resultados por cuestions de administración,
+procesamiento y análisis de datos.</p>
+<p>Lo primero que se viene a la mente es no tener acceso al software
+para replicar los resultados, o por usar software propietario y carecer
+de licencia o porque los autores no compartieron su código. Esto nos
+lleva a hacer un llamado a utilizar software de código abierto y siempre
+compartir el código con el que se llevó a cabo un proyecto. Por supuesto
+esto puede ser más o menos delicado por cuestiones de seguridad.</p>
+<p>Lo segundo que viene a la mente es con qué herramientas se llevan a
+cabo los procesos. A pesar de vivie en la época del BIG DATA, si somos
+honestos, casi nadie lleva a cabo sus procesos analíticos con Big Data.
+La mayoría de los procesos analíticos se llevan a cabo sobre archivos de
+texto y en excel.</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="4_genes.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
-<p><a href="https://theconversation.com/excel-autocorrect-errors-still-plague-genetic-research-raising-concerns-over-scientific-rigour-166554">fuente</a></p>
-<p>A lo mejor es un poco injusto hacer un llamado total a dejar de usar Excel, por supuesto es una herramienta poderosa en sí misma y muy cómoda para llevar a cabo ciertas exploraciones de datos. Pero una vez que lo que se quiere hacer queda claro, definitivamente conviene automatizarlo con algún proceso en, por ejemplo R, y meterlo a un pipeline.</p>
-<p>En el artículo de Nature antes citado comienza diciendo que más del 70% de los investigadores encuestados (~1500) fallaron al intentar replicar los experimentos de otro científico. Más del 50% fallaron al replicar sus propios experimentos.</p>
-<p>Por supuesto esto está exacerbado en ciencia que depende de métodos empíricos pero la investigación basada en analítica está lejos de estar a salvo.</p>
-<p>Si unos resultados analíticos se alcanzan utilizando un pipeline, hay una absoluta certeza de que los resultados son reproducibles. Esto es, con base en una misma entrada, lo que al final arroja un pipeline siempre será lo mismo.</p>
+<p><a
+href="https://theconversation.com/excel-autocorrect-errors-still-plague-genetic-research-raising-concerns-over-scientific-rigour-166554">fuente</a></p>
+<p>A lo mejor es un poco injusto hacer un llamado total a dejar de usar
+Excel, por supuesto es una herramienta poderosa en sí misma y muy cómoda
+para llevar a cabo ciertas exploraciones de datos. Pero una vez que lo
+que se quiere hacer queda claro, definitivamente conviene automatizarlo
+con algún proceso en, por ejemplo R, y meterlo a un pipeline.</p>
+<p>En el artículo de Nature antes citado comienza diciendo que más del
+70% de los investigadores encuestados (~1500) fallaron al intentar
+replicar los experimentos de otro científico. Más del 50% fallaron al
+replicar sus propios experimentos.</p>
+<p>Por supuesto esto está exacerbado en ciencia que depende de métodos
+empíricos pero la investigación basada en analítica está lejos de estar
+a salvo.</p>
+<p>Si unos resultados analíticos se alcanzan utilizando un pipeline, hay
+una absoluta certeza de que los resultados son reproducibles. Esto es,
+con base en una misma entrada, lo que al final arroja un pipeline
+siempre será lo mismo.</p>
 <h1 id="eficiencia">Eficiencia</h1>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="5_automate.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
-<p>Por supuesto que un proceso automatizado de manejo de datos es más veloz que copiar y pegar celdas a mano en una hoja de cálculo excel. Como ya se mencionó, puede ser útil llevar a cabo procesos con datos en excel para entender cómo deben de ser y para validar ciertos pasos pero al final del día lo más limpio y rápido será replicar eso con un proceso automatizado.</p>
+<p>Por supuesto que un proceso automatizado de manejo de datos es más
+veloz que copiar y pegar celdas a mano en una hoja de cálculo excel.
+Como ya se mencionó, puede ser útil llevar a cabo procesos con datos en
+excel para entender cómo deben de ser y para validar ciertos pasos pero
+al final del día lo más limpio y rápido será replicar eso con un proceso
+automatizado.</p>
 <h1 id="escalabilidad">Escalabilidad</h1>
-<p>Con el advenimiento del Big Data, se desarrollan diversas herramientas para la administración, consulta y análisis de datos. Hardware y software. Una cosa que se vuelve muy importante es el uso de pipelines para siquiera poder procesar Big Data. Un pipeline no sólo deja controlar el proceso analítico en sí, si no la gestión de los recursos destinados a los procesos y análisis que se están ejecutando. El software para hacer piplines está pensado para poder controlar a qué lugar mandar un cierto proceso (por ejemplo un Nodo en un cluster de alto desempeño), determinar la memoria RAM necesaria para cada proceso y organizar todo de tal manera que ningún proceso comience si no se ha terminado uno anterior que es necesario. Todo bajo un constante monitoreo para poder revisar que las cosas van bien y que, de haber errores, estos se están documentando. Naturalmente hay pipelines enormes y pipelines chicas. Algo interesante también es que no se necesita un proyecto gigantesto para aprovechar una plétora de computadoras, poder ejecutar numerosos procesos simultáneamente cuando ya se tiene una pipeline definida es una opción, sin duda, útil.</p>
+<p>Con el advenimiento del Big Data, se desarrollan diversas
+herramientas para la administración, consulta y análisis de datos.
+Hardware y software. Una cosa que se vuelve muy importante es el uso de
+pipelines para siquiera poder procesar Big Data. Un pipeline no sólo
+deja controlar el proceso analítico en sí, si no la gestión de los
+recursos destinados a los procesos y análisis que se están ejecutando.
+El software para hacer piplines está pensado para poder controlar a qué
+lugar mandar un cierto proceso (por ejemplo un Nodo en un cluster de
+alto desempeño), determinar la memoria RAM necesaria para cada proceso y
+organizar todo de tal manera que ningún proceso comience si no se ha
+terminado uno anterior que es necesario. Todo bajo un constante
+monitoreo para poder revisar que las cosas van bien y que, de haber
+errores, estos se están documentando. Naturalmente hay pipelines enormes
+y pipelines chicas. Algo interesante también es que no se necesita un
+proyecto gigantesto para aprovechar una plétora de computadoras, poder
+ejecutar numerosos procesos simultáneamente cuando ya se tiene una
+pipeline definida es una opción, sin duda, útil.</p>
 <p>¿Qué es un contenedor?</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="6_containers.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
-<p>Un contenedor es una unidad estándar de software que empaqueta código y todas sus dependencias para que una aplicación corra confiablemente sin importar en qué ambiente se esté ejecutando.</p>
+<p>Un contenedor es una unidad estándar de software que empaqueta código
+y todas sus dependencias para que una aplicación corra confiablemente
+sin importar en qué ambiente se esté ejecutando.</p>
 <p>Hay varios contenedores, los más interesantes para nosotros son:</p>
 <ul>
-<li><a href="https://www.docker.com/">Docker</a>, por su popularidad y flexibilidad</li>
-<li><a href="https://www.docker.com/">https://apptainer.org/</a>, por estar especializado en procesos analíticos</li>
+<li><a href="https://www.docker.com/">Docker</a>, por su popularidad y
+flexibilidad</li>
+<li><a href="https://www.docker.com/">https://apptainer.org/</a>, por
+estar especializado en procesos analíticos</li>
 </ul>
-<p>Estos contenedores permiten generar paquetitos que sencillamente se pueden compartir, listos para usarse en otro ambiente. Para proyectos chicos, una pipeline completa puede vivir en un solo contenedor. Para proyectos muy grandes, módulos importantes de la pipeline pueden vivir en contenedores diferentes y por tanto deben ser orquestrados por software adicional.¡Hay opciones son muchísimas!</p>
+<p>Estos contenedores permiten generar paquetitos que sencillamente se
+pueden compartir, listos para usarse en otro ambiente. Para proyectos
+chicos, una pipeline completa puede vivir en un solo contenedor. Para
+proyectos muy grandes, módulos importantes de la pipeline pueden vivir
+en contenedores diferentes y por tanto deben ser orquestrados por
+software adicional.¡Hay opciones son muchísimas!</p>
 <h1 id="software">Software</h1>
-<p>Hay muchísimo software para hacer pipelines. Cada lenguaje de programación tiene varias opciones y hay varios orientados a infraestructura particular, por ejemplo, <a href="https://aws.amazon.com/sagemaker/pipelines/">Sagemaker</a> es específicamente para llevar a cabo machine learning en amazon web services.</p>
-<p>En R, uno de los paquetes más populares para hacer pipelines es <a href="https://books.ropensci.org/drake/">Drake</a>.</p>
+<p>Hay muchísimo software para hacer pipelines. Cada lenguaje de
+programación tiene varias opciones y hay varios orientados a
+infraestructura particular, por ejemplo, <a
+href="https://aws.amazon.com/sagemaker/pipelines/">Sagemaker</a> es
+específicamente para llevar a cabo machine learning en amazon web
+services.</p>
+<p>En R, uno de los paquetes más populares para hacer pipelines es <a
+href="https://books.ropensci.org/drake/">Drake</a>.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://docs.ropensci.org/drake'>drake</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyr.tidyverse.org'>tidyr</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://rspatial.org/terra/'>terra</a></span><span class='op'>)</span>
-
-<span class='co'># Establecer rutas a archivos importantes.</span>
-<span class='va'>ruta_ie</span> <span class='op'>&lt;-</span> <span class='st'>"../../data/ie/ie_yucatan_2018.tif"</span>
-
-<span class='co'># Cargar funciones auxiliares.</span>
-<span class='va'>histograma_ie</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>df_ie</span><span class='op'>)</span><span class='op'>{</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>df_ie</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>ie_yucatan_2018</span>, fill <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/cut.html'>cut</a></span><span class='op'>(</span><span class='va'>ie_yucatan_2018</span>,<span class='fl'>11</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
-    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_histogram.html'>geom_histogram</a></span><span class='op'>(</span>show.legend <span class='op'>=</span> <span class='cn'>FALSE</span>, bins <span class='op'>=</span> <span class='fl'>101</span><span class='op'>)</span><span class='op'>+</span>
-    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_brewer.html'>scale_fill_brewer</a></span><span class='op'>(</span>palette<span class='op'>=</span><span class='st'>"RdYlGn"</span>, direction <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>+</span>
-    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>xlab</a></span><span class='op'>(</span><span class='st'>"Integridad ecosistémica"</span><span class='op'>)</span> <span class='op'>+</span> 
-    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>ylab</a></span><span class='op'>(</span><span class='st'>"Cantidad de píxeles (250m)"</span><span class='op'>)</span>
-<span class='op'>}</span>
-
-<span class='va'>plan</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://docs.ropensci.org/drake/reference/drake_plan.html'>drake_plan</a></span><span class='op'>(</span>
-    raw_data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/terra/man/rast.html'>rast</a></span><span class='op'>(</span><span class='va'>ruta_ie</span><span class='op'>)</span>,
-    
-    data <span class='op'>=</span> <span class='va'>rast_ie</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/pkg/terra/man/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='op'>)</span>,
-    
-    histograma <span class='op'>=</span> <span class='fu'>histograma_ie</span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span>,
-    
-    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggsave.html'>ggsave</a></span><span class='op'>(</span><span class='st'>"../figuras/histograma_yucatan_ie.png"</span><span class='op'>)</span>
-<span class='op'>)</span>
-
-
-<span class='va'>plan</span>
-</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://docs.ropensci.org/drake'>drake</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyr.tidyverse.org'>tidyr</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://rspatial.org/terra/'>terra</a></span><span class='op'>)</span></span>
+<span></span>
+<span><span class='co'># Establecer rutas a archivos importantes.</span></span>
+<span><span class='va'>ruta_ie</span> <span class='op'>&lt;-</span> <span class='st'>"../../data/ie/ie_yucatan_2018.tif"</span></span>
+<span></span>
+<span><span class='co'># Cargar funciones auxiliares.</span></span>
+<span><span class='va'>histograma_ie</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>df_ie</span><span class='op'>)</span><span class='op'>{</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>df_ie</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>ie_yucatan_2018</span>, fill <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/cut.html'>cut</a></span><span class='op'>(</span><span class='va'>ie_yucatan_2018</span>,<span class='fl'>11</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_histogram.html'>geom_histogram</a></span><span class='op'>(</span>show.legend <span class='op'>=</span> <span class='cn'>FALSE</span>, bins <span class='op'>=</span> <span class='fl'>101</span><span class='op'>)</span><span class='op'>+</span></span>
+<span>    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_brewer.html'>scale_fill_brewer</a></span><span class='op'>(</span>palette<span class='op'>=</span><span class='st'>"RdYlGn"</span>, direction <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>+</span></span>
+<span>    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>xlab</a></span><span class='op'>(</span><span class='st'>"Integridad ecosistémica"</span><span class='op'>)</span> <span class='op'>+</span> </span>
+<span>    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>ylab</a></span><span class='op'>(</span><span class='st'>"Cantidad de píxeles (250m)"</span><span class='op'>)</span></span>
+<span><span class='op'>}</span></span>
+<span></span>
+<span><span class='va'>plan</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://docs.ropensci.org/drake/reference/drake_plan.html'>drake_plan</a></span><span class='op'>(</span></span>
+<span>    raw_data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/terra/man/rast.html'>rast</a></span><span class='op'>(</span><span class='va'>ruta_ie</span><span class='op'>)</span>,</span>
+<span>    </span>
+<span>    data <span class='op'>=</span> <span class='va'>rast_ie</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> <span class='fu'><a href='https://rdrr.io/pkg/terra/man/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='op'>)</span>,</span>
+<span>    </span>
+<span>    histograma <span class='op'>=</span> <span class='fu'>histograma_ie</span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span>,</span>
+<span>    </span>
+<span>    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggsave.html'>ggsave</a></span><span class='op'>(</span><span class='st'>"../figuras/histograma_yucatan_ie.png"</span><span class='op'>)</span></span>
+<span><span class='op'>)</span></span>
+<span></span>
+<span></span>
+<span><span class='va'>plan</span></span></code></pre>
 </div>
-<pre><code># A tibble: 4 x 2
+<pre><code># A tibble: 4 × 2
   target         command                                       
   &lt;chr&gt;          &lt;expr_lst&gt;                                    
 1 raw_data       rast(ruta_ie)                                 
@@ -1593,13 +1711,13 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 3 histograma     histograma_ie(data)                           
 4 drake_target_1 ggsave(&quot;../figuras/histograma_yucatan_ie.png&quot;)</code></pre>
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://docs.ropensci.org/drake/reference/vis_drake_graph.html'>vis_drake_graph</a></span><span class='op'>(</span><span class='va'>plan</span><span class='op'>)</span>
-</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://docs.ropensci.org/drake/reference/vis_drake_graph.html'>vis_drake_graph</a></span><span class='op'>(</span><span class='va'>plan</span><span class='op'>)</span></span></code></pre>
 </div>
-<div id="htmlwidget-9e21008e87e2a631b800" style="width:624px;height:384px;" class="visNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-9e21008e87e2a631b800">{"x":{"nodes":{"id":["drake_target_1","ruta_ie","histograma_ie","data","raw_data","histograma"],"imported":[false,true,true,false,false,false],"label":["drake_target_1","ruta_ie","histograma_ie","data","raw_data","histograma"],"status":["outdated","imported","imported","outdated","outdated","outdated"],"type":["object","object","function","object","object","object"],"font.size":[20,20,20,20,20,20],"color":["#000000","#1874CD","#1874CD","#000000","#000000","#000000"],"shape":["dot","dot","triangle","dot","dot","dot"],"level":[1,1,1,1,2,2],"x":[-1,-1,-1,-1,1,1],"y":[-1,-0.333333333333333,0.333333333333333,1,-0.555555555555556,0.555555555555555]},"edges":{"from":["ruta_ie","histograma_ie","data"],"to":["raw_data","histograma","histograma"],"arrows":["to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"edges":{"smooth":{"type":"cubicBezier","forceDirection":"horizontal"}},"interaction":{"navigationButtons":true,"zoomSpeed":1},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":{"text":"Dependency graph","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":false,"hoverNearest":false,"degree":1,"algorithm":"all","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":true,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"legend":{"width":0.2,"useGroups":false,"position":"left","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Outdated","Imported","Object","Function"],"color":["#000000","#1874CD","#888888","#888888"],"shape":["dot","dot","dot","triangle"],"font.color":["black","black","black","black"],"font.size":[20,20,20,20],"id":[2,6,8,10]},"nodesToDataframe":true},"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-60946d3abbe6f61a347a" style="width:624px;height:384px;" class="visNetwork html-widget"></div>
+<script type="application/json" data-for="htmlwidget-60946d3abbe6f61a347a">{"x":{"nodes":{"id":["drake_target_1","ruta_ie","histograma_ie","data","raw_data","histograma"],"imported":[false,true,true,false,false,false],"label":["drake_target_1","ruta_ie","histograma_ie","data","raw_data","histograma"],"status":["outdated","imported","imported","outdated","outdated","outdated"],"type":["object","object","function","object","object","object"],"font.size":[20,20,20,20,20,20],"color":["#000000","#1874CD","#1874CD","#000000","#000000","#000000"],"shape":["dot","dot","triangle","dot","dot","dot"],"level":[1,1,1,1,2,2],"x":[-1,-1,-1,-1,1,1],"y":[-1,-0.333333333333333,0.333333333333333,1,-0.555555555555556,0.555555555555555]},"edges":{"from":["ruta_ie","histograma_ie","data"],"to":["raw_data","histograma","histograma"],"arrows":["to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"edges":{"smooth":{"type":"cubicBezier","forceDirection":"horizontal"}},"interaction":{"navigationButtons":true,"zoomSpeed":1},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":{"text":"Dependency graph","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":false,"hoverNearest":false,"degree":1,"algorithm":"all","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":true,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"legend":{"width":0.2,"useGroups":false,"position":"left","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Outdated","Imported","Object","Function"],"color":["#000000","#1874CD","#888888","#888888"],"shape":["dot","dot","dot","triangle"],"font.color":["black","black","black","black"],"font.size":[20,20,20,20],"id":[2,6,8,10]},"nodesToDataframe":true},"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);"},"evals":[],"jsHooks":[]}</script>
 </div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

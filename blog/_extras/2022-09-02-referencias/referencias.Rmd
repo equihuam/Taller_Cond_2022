@@ -1,0 +1,33 @@
+---
+title: "Lecturas sugeridas"
+description: |
+  Lecturas y vinculos de interés
+author:
+  - name: Miguel Equihua Zamora, Julián Equihua Benítez y Octavio Pérez Maqueo
+date: 2022-09-02
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r, echo = FALSE, fig.align = 'center', out.width = '30%'}
+
+
+knitr::include_graphics("robots-judea-pearl-IA.jpg")
+```
+
+[El Libro del Porqué](https://www.filosofiadebolsillo.com/el-libro-del-porque-la-nueva-ciencia-de-la-causa-y-el-efecto-de-judea-pearl/)
+[Reproducible Analytical Pipelines](https://dataingovernment.blog.gov.uk/2017/03/27/reproducible-analytical-pipeline/)
+
+[Office verse](https://ardata-fr.github.io/officeverse/)
+
+[El Libro del Porqué](https://www.filosofiadebolsillo.com/el-libro-del-porque-la-nueva-ciencia-de-la-causa-y-el-efecto-de-judea-pearl/)
+[Reproducible Analytical Pipelines](https://dataingovernment.blog.gov.uk/2017/03/27/reproducible-analytical-pipeline/)
+
+[Office verse](https://ardata-fr.github.io/officeverse/)
+

@@ -1,5 +1,22 @@
 [
   {
+    "path": "extras/2022-09-02-referencias/",
+    "title": "Lecturas sugeridas",
+    "description": "Lecturas y vinculos de interés",
+    "author": [
+      {
+        "name": "Miguel Equihua Zamora, Julián Equihua Benítez y Octavio Pérez Maqueo",
+        "url": {}
+      }
+    ],
+    "date": "2022-09-02",
+    "categories": [],
+    "contents": "\r\n\r\n\r\n\r\nEl\r\nLibro del Porqué Reproducible\r\nAnalytical Pipelines\r\nOffice\r\nverse\r\nEl\r\nLibro del Porqué Reproducible\r\nAnalytical Pipelines\r\nOffice\r\nverse\r\n\r\n\r\n\r\n",
+    "preview": "extras/2022-09-02-referencias/robots-judea-pearl-IA.jpg",
+    "last_modified": "2022-09-02T09:44:36-05:00",
+    "input_file": {}
+  },
+  {
     "path": "extras/2022-08-29-datos/",
     "title": "Datos",
     "description": "Datos compartidos para hacer los ejercicios del taller e incluso algunas otras\ntareas que consideren de interés.",
@@ -8,7 +25,7 @@
     "categories": [],
     "contents": "\r\n\r\n\r\n\r\nLos datos para los ejercicios y posiblemente ejercicios que quieran\r\nhacer por su cuenta están en la carpeta\r\nde datos que hemos puesto en Github. La plataforma Github no admite\r\narchivos mayores a 100 megas. Su intención es básicamente almacenar\r\ndocumentos de texto simples, como los que tendría el código de un\r\nprograma de cómputo. De ahí que hemos visto la conveniencia de utilizar\r\notra carpeta\r\nde datos en Google Drive que hemos compartido con acceso público\r\ngeneral, sólo para lectura.\r\n\r\n\r\n\r\n",
     "preview": "extras/2022-08-29-datos/../../figuras/uso_datos.jpg",
-    "last_modified": "2022-08-31T11:14:06+02:00",
+    "last_modified": "2022-09-02T09:36:24-05:00",
     "input_file": {}
   }
 ]

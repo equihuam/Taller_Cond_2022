@@ -11,12 +11,10 @@ collections:
   extras:
     categories: true
 navbar:
-  logo:
-    image: figuras/i-Gamma-1.png
   right:
     - text: "Extras"
       menu:
-        - text: "Datos"
+        - text: "Datos y lecturas"
           href: datos.html
     - text: "Inicio"
       href: index.html
