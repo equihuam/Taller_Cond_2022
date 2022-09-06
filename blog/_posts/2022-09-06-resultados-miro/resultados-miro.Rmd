@@ -1,0 +1,81 @@
+---
+title: "Resultados Miro"
+description: |
+  Como actividad final del taller se utilizó Miro para explorar oportuunnidades de mejora.
+author:
+  - name: Miguel Equihua Zamora y Octavio Pérez Maqueo 
+date: 2022-09-06
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+list.files("../../../data/Miro/")
+
+miro_datos <- read.csv("../../../data/Miro/Miro_notitas.csv", sep = ",",
+                       quote = "'", fileEncoding = "utf-8")
+```
+
+
+```{r, echo = FALSE, fig.align = 'center', out.width = '60%'}
+
+
+knitr::include_graphics("../../figuras/Miro_lleno.png")
+```
+
+
+Como actividad final del taller se utilizó Miro para explorar acciones que se sugieren para mejorar la implementación, adopción y diseminación del uso de la cuenta de condicón con base en el enfoque de redes bayesianas.
+
+## Aspectos analizados
+
+El análisis consideró cuatro aspectos.
+
+```{r}
+
+knitr::kable(unique(miro_datos$acción), col.names = "Aspecto")
+```
+
+## Continuar
+
+En el ámbito de lo que se estima está funcionando bien se anotó lo siguiente.
+
+```{r}
+
+knitr::kable((miro_datos$idea[miro_datos$color == "cyan"]), col.names = "Idea")
+
+```
+
+## Resolver
+
+Se identificaron algunos asuntos que se considera no están adecuadamente resueltos o aspectos que están obstaculizando actualmente el desarrollo y adopción del enfoque propuesto para la integración de la cuenta de condición.
+
+```{r}
+
+knitr::kable((miro_datos$idea[miro_datos$color == "red"]), col.names = "Idea")
+
+```
+
+## Innovar
+
+Los participantes identificaron algunos elementos que consideran aportarían innovaciones valiosas para mejorar el desarrollo de la cuenta de condición o aspectos sobre los que se debería continuar trabajando para producir un mejor resultado.
+
+```{r}
+
+knitr::kable((miro_datos$idea[miro_datos$color == "yellow"]), col.names = "Idea")
+
+```
+
+## Actuar
+
+Finalmente, se hicieron algunas sugerencias de acciones de puesta en práctica inmediata que se estima mejorarían ampliamente el desarrollo, implementación y adopción general de la cuenta de condición del Sistema de Contabilidad de los Ecosistemas.
+
+
+```{r}
+
+knitr::kable((miro_datos$idea[miro_datos$color == "light_blue"]), col.names = "Idea")
+
+```

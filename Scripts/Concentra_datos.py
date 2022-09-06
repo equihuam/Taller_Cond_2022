@@ -1,9 +1,8 @@
 import os
 import shutil
 
-dir_base = ".\\blog"
+dir_base = "..\\blog"
 os.chdir(dir_base)
-
 
 fname = []
 for root,d_names,f_names in os.walk("."):
