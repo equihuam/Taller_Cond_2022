@@ -17,7 +17,6 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ```{r, echo = FALSE, fig.align = 'center', out.width = '30%'}
 
-
 knitr::include_graphics("robots-judea-pearl-IA.jpg")
 ```
 
