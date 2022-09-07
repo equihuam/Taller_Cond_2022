@@ -14,21 +14,109 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 
-list.files("../../../data/Miro/")
-
-miro_datos <- read.csv("../../../data/Miro/Miro_notitas.csv", sep = ",",
-                       quote = "'", fileEncoding = "utf-8")
 ```
 
+Como actividad final del taller se utilizó Miro para explorar acciones que se sugieren para mejorar la implementación, adopción y diseminación del uso de la cuenta de condicón con base en el enfoque de redes bayesianas. Podría ser de su interés saber que posible recuperar los datos de los tableros Miro directamente en R. Las [instrucciones para hacerlo están aquí](https://developers.miro.com/reference/api-reference).
 
-```{r, echo = FALSE, fig.align = 'center', out.width = '60%'}
+A continuación se enlistan las contribuciones reunidas.
 
+```{r preliminares, echo = FALSE, fig.align = 'center', out.width = '60%'}
 
 knitr::include_graphics("../../figuras/Miro_lleno.png")
 ```
 
 
-Como actividad final del taller se utilizó Miro para explorar acciones que se sugieren para mejorar la implementación, adopción y diseminación del uso de la cuenta de condicón con base en el enfoque de redes bayesianas.
+```{r }
+# Bibliotecas requeridas
+library(httr)
+library(jsonlite)
+library(dotenv)
+library(tidyverse)
+
+# Siguiendo las instruccioes de https://developers.miro.com/reference/api-reference
+lee_datos_miro <- function(componente, tipo_item = "", cursor = "")
+{
+  load_dot_env("../../../token_miro.env")
+  
+  # Preparación para acceder al tablero
+  if (tipo_item == "")
+  {
+    queryString <- list(limit = "50") # 50 = máximo item página, más de esto usar "cursor"
+    
+  } else {
+    queryString <- list(limit = "50",
+                        type = tipo_item)
+  }
+
+  if (cursor != "")
+  {
+    queryString$cursor <- cursor
+  }
+  
+  response <- VERB("GET", componente, 
+                   add_headers("Authorization" = paste0("Bearer ", Sys.getenv("MIRO_TOKEN"))), 
+                   query = queryString, content_type("application/octet-stream"), 
+                   accept("application/json"))
+  
+  # Recupera los datos del tablero
+   return (fromJSON(content(response, "text", encoding = "UTF-8")))
+}
+
+
+# datos generales del tablero
+id_tablero <- "uXjVPf-z5Tg=" # tomado del vínculo que se usa para abrir el tablero de interes
+tablero <-  paste0("https://api.miro.com/v2/boards/", id_tablero)
+
+datos_tablero <- lee_datos_miro(tablero)
+
+describe_miro <- data.frame(concepto = c("id tablero", "Nombre", "Descripción"), 
+                            txt = c(datos_tablero$id, datos_tablero$name, datos_tablero$description))
+
+# Items de tipo "shape" son el marco de fondo de los temas a tratar
+items <-  paste0("https://api.miro.com/v2/boards/", id_tablero, "/items" )
+items_shape <- lee_datos_miro(items, "shape")
+
+cuadros <- data.frame(concepto = items_shape$data$data[, 1])
+cuadros$concepto <- gsub("<.*?>|&#.*?;|⏩|⛔|\\ufe0f", "", cuadros$concepto)
+cuadros$color[grepl("Actuar", cuadros)] <- "light_blue"
+cuadros$color[grepl("Continuar", cuadros)] <- "cyan"
+cuadros$color[grepl("Resolver", cuadros)] <- "red"
+cuadros$color[grepl("Inventar", cuadros)] <- "yellow"
+
+# Sticky_notes en el tablero, ideas aportadas por los participantes
+notas <- paste0("https://api.miro.com/v2/boards/", id_tablero, "/items" )
+
+items_sticky <- lee_datos_miro(notas, tipo_item = "sticky_note")
+
+# Si aparece el concepto "cursor", restan items por recuperar
+if (!is_empty(grep("cursor", names(items_sticky), value = TRUE)))
+{
+  items_sig <- lee_datos_miro(items, "sticky_note", cursor = items_sticky$cursor)
+}
+
+
+# Tabla de datos de notas ordenada por colores/concepto
+datos_notas <- data.frame(color = items_sticky$data$style$fillColor,
+                          idea = gsub("<.*?>|&#.*?;|\\xa0|\\ufe0f", "", 
+                                      items_sticky$data$data$content))
+
+datos_notas <- datos_notas[order(datos_notas$color),]
+
+describe_miro <- rbind(describe_miro, c("Núm. notas", items_sticky$total))
+```
+
+
+## Identificación y descripción del tablero
+
+
+```{r}
+
+# Utilizó el data.frame que se contruyó al inicio (chunk "preliminares")
+
+knitr::kable(describe_miro)
+```
+
+
 
 ## Aspectos analizados
 
@@ -36,7 +124,7 @@ El análisis consideró cuatro aspectos.
 
 ```{r}
 
-knitr::kable(unique(miro_datos$acción), col.names = "Aspecto")
+knitr::kable(sort(cuadros$concepto), col.names = "Aspecto")
 ```
 
 ## Continuar
@@ -45,7 +133,7 @@ En el ámbito de lo que se estima está funcionando bien se anotó lo siguiente.
 
 ```{r}
 
-knitr::kable((miro_datos$idea[miro_datos$color == "cyan"]), col.names = "Idea")
+knitr::kable((datos_notas$idea[datos_notas$color == "cyan"]), col.names = "Idea")
 
 ```
 
@@ -55,7 +143,7 @@ Se identificaron algunos asuntos que se considera no están adecuadamente resuel
 
 ```{r}
 
-knitr::kable((miro_datos$idea[miro_datos$color == "red"]), col.names = "Idea")
+knitr::kable((datos_notas$idea[datos_notas$color == "red"]), col.names = "Idea")
 
 ```
 
@@ -65,7 +153,7 @@ Los participantes identificaron algunos elementos que consideran aportarían inn
 
 ```{r}
 
-knitr::kable((miro_datos$idea[miro_datos$color == "yellow"]), col.names = "Idea")
+knitr::kable((datos_notas$idea[datos_notas$color == "yellow"]), col.names = "Idea")
 
 ```
 
@@ -76,6 +164,6 @@ Finalmente, se hicieron algunas sugerencias de acciones de puesta en práctica i
 
 ```{r}
 
-knitr::kable((miro_datos$idea[miro_datos$color == "light_blue"]), col.names = "Idea")
+knitr::kable((datos_notas$idea[datos_notas$color == "light_blue"]), col.names = "Idea")
 
 ```

@@ -1,3 +1,6 @@
+# Token Miro
+*.env
+
 # History files
 .Rhistory
 .Rapp.history
