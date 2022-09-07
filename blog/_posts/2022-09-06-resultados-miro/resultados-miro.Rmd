@@ -77,7 +77,7 @@ items <-  paste0("https://api.miro.com/v2/boards/", id_tablero, "/items" )
 items_shape <- lee_datos_miro(items, "shape")
 
 cuadros <- data.frame(concepto = items_shape$data$data[, 1])
-cuadros$concepto <- gsub("<.*?>|&#.*?;|⏩|⛔|\\ufe0f", "", cuadros$concepto)
+cuadros$concepto <- gsub("<.*?>|&#.*?;|\U23e9|\U9940|\\ufe0f", "", cuadros$concepto)
 cuadros$color[grepl("Actuar", cuadros)] <- "light_blue"
 cuadros$color[grepl("Continuar", cuadros)] <- "cyan"
 cuadros$color[grepl("Resolver", cuadros)] <- "red"
