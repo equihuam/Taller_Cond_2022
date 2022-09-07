@@ -20,13 +20,13 @@ Como actividad final del taller se utilizó Miro para explorar acciones que se s
 
 A continuación se enlistan las contribuciones reunidas.
 
-```{r preliminares, echo = FALSE, fig.align = 'center', out.width = '60%'}
+```{r, echo = FALSE, fig.align = 'center', out.width = '60%'}
 
 knitr::include_graphics("../../figuras/Miro_lleno.png")
 ```
 
 
-```{r }
+```{r preliminares}
 # Bibliotecas requeridas
 library(httr)
 library(jsonlite)
@@ -103,6 +103,12 @@ datos_notas <- data.frame(color = items_sticky$data$style$fillColor,
 datos_notas <- datos_notas[order(datos_notas$color),]
 
 describe_miro <- rbind(describe_miro, c("Núm. notas", items_sticky$total))
+
+# Lista de participantes en el tablero
+equipo <- paste0("https://api.miro.com/v2/boards/", id_tablero, "/members")
+equipo_lst <- lee_datos_miro(equipo)
+participantes <- data.frame(id = equipo_lst$data$id, nombre = equipo_lst$data$name)
+
 ```
 
 
@@ -114,6 +120,15 @@ describe_miro <- rbind(describe_miro, c("Núm. notas", items_sticky$total))
 # Utilizó el data.frame que se contruyó al inicio (chunk "preliminares")
 
 knitr::kable(describe_miro)
+```
+
+los participantes en el ejercicio *Miro* fueron los que se registraron con los siguientees nombres.
+
+```{r}
+# Miembros tomados de data.frame que se contruyó al inicio (chunk "preliminares")
+tabla <- data.frame(participantes$nombre[1:12], 
+             participantes$nombre[13:length(participantes$nombre)])
+knitr::kable(tabla, col.names = c("Participante","Participante"))
 ```
 
 
