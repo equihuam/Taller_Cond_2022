@@ -77,7 +77,7 @@ items <-  paste0("https://api.miro.com/v2/boards/", id_tablero, "/items" )
 items_shape <- lee_datos_miro(items, "shape")
 
 cuadros <- data.frame(concepto = items_shape$data$data[, 1])
-cuadros$concepto <- gsub("<.*?>|&#.*?;|\U23e9|\U9940|\\ufe0f", "", cuadros$concepto)
+cuadros$concepto <- gsub("<.*?>|&#.*?;|\U23E9|\U26D4|\Ufe0f", "", cuadros$concepto)
 cuadros$color[grepl("Actuar", cuadros)] <- "light_blue"
 cuadros$color[grepl("Continuar", cuadros)] <- "cyan"
 cuadros$color[grepl("Resolver", cuadros)] <- "red"
@@ -98,7 +98,17 @@ if (!is_empty(grep("cursor", names(items_sticky), value = TRUE)))
 # Tabla de datos de notas ordenada por colores/concepto
 datos_notas <- data.frame(color = items_sticky$data$style$fillColor,
                           idea = gsub("<.*?>|&#.*?;|\\xa0|\\ufe0f", "", 
-                                      items_sticky$data$data$content))
+                                      items_sticky$data$data$content),
+                          id = items_sticky$data$modifiedBy$id)
+if (!is_empty(items_sig))
+{
+  datos_sig <- data.frame(color = items_sig$data$style$fillColor,
+                            idea = gsub("<.*?>|&#.*?;|\\xa0|\\ufe0f", "", 
+                                        items_sig$data$data$content),
+                            id = items_sig$data$modifiedBy$id)
+  
+  datos_notas <- rbind(datos_notas, datos_sig)
+}
 
 datos_notas <- datos_notas[order(datos_notas$color),]
 
@@ -108,6 +118,7 @@ describe_miro <- rbind(describe_miro, c("Núm. notas", items_sticky$total))
 equipo <- paste0("https://api.miro.com/v2/boards/", id_tablero, "/members")
 equipo_lst <- lee_datos_miro(equipo)
 participantes <- data.frame(id = equipo_lst$data$id, nombre = equipo_lst$data$name)
+datos_notas_1 <-  merge(datos_notas,  participantes, by = "id")
 
 ```
 
@@ -122,7 +133,7 @@ participantes <- data.frame(id = equipo_lst$data$id, nombre = equipo_lst$data$na
 knitr::kable(describe_miro)
 ```
 
-los participantes en el ejercicio *Miro* fueron los que se registraron con los siguientees nombres.
+los participantes en el ejercicio *Miro* fueron los que se registraron con los siguientes nombres.
 
 ```{r}
 # Miembros tomados de data.frame que se contruyó al inicio (chunk "preliminares")
