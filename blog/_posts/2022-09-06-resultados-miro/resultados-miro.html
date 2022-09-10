@@ -118,7 +118,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["resultados-miro_files/anchor-4.2.2/anchor.min.js","resultados-miro_files/bowser-1.9.3/bowser.min.js","resultados-miro_files/distill-2.2.21/template.v2.js","resultados-miro_files/header-attrs-2.14/header-attrs.js","resultados-miro_files/jquery-3.6.0/jquery-3.6.0.js","resultados-miro_files/jquery-3.6.0/jquery-3.6.0.min.js","resultados-miro_files/jquery-3.6.0/jquery-3.6.0.min.map","resultados-miro_files/popper-2.6.0/popper.min.js","resultados-miro_files/tippy-6.2.7/tippy-bundle.umd.min.js","resultados-miro_files/tippy-6.2.7/tippy-light-border.css","resultados-miro_files/tippy-6.2.7/tippy.css","resultados-miro_files/tippy-6.2.7/tippy.umd.min.js","resultados-miro_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["resultados-miro_files/anchor-4.2.2/anchor.min.js","resultados-miro_files/bowser-1.9.3/bowser.min.js","resultados-miro_files/distill-2.2.21/template.v2.js","resultados-miro_files/header-attrs-2.14/header-attrs.js","resultados-miro_files/header-attrs-2.16/header-attrs.js","resultados-miro_files/jquery-3.6.0/jquery-3.6.0.js","resultados-miro_files/jquery-3.6.0/jquery-3.6.0.min.js","resultados-miro_files/jquery-3.6.0/jquery-3.6.0.min.map","resultados-miro_files/popper-2.6.0/popper.min.js","resultados-miro_files/tippy-6.2.7/tippy-bundle.umd.min.js","resultados-miro_files/tippy-6.2.7/tippy-light-border.css","resultados-miro_files/tippy-6.2.7/tippy.css","resultados-miro_files/tippy-6.2.7/tippy.umd.min.js","resultados-miro_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -189,6 +189,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   d-article table.gt_table td,
   d-article table.gt_table th {
     border-bottom: none;
+    font-size: 100%;
   }
 
   .html-widget {
@@ -1261,15 +1262,21 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
-        if ($(this).children()[0].nodeName == "D-FOOTNOTE") {
-          var fn = $(this).children()[0]
+        const citeChild = $(this).children()[0]
+        // Do not process if @xyz has been used without escaping and without bibliography activated
+        // https://github.com/rstudio/distill/issues/466
+        if (citeChild === undefined) return true
+
+        if (citeChild.nodeName == "D-FOOTNOTE") {
+          var fn = citeChild
           $(this).html(fn.shadowRoot.querySelector("sup"))
           $(this).id = fn.id
           fn.remove()
         }
         var refs = $(this).attr('data-cites').split(" ");
         var refHtml = refs.map(function(ref) {
-          return "<p>" + $('#ref-' + ref).html() + "</p>";
+          // Could use CSS.escape too here, we insure backward compatibility in navigator
+          return "<p>" + $('div[id="ref-' + ref + '"]').html() + "</p>";
         }).join("\n");
         window.tippy(this, {
           allowHTML: true,
@@ -1468,7 +1475,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="resultados-miro_files/header-attrs-2.14/header-attrs.js"></script>
+  <script src="resultados-miro_files/header-attrs-2.16/header-attrs.js"></script>
   <script src="resultados-miro_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="resultados-miro_files/popper-2.6.0/popper.min.js"></script>
   <link href="resultados-miro_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
@@ -1502,8 +1509,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h1>Resultados Miro</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>Como actividad final del taller se utilizó Miro para explorar
-oportuunnidades de mejora.</p></p>
+<p><p>Como actividad final del taller se utilizó Miro para explorar oportuunnidades de mejora.</p></p>
 </div>
 
 <div class="d-byline">
@@ -1513,13 +1519,7 @@ oportuunnidades de mejora.</p></p>
 </div>
 
 <div class="d-article">
-<p>Como actividad final del taller se utilizó Miro para explorar
-acciones que se sugieren para mejorar la implementación, adopción y
-diseminación del uso de la cuenta de condicón con base en el enfoque de
-redes bayesianas. Podría ser de su interés saber que posible recuperar
-los datos de los tableros Miro directamente en R. Las <a
-href="https://developers.miro.com/reference/api-reference">instrucciones
-para hacerlo están aquí</a>.</p>
+<p>Como actividad final del taller se utilizó Miro para explorar acciones que se sugieren para mejorar la implementación, adopción y diseminación del uso de la cuenta de condicón con base en el enfoque de redes bayesianas. Podría ser de su interés saber que posible recuperar los datos de los tableros Miro directamente en R. Las <a href="https://developers.miro.com/reference/api-reference">instrucciones para hacerlo están aquí</a>.</p>
 <p>A continuación se enlistan las contribuciones reunidas.</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="../../figuras/Miro_lleno.png" width="60%" style="display: block; margin: auto;" /></p>
@@ -1527,8 +1527,7 @@ para hacerlo están aquí</a>.</p>
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
-<h2 id="identificación-y-descripción-del-tablero">Identificación y
-descripción del tablero</h2>
+<h2 id="identificación-y-descripción-del-tablero">Identificación y descripción del tablero</h2>
 <div class="layout-chunk" data-layout="l-body">
 <table>
 <colgroup>
@@ -1552,8 +1551,7 @@ descripción del tablero</h2>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Descripción</td>
-<td style="text-align: left;">Análisis estratégico para fortalecer la
-implementación del SEEA EA en México</td>
+<td style="text-align: left;">Análisis estratégico para fortalecer la implementación del SEEA EA en México</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Núm. notas</td>
@@ -1562,8 +1560,7 @@ implementación del SEEA EA en México</td>
 </tbody>
 </table>
 </div>
-<p>los participantes en el ejercicio <em>Miro</em> fueron los que se
-registraron con los siguientes nombres.</p>
+<p>los participantes en el ejercicio <em>Miro</em> fueron los que se registraron con los siguientes nombres.</p>
 <div class="layout-chunk" data-layout="l-body">
 <table>
 <thead>
@@ -1624,6 +1621,14 @@ registraron con los siguientes nombres.</p>
 </tbody>
 </table>
 </div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-4"></span>
+<img src="../../figuras/Participantes_2.jpg" alt="caption" width="49%" height="20%" /><img src="../../figuras/participantes.png" alt="caption" width="49%" height="20%" />
+<p class="caption">
+Figure 1: caption
+</p>
+</div>
+</div>
 <h2 id="aspectos-analizados">Aspectos analizados</h2>
 <p>El análisis consideró cuatro aspectos.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -1635,27 +1640,22 @@ registraron con los siguientes nombres.</p>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Actuar ¿Qué deberíamos hacer en
-seguida?</td>
+<td style="text-align: left;">Actuar ¿Qué deberíamos hacer en seguida?</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Continuar ¿Qué nos está funcionando
-bien?</td>
+<td style="text-align: left;">Continuar ¿Qué nos está funcionando bien?</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Inventar ¿Hay una mejor manera de hacer
-las cosas?</td>
+<td style="text-align: left;">Inventar ¿Hay una mejor manera de hacer las cosas?</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Resolver ¿Qué nos está impidiendo
-avanzar?</td>
+<td style="text-align: left;">Resolver ¿Qué nos está impidiendo avanzar?</td>
 </tr>
 </tbody>
 </table>
 </div>
 <h2 id="continuar">Continuar</h2>
-<p>En el ámbito de lo que se estima está funcionando bien se anotó lo
-siguiente.</p>
+<p>En el ámbito de lo que se estima está funcionando bien se anotó lo siguiente.</p>
 <div class="layout-chunk" data-layout="l-body">
 <table>
 <colgroup>
@@ -1668,12 +1668,10 @@ siguiente.</p>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">La sistematización del proceso de
-generación del indicador</td>
+<td style="text-align: left;">La sistematización del proceso de generación del indicador</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Utilizar la información disponible en el
-país, que sirve para todos</td>
+<td style="text-align: left;">Utilizar la información disponible en el país, que sirve para todos</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">El uso de información oficial</td>
@@ -1682,34 +1680,25 @@ país, que sirve para todos</td>
 <td style="text-align: left;">El trabajo multidisciplinario</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Trabajo interinstitucional para la
-definición de objetivos y líneas de acción</td>
+<td style="text-align: left;">Trabajo interinstitucional para la definición de objetivos y líneas de acción</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">La homologación en el lenguaje en común
-con todos los interesados. También el entendimiento y apropiación de la
-metodología.</td>
+<td style="text-align: left;">La homologación en el lenguaje en común con todos los interesados. También el entendimiento y apropiación de la metodología.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">La generación de diálogo entre los
-expertos para formar acuerdos y búsqueda de áreas de oportunidad.</td>
+<td style="text-align: left;">La generación de diálogo entre los expertos para formar acuerdos y búsqueda de áreas de oportunidad.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Aprovechar el impulso internacional para
-el proyecto de cuentas ecosistémicas</td>
+<td style="text-align: left;">Aprovechar el impulso internacional para el proyecto de cuentas ecosistémicas</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Con la definición/identificación de las
-variables explicativasHumberto Ramos</td>
+<td style="text-align: left;">Con la definición/identificación de las variables explicativasHumberto Ramos</td>
 </tr>
 </tbody>
 </table>
 </div>
 <h2 id="resolver">Resolver</h2>
-<p>Se identificaron algunos asuntos que se considera no están
-adecuadamente resueltos o aspectos que están obstaculizando actualmente
-el desarrollo y adopción del enfoque propuesto para la integración de la
-cuenta de condición.</p>
+<p>Se identificaron algunos asuntos que se considera no están adecuadamente resueltos o aspectos que están obstaculizando actualmente el desarrollo y adopción del enfoque propuesto para la integración de la cuenta de condición.</p>
 <div class="layout-chunk" data-layout="l-body">
 <table>
 <colgroup>
@@ -1722,98 +1711,70 @@ cuenta de condición.</p>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">No se garantiza la producción sistemática
-de información. Es necesario conocer cual es el futuro de fuentes de
-información como el InFyS y la adquisisión de información satelital</td>
+<td style="text-align: left;">No se garantiza la producción sistemática de información. Es necesario conocer cual es el futuro de fuentes de información como el InFyS y la adquisisión de información satelital</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Limitantes en el manejo de software
-específico para el análisis.</td>
+<td style="text-align: left;">Limitantes en el manejo de software específico para el análisis.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Incluir dentro de la clasificación los
-usos de suelo como la minería y la ganadería</td>
+<td style="text-align: left;">Incluir dentro de la clasificación los usos de suelo como la minería y la ganadería</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">El uso de herramientas (software) libre o
-de uso más generalizado, ya que las faltas de licencias puede ser un
-obstáculo para la actualización, mejora y ampliación del Índice</td>
+<td style="text-align: left;">El uso de herramientas (software) libre o de uso más generalizado, ya que las faltas de licencias puede ser un obstáculo para la actualización, mejora y ampliación del Índice</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Información georreferenciada de actividad
-agrícola y ganadera</td>
+<td style="text-align: left;">Información georreferenciada de actividad agrícola y ganadera</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Definir una clasificación de los
-ecosistemas que pueda interoperar con diferentes proyectos (Cuentas de
-Bosques, Cuentas Urbanas, Cuentas de Océanos)</td>
+<td style="text-align: left;">Definir una clasificación de los ecosistemas que pueda interoperar con diferentes proyectos (Cuentas de Bosques, Cuentas Urbanas, Cuentas de Océanos)</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">La limitación en la información o
-incertidumbre sobre su actualización</td>
+<td style="text-align: left;">La limitación en la información o incertidumbre sobre su actualización</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">La falta de un comité o grupo formal para
-generar y asentar acuerdos.</td>
+<td style="text-align: left;">La falta de un comité o grupo formal para generar y asentar acuerdos.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Continuidad en la generación de
-informaciónen campo como el INFyS</td>
+<td style="text-align: left;">Continuidad en la generación de informaciónen campo como el INFyS</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">La determinación de las responsabilidades
-por cada Institución.</td>
+<td style="text-align: left;">La determinación de las responsabilidades por cada Institución.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Actualización del índice para otros años
-de estudios. Idealmente que sean para los mismos años de las CUSV del
-INEGI</td>
+<td style="text-align: left;">Actualización del índice para otros años de estudios. Idealmente que sean para los mismos años de las CUSV del INEGI</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Garantizar que cuenten con las licencias y
-equipos de cómputo con la capacidad de realizarlo.</td>
+<td style="text-align: left;">Garantizar que cuenten con las licencias y equipos de cómputo con la capacidad de realizarlo.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Incluir las actividades relacionadas en
-los programas anuales de trabajo.</td>
+<td style="text-align: left;">Incluir las actividades relacionadas en los programas anuales de trabajo.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">En caso de no tener capacitación en uso de
-software especializado, apoyar para su utilización(Capacitación)</td>
+<td style="text-align: left;">En caso de no tener capacitación en uso de software especializado, apoyar para su utilización(Capacitación)</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Realizar capacitaciones en linea de los
-temas presentados</td>
+<td style="text-align: left;">Realizar capacitaciones en linea de los temas presentados</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Información Georreferenciada de
-actividades de minería en Áreas Naturales ProtegidasVíctor Salazar</td>
+<td style="text-align: left;">Información Georreferenciada de actividades de minería en Áreas Naturales ProtegidasVíctor Salazar</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Generar un modelo multiescala, que
-considere variables específicas por zona/escalaHumberto Ramos</td>
+<td style="text-align: left;">Generar un modelo multiescala, que considere variables específicas por zona/escalaHumberto Ramos</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Falta de Salida al campo por reducción de
-presupuestoVíctor Salazar</td>
+<td style="text-align: left;">Falta de Salida al campo por reducción de presupuestoVíctor Salazar</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">la manera de integrar en trabajo
-multidisciplinario a las distintas instituciones, incluida la
-capacitaciónHumberto Ramos</td>
+<td style="text-align: left;">la manera de integrar en trabajo multidisciplinario a las distintas instituciones, incluida la capacitaciónHumberto Ramos</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Falta de Salida al campo por reducción de
-presupuestoVíctor Salazar</td>
+<td style="text-align: left;">Falta de Salida al campo por reducción de presupuestoVíctor Salazar</td>
 </tr>
 </tbody>
 </table>
 </div>
 <h2 id="innovar">Innovar</h2>
-<p>Los participantes identificaron algunos elementos que consideran
-aportarían innovaciones valiosas para mejorar el desarrollo de la cuenta
-de condición o aspectos sobre los que se debería continuar trabajando
-para producir un mejor resultado.</p>
+<p>Los participantes identificaron algunos elementos que consideran aportarían innovaciones valiosas para mejorar el desarrollo de la cuenta de condición o aspectos sobre los que se debería continuar trabajando para producir un mejor resultado.</p>
 <div class="layout-chunk" data-layout="l-body">
 <table>
 <colgroup>
@@ -1826,47 +1787,34 @@ para producir un mejor resultado.</p>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Aún me queda duda de cómo se genera la
-homologación del indicador a nivel mundial</td>
+<td style="text-align: left;">Aún me queda duda de cómo se genera la homologación del indicador a nivel mundial</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Tomar en cuenta la retroalimentación de
-otras instituciones al intentar replicar el ejercicio realizado.</td>
+<td style="text-align: left;">Tomar en cuenta la retroalimentación de otras instituciones al intentar replicar el ejercicio realizado.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Integrar bases de datos de información
-económica para la valoración de los Servicios de los Ecosistemas</td>
+<td style="text-align: left;">Integrar bases de datos de información económica para la valoración de los Servicios de los Ecosistemas</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Ajustar la información de asentamientos
-humanos con información de ciudades sostenibles e infraestructura
-verde-azul</td>
+<td style="text-align: left;">Ajustar la información de asentamientos humanos con información de ciudades sostenibles e infraestructura verde-azul</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">La sistematización podría favorecer su
-desarrollo y aprovechamiento.</td>
+<td style="text-align: left;">La sistematización podría favorecer su desarrollo y aprovechamiento.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Integrando otras variables ecológicas y
-económicas, así como adoptar una clasificación acordada de los
-ecosistemas</td>
+<td style="text-align: left;">Integrando otras variables ecológicas y económicas, así como adoptar una clasificación acordada de los ecosistemas</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">¿Será posible realizar un ejercicio
-similar para ecosistemas acuáticos?</td>
+<td style="text-align: left;">¿Será posible realizar un ejercicio similar para ecosistemas acuáticos?</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Un Pipeline que integre a los datos de
-distintas institucionesHuumberto Ramos</td>
+<td style="text-align: left;">Un Pipeline que integre a los datos de distintas institucionesHuumberto Ramos</td>
 </tr>
 </tbody>
 </table>
 </div>
 <h2 id="actuar">Actuar</h2>
-<p>Finalmente, se hicieron algunas sugerencias de acciones de puesta en
-práctica inmediata que se estima mejorarían ampliamente el desarrollo,
-implementación y adopción general de la cuenta de condición del Sistema
-de Contabilidad de los Ecosistemas.</p>
+<p>Finalmente, se hicieron algunas sugerencias de acciones de puesta en práctica inmediata que se estima mejorarían ampliamente el desarrollo, implementación y adopción general de la cuenta de condición del Sistema de Contabilidad de los Ecosistemas.</p>
 <div class="layout-chunk" data-layout="l-body">
 <table>
 <colgroup>
@@ -1879,71 +1827,51 @@ de Contabilidad de los Ecosistemas.</p>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Profundizar en las redes bayesianas, como
-parte del flujo de trabajoHumberto Ramos</td>
+<td style="text-align: left;">Profundizar en las redes bayesianas, como parte del flujo de trabajoHumberto Ramos</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Comité Técnico Especializado con subgrupos
-de trabajo</td>
+<td style="text-align: left;">Comité Técnico Especializado con subgrupos de trabajo</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Socializar metodologías para las demás
-instituciones con una pequeña capacitación.(Áreas de cada institución
-familiarizadas con este tipo de análisis)</td>
+<td style="text-align: left;">Socializar metodologías para las demás instituciones con una pequeña capacitación.(Áreas de cada institución familiarizadas con este tipo de análisis)</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Foro Técnico: Identificación de proyectos
-en común, definir líneas de acción, priorizar líneas de acción para
-interoperar en el corto, mediano y largo plazo.</td>
+<td style="text-align: left;">Foro Técnico: Identificación de proyectos en común, definir líneas de acción, priorizar líneas de acción para interoperar en el corto, mediano y largo plazo.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Socializar el blog desarrollado en el curo
-con la comunidad ambiental (CONAGUA, SEMARNAT. ACADËMICOS, etc.)
-Angélica Hernández</td>
+<td style="text-align: left;">Socializar el blog desarrollado en el curo con la comunidad ambiental (CONAGUA, SEMARNAT. ACADËMICOS, etc.) Angélica Hernández</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Producción automatizada de productos para
-optimizar recursos institucionales en INEGI</td>
+<td style="text-align: left;">Producción automatizada de productos para optimizar recursos institucionales en INEGI</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Poner en práctica lo visto en el taller
-para la generación de más dudas. Esas mismas compartirlas con el grupo
-de trabajo por si es una duda en común.</td>
+<td style="text-align: left;">Poner en práctica lo visto en el taller para la generación de más dudas. Esas mismas compartirlas con el grupo de trabajo por si es una duda en común.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Debatir sobre las áreas de oportunidad o
-uso potencial para los diferentes sectores.</td>
+<td style="text-align: left;">Debatir sobre las áreas de oportunidad o uso potencial para los diferentes sectores.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Realizar una memoria de cálculo a detalle
-sobre el proceso de la generación del índice y que esté disponible para
-todos para que exista una sola versión</td>
+<td style="text-align: left;">Realizar una memoria de cálculo a detalle sobre el proceso de la generación del índice y que esté disponible para todos para que exista una sola versión</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Creación de un grupo de trabajo dentro del
-CTE en el que este en constante discusión la metodología del Índice</td>
+<td style="text-align: left;">Creación de un grupo de trabajo dentro del CTE en el que este en constante discusión la metodología del Índice</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Generar:Memoria/guion del proceso de ojo
-de expertosMemoria de cálculo del proceso en general</td>
+<td style="text-align: left;">Generar:Memoria/guion del proceso de ojo de expertosMemoria de cálculo del proceso en general</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Determinar los puntos focales por
-Institución</td>
+<td style="text-align: left;">Determinar los puntos focales por Institución</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Realizar ejercicios de Redes
-BayesianasSandra Medina</td>
+<td style="text-align: left;">Realizar ejercicios de Redes BayesianasSandra Medina</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Realizar un proyecto compartiendo procesos
-en equiposSandra Medina</td>
+<td style="text-align: left;">Realizar un proyecto compartiendo procesos en equiposSandra Medina</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

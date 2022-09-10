@@ -135,11 +135,22 @@ knitr::kable(describe_miro)
 
 los participantes en el ejercicio *Miro* fueron los que se registraron con los siguientes nombres.
 
-```{r}
+```{r }
 # Miembros tomados de data.frame que se contruyó al inicio (chunk "preliminares")
 tabla <- data.frame(participantes$nombre[1:12], 
              participantes$nombre[13:length(participantes$nombre)])
 knitr::kable(tabla, col.names = c("Participante","Participante"))
+
+```
+
+
+
+
+
+```{r, echo=FALSE, out.width="49%", out.height="20%", fig.cap="caption",fig.show='hold', fig.align='center'}
+
+knitr::include_graphics(c("../../figuras/Participantes_2.jpg", "../../figuras/participantes.png"))
+
 ```
 
 
