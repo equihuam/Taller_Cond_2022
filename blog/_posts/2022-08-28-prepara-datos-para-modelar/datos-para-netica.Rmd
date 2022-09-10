@@ -146,6 +146,7 @@ Una vez entrenado el modelo de *red bayesiana* y procesados los casos base para 
 
 ```{r echo=TRUE}
 ie_dato <- fread(paste0(mapas_dir, "/salida.txt"), header = TRUE, col.names = "iie")
+temp <- unique(ie_dato)
 
 # Lo normalizo para expresarlo entre 0 (nula iie) y 100 (alta iie)
 ie_dato <- 100 * (18 - ie_dato) / 18
@@ -161,7 +162,6 @@ coordinates(datos_tbl_ie) <-  ~ x + y
 gridded(datos_tbl_ie) <-  TRUE
 class(datos_tbl_ie)
 plot(datos_tbl_ie)
-
 ```
 
 Ahora convierto esta estructura de dato en uun objeto raster, efectivamente será ya el mapa final en memoria. El que guardaremos en disco finalmente.

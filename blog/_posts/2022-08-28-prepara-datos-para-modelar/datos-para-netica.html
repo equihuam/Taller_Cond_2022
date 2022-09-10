@@ -118,7 +118,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["datos-para-netica_files/anchor-4.2.2/anchor.min.js","datos-para-netica_files/bowser-1.9.3/bowser.min.js","datos-para-netica_files/distill-2.2.21/template.v2.js","datos-para-netica_files/figure-html5/unnamed-chunk-10-1.png","datos-para-netica_files/figure-html5/unnamed-chunk-9-1.png","datos-para-netica_files/header-attrs-2.14/header-attrs.js","datos-para-netica_files/jquery-3.6.0/jquery-3.6.0.js","datos-para-netica_files/jquery-3.6.0/jquery-3.6.0.min.js","datos-para-netica_files/jquery-3.6.0/jquery-3.6.0.min.map","datos-para-netica_files/popper-2.6.0/popper.min.js","datos-para-netica_files/tippy-6.2.7/tippy-bundle.umd.min.js","datos-para-netica_files/tippy-6.2.7/tippy-light-border.css","datos-para-netica_files/tippy-6.2.7/tippy.css","datos-para-netica_files/tippy-6.2.7/tippy.umd.min.js","datos-para-netica_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["datos-para-netica_files/anchor-4.2.2/anchor.min.js","datos-para-netica_files/bowser-1.9.3/bowser.min.js","datos-para-netica_files/distill-2.2.21/template.v2.js","datos-para-netica_files/figure-html5/unnamed-chunk-10-1.png","datos-para-netica_files/figure-html5/unnamed-chunk-9-1.png","datos-para-netica_files/header-attrs-2.14/header-attrs.js","datos-para-netica_files/header-attrs-2.16/header-attrs.js","datos-para-netica_files/jquery-3.6.0/jquery-3.6.0.js","datos-para-netica_files/jquery-3.6.0/jquery-3.6.0.min.js","datos-para-netica_files/jquery-3.6.0/jquery-3.6.0.min.map","datos-para-netica_files/popper-2.6.0/popper.min.js","datos-para-netica_files/tippy-6.2.7/tippy-bundle.umd.min.js","datos-para-netica_files/tippy-6.2.7/tippy-light-border.css","datos-para-netica_files/tippy-6.2.7/tippy.css","datos-para-netica_files/tippy-6.2.7/tippy.umd.min.js","datos-para-netica_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -189,6 +189,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   d-article table.gt_table td,
   d-article table.gt_table th {
     border-bottom: none;
+    font-size: 100%;
   }
 
   .html-widget {
@@ -1261,15 +1262,21 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
-        if ($(this).children()[0].nodeName == "D-FOOTNOTE") {
-          var fn = $(this).children()[0]
+        const citeChild = $(this).children()[0]
+        // Do not process if @xyz has been used without escaping and without bibliography activated
+        // https://github.com/rstudio/distill/issues/466
+        if (citeChild === undefined) return true
+
+        if (citeChild.nodeName == "D-FOOTNOTE") {
+          var fn = citeChild
           $(this).html(fn.shadowRoot.querySelector("sup"))
           $(this).id = fn.id
           fn.remove()
         }
         var refs = $(this).attr('data-cites').split(" ");
         var refHtml = refs.map(function(ref) {
-          return "<p>" + $('#ref-' + ref).html() + "</p>";
+          // Could use CSS.escape too here, we insure backward compatibility in navigator
+          return "<p>" + $('div[id="ref-' + ref + '"]').html() + "</p>";
         }).join("\n");
         window.tippy(this, {
           allowHTML: true,
@@ -1468,7 +1475,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="datos-para-netica_files/header-attrs-2.14/header-attrs.js"></script>
+  <script src="datos-para-netica_files/header-attrs-2.16/header-attrs.js"></script>
   <script src="datos-para-netica_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="datos-para-netica_files/popper-2.6.0/popper.min.js"></script>
   <link href="datos-para-netica_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
@@ -1502,9 +1509,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h1>Prepara datos para modelar</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>Procedimiento de preparción de datos a partir de GeoTiffs para
-producir datos tabulares más adecuados para el análisis
-estadístico.</p></p>
+<p><p>Procedimiento de preparción de datos a partir de GeoTiffs para producir datos tabulares
+más adecuados para el análisis estadístico.</p></p>
 </div>
 
 <div class="d-byline">
@@ -1517,18 +1523,9 @@ estadístico.</p></p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="../../figuras/Proceso_datos_redes.jpg" width="80%" style="display: block; margin: auto;" /></p>
 </div>
-<p>Aunque este proceso puede hacerse con la nueva biblioteca
-<em>terra</em>. Se dice que la biblioteca <em>raster</em> es más
-eficiente y conveniente para hacer la tarea que nos proponemos resolver,
-sin embargo, <em>terra</em> está evolucionando y podría ya no ser así.
-Lo que haremos aquí es leer un montón de archivos <em>raster</em> en
-formato <em>GeoTiff</em>. Generaremos una colección congruente con ellos
-en términos de que comparten proyección y extensión y luego haremos una
-transformación de los objetos de datos para producir una tabla
-convencional de datos.</p>
+<p>Aunque este proceso puede hacerse con la nueva biblioteca <em>terra</em>. Se dice que la biblioteca <em>raster</em> es más eficiente y conveniente para hacer la tarea que nos proponemos resolver, sin embargo, <em>terra</em> está evolucionando y podría ya no ser así. Lo que haremos aquí es leer un montón de archivos <em>raster</em> en formato <em>GeoTiff</em>. Generaremos una colección congruente con ellos en términos de que comparten proyección y extensión y luego haremos una transformación de los objetos de datos para producir una tabla convencional de datos.</p>
 <h2 id="localización-de-los-archivos">Localización de los archivos</h2>
-<p>En la seción de ayer usamos la biblioteca <em>tools</em> y de ella la
-función <code>list_files_with_exts</code>. Volvamos a hacerlo.</p>
+<p>En la seción de ayer usamos la biblioteca <em>tools</em> y de ella la función <code>list_files_with_exts</code>. Volvamos a hacerlo.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'>"tools"</span><span class='op'>)</span></span>
@@ -1546,44 +1543,29 @@ función <code>list_files_with_exts</code>. Volvamos a hacerlo.</p>
  [6] &quot;../../../data/indep_vars/DiametroCopa_media_250m.tif&quot;       
  [7] &quot;../../../data/indep_vars/DiametroNormal_desvest_250m.tif&quot;   
  [8] &quot;../../../data/indep_vars/DiametroNormal_media_250m.tif&quot;     
- [9] &quot;../../../data/indep_vars/net_photo_mean.tif&quot;                
-[10] &quot;../../../data/indep_vars/net_photo_mean_lluvias.tif&quot;        
-[11] &quot;../../../data/indep_vars/net_photo_mean_secas.tif&quot;          
-[12] &quot;../../../data/indep_vars/net_photo_sd.tif&quot;                  
-[13] &quot;../../../data/indep_vars/presenciaArbolesMuertos_250m.tif&quot;  
-[14] &quot;../../../data/indep_vars/presenciaInsectos_250m.tif&quot;        
-[15] &quot;../../../data/indep_vars/propor_bosque.tif&quot;                 
-[16] &quot;../../../data/indep_vars/propor_pastizaloagricultura.tif&quot;   
-[17] &quot;../../../data/indep_vars/propor_selva.tif&quot;                  
-[18] &quot;../../../data/indep_vars/propor_suelodesnudo.tif&quot;           
-[19] &quot;../../../data/indep_vars/propor_urbano.tif&quot;                 
-[20] &quot;../../../data/indep_vars/srtm90m_mean250m.tif&quot;              
-[21] &quot;../../../data/indep_vars/srtm90m_range250m.tif&quot;             
-[22] &quot;../../../data/indep_vars/zvh_31_lcc_h.tif&quot;                  </code></pre>
+ [9] &quot;../../../data/indep_vars/hemerobia_250m.tif&quot;                
+[10] &quot;../../../data/indep_vars/net_photo_mean.tif&quot;                
+[11] &quot;../../../data/indep_vars/net_photo_mean_lluvias.tif&quot;        
+[12] &quot;../../../data/indep_vars/net_photo_mean_secas.tif&quot;          
+[13] &quot;../../../data/indep_vars/net_photo_sd.tif&quot;                  
+[14] &quot;../../../data/indep_vars/presenciaArbolesMuertos_250m.tif&quot;  
+[15] &quot;../../../data/indep_vars/presenciaInsectos_250m.tif&quot;        
+[16] &quot;../../../data/indep_vars/propor_bosque.tif&quot;                 
+[17] &quot;../../../data/indep_vars/propor_pastizaloagricultura.tif&quot;   
+[18] &quot;../../../data/indep_vars/propor_selva.tif&quot;                  
+[19] &quot;../../../data/indep_vars/propor_suelodesnudo.tif&quot;           
+[20] &quot;../../../data/indep_vars/propor_urbano.tif&quot;                 
+[21] &quot;../../../data/indep_vars/srtm90m_mean250m.tif&quot;              
+[22] &quot;../../../data/indep_vars/srtm90m_range250m.tif&quot;             
+[23] &quot;../../../data/indep_vars/zvh_31_lcc_h.tif&quot;                  </code></pre>
 </div>
-<p>Pueden ver que hemos encontrado 25 capas de información. Cada una de
-ellas aportará una columna de datos a nuestra tabla. Para hacer esto lo
-que haremos es:</p>
+<p>Pueden ver que hemos encontrado 25 capas de información. Cada una de ellas aportará una columna de datos a nuestra tabla. Para hacer esto lo que haremos es:</p>
 <ol type="1">
-<li>Leer los GeoTiff uno a la vez y agregarlo a una colección
-<strong>brick</strong></li>
-<li>Convertir la colección de objectos raster a una colección de puntos
-*vectoriales.</li>
-<li>Convertir los puntos en una tabla en la que cada capa aporta una
-columna.</li>
+<li>Leer los GeoTiff uno a la vez y agregarlo a una colección <strong>brick</strong></li>
+<li>Convertir la colección de objectos raster a una colección de puntos *vectoriales.</li>
+<li>Convertir los puntos en una tabla en la que cada capa aporta una columna.</li>
 </ol>
-<p>La tabla que queremos debería tener valores para todas las
-variablesNoté que rasterToPoints deja pasar algunos datos faltantes que
-no deberían faltar!!!, Quizás sean resultado de algunas incongruencias
-en la representación geográfica entre los mapas. Desde luego el tema
-podría requerir una valoración más cuidadosa, pero para fines prácticos
-se puede optar por generar una tabla en la que todas las columnas tienen
-datos. La función de <em>R</em> <code>complete.cases()</code>permite
-incorporar esta consideración en la construcción de la tabla para omitir
-todos los registros (casos o renglones) que no tengan valores válidos
-para todas las variables. Esto lo hace <em>terra</em> en forma
-predeterminada, así que en este caso también sirve para obtener un
-resultado comparable.</p>
+<p>La tabla que queremos debería tener valores para todas las variablesNoté que rasterToPoints deja pasar algunos datos faltantes que no deberían faltar!!!, Quizás sean resultado de algunas incongruencias en la representación geográfica entre los mapas. Desde luego el tema podría requerir una valoración más cuidadosa, pero para fines prácticos se puede optar por generar una tabla en la que todas las columnas tienen datos. La función de <em>R</em> <code>complete.cases()</code>permite incorporar esta consideración en la construcción de la tabla para omitir todos los registros (casos o renglones) que no tengan valores válidos para todas las variables. Esto lo hace <em>terra</em> en forma predeterminada, así que en este caso también sirve para obtener un resultado comparable.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://rspatial.org/raster'>raster</a></span><span class='op'>)</span></span>
@@ -1605,10 +1587,7 @@ resultado comparable.</p>
 <span><span class='va'>datos_tbl_na</span> <span class='op'>&lt;-</span> <span class='va'>datos_tbl_na</span><span class='op'>[</span><span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/stats/complete.cases.html'>complete.cases</a></span><span class='op'>(</span><span class='va'>datos_tbl_na</span><span class='op'>)</span>,<span class='op'>]</span> <span class='co'># tabla con casos incompletos</span></span></code></pre>
 </div>
 </div>
-<p>Con fines didácticos y si no por llana curiosidad, les propongo
-comparar el tiempo que nos toma hacer la tarea que nos propusimos con la
-biblioteca <em>raster</em>, en contraste con el que nos toma hacerlo con
-la biblioteca <em>terra</em>.</p>
+<p>Con fines didácticos y si no por llana curiosidad, les propongo comparar el tiempo que nos toma hacer la tarea que nos propusimos con la biblioteca <em>raster</em>, en contraste con el que nos toma hacerlo con la biblioteca <em>terra</em>.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://r-spatial.github.io/sf/'>sf</a></span><span class='op'>)</span></span>
@@ -1638,16 +1617,15 @@ la biblioteca <em>terra</em>.</p>
 <tbody>
 <tr class="odd">
 <td>Raster</td>
-<td>12.0266971588135</td>
+<td>8.28790497779846</td>
 </tr>
 <tr class="even">
 <td>Terra</td>
-<td>12.5144991874695</td>
+<td>9.75708389282227</td>
 </tr>
 </tbody>
 </table>
-<p>Los procesos que aplicamos ¿producen los mismos resultados?. Podemos
-usar esté código para explorar la cuestión</p>
+<p>Los procesos que aplicamos ¿producen los mismos resultados?. Podemos usar esté código para explorar la cuestión</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
@@ -1670,16 +1648,7 @@ usar esté código para explorar la cuestión</p>
 <pre><code>¿Tienen los mismos datos? TRUE </code></pre>
 </div>
 <h2 id="guardar-la-tabla-en-disco">Guardar la tabla en disco</h2>
-<p>Ahora sólo resta guardar los datos en algun lugar de mi conveniencia.
-Lo haré en este caso con la biblioteca <strong>data.table</strong> que
-es super eficiente para datos grandes, así que conviene que la conozcan.
-Esta biblioteca contiene la función <code>fwrite</code> que es la que
-utilizaremos. Crearemos un archivo <strong>csv</strong>
-(valores-separados-por-comas). Anote las opciones que requiero para
-hacer el archivo <strong>csv</strong> como lo necesito. En
-<strong>R</strong> el símbolo “#” indica que lo que sigue la máquina no
-debe interpretarlo, así que puede usarse para añadir comentarios para el
-consumo humano.</p>
+<p>Ahora sólo resta guardar los datos en algun lugar de mi conveniencia. Lo haré en este caso con la biblioteca <strong>data.table</strong> que es super eficiente para datos grandes, así que conviene que la conozcan. Esta biblioteca contiene la función <code>fwrite</code> que es la que utilizaremos. Crearemos un archivo <strong>csv</strong> (valores-separados-por-comas). Anote las opciones que requiero para hacer el archivo <strong>csv</strong> como lo necesito. En <strong>R</strong> el símbolo “#” indica que lo que sigue la máquina no debe interpretarlo, así que puede usarse para añadir comentarios para el consumo humano.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://r-datatable.com'>data.table</a></span><span class='op'>)</span></span>
@@ -1692,12 +1661,8 @@ consumo humano.</p>
 <span>                        showProgress <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span><span class='co'># No necesito una barra de progreso</span></span></code></pre>
 </div>
 </div>
-<p>Con este proceso hemos preparado una tabla de datos adecuada para ser
-leída en NETICA y podemos continuar con el procedimiento de construcción
-de los datos que utilizaremos en la contabilidad.</p>
-<p>En Netica se necesitará un pequeño <em>archivo de control</em> que
-especifica los datos que deseamos recuperar al procesar un nuevo archivo
-de datos. Para simplificar las cosas lo haremos desde aquí.</p>
+<p>Con este proceso hemos preparado una tabla de datos adecuada para ser leída en NETICA y podemos continuar con el procedimiento de construcción de los datos que utilizaremos en la contabilidad.</p>
+<p>En Netica se necesitará un pequeño <em>archivo de control</em> que especifica los datos que deseamos recuperar al procesar un nuevo archivo de datos. Para simplificar las cosas lo haremos desde aquí.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'># Genera archivo de control para Netica</span></span>
@@ -1707,18 +1672,11 @@ de datos. Para simplificar las cosas lo haremos desde aquí.</p>
 </div>
 </div>
 <h2 id="mapear-resultados-de-netica">Mapear resultados de Netica</h2>
-<p>Una vez entrenado el modelo de <em>red bayesiana</em> y procesados
-los casos base para el mapeo, tenemos un mapa de valore
-<em>predichos</em>. Dada la especificación del <em>archivo de
-control</em>, ese archivo de salida tendrá una sola columna y tantos
-renglones como los que tenemos en el archivo de datos utilizaado como
-fuente de evidencia. El orden de los casos es también el mismo del
-archivo de datos, así que podemos agregar la nueva comuna del índice de
-integridad a la tabla que procesamos anteriormente para generar los
-datos.</p>
+<p>Una vez entrenado el modelo de <em>red bayesiana</em> y procesados los casos base para el mapeo, tenemos un mapa de valore <em>predichos</em>. Dada la especificación del <em>archivo de control</em>, ese archivo de salida tendrá una sola columna y tantos renglones como los que tenemos en el archivo de datos utilizaado como fuente de evidencia. El orden de los casos es también el mismo del archivo de datos, así que podemos agregar la nueva comuna del índice de integridad a la tabla que procesamos anteriormente para generar los datos.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>ie_dato</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/fread.html'>fread</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>mapas_dir</span>, <span class='st'>"/salida.txt"</span><span class='op'>)</span>, header <span class='op'>=</span> <span class='cn'>TRUE</span>, col.names <span class='op'>=</span> <span class='st'>"iie"</span><span class='op'>)</span></span>
+<span><span class='va'>temp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span><span class='op'>(</span><span class='va'>ie_dato</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='co'># Lo normalizo para expresarlo entre 0 (nula iie) y 100 (alta iie)</span></span>
 <span><span class='va'>ie_dato</span> <span class='op'>&lt;-</span> <span class='fl'>100</span> <span class='op'>*</span> <span class='op'>(</span><span class='fl'>18</span> <span class='op'>-</span> <span class='va'>ie_dato</span><span class='op'>)</span> <span class='op'>/</span> <span class='fl'>18</span></span>
@@ -1739,41 +1697,37 @@ datos.</p>
 <tr class="odd">
 <td style="text-align: right;">3935625</td>
 <td style="text-align: right;">1135375</td>
-<td style="text-align: right;">51.73611</td>
+<td style="text-align: right;">15.43778</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">3932125</td>
 <td style="text-align: right;">1135125</td>
-<td style="text-align: right;">51.73611</td>
+<td style="text-align: right;">68.02300</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">3932375</td>
 <td style="text-align: right;">1135125</td>
-<td style="text-align: right;">51.73611</td>
+<td style="text-align: right;">80.22961</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">3932625</td>
 <td style="text-align: right;">1135125</td>
-<td style="text-align: right;">51.73611</td>
+<td style="text-align: right;">83.39072</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">3932875</td>
 <td style="text-align: right;">1135125</td>
-<td style="text-align: right;">51.73611</td>
+<td style="text-align: right;">78.98461</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">3933125</td>
 <td style="text-align: right;">1135125</td>
-<td style="text-align: right;">51.73611</td>
+<td style="text-align: right;">81.42372</td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>Ya tenemos una nueva tabla que incluye coordenadas lat-lon, y el
-nuevo dato del <strong>índice de integridad ecosistémica</strong>. Sólo
-resta convertir estos datos en en una tabla adecuada para representación
-espacial y a partir de ahí generar el <strong>GeoTiff</strong> que
-represente el resultado que obtuvimos.</p>
+<p>Ya tenemos una nueva tabla que incluye coordenadas lat-lon, y el nuevo dato del <strong>índice de integridad ecosistémica</strong>. Sólo resta convertir estos datos en en una tabla adecuada para representación espacial y a partir de ahí generar el <strong>GeoTiff</strong> que represente el resultado que obtuvimos.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span> <span class='op'>(</span><span class='va'><a href='https://github.com/edzer/sp/'>sp</a></span><span class='op'>)</span></span>
@@ -1789,9 +1743,7 @@ attr(,&quot;package&quot;)
 </div>
 <p><img src="datos-para-netica_files/figure-html5/unnamed-chunk-9-1.png" width="624" /></p>
 </div>
-<p>Ahora convierto esta estructura de dato en uun objeto raster,
-efectivamente será ya el mapa final en memoria. El que guardaremos en
-disco finalmente.</p>
+<p>Ahora convierto esta estructura de dato en uun objeto raster, efectivamente será ya el mapa final en memoria. El que guardaremos en disco finalmente.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>datos_ie_r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/raster/man/raster.html'>raster</a></span><span class='op'>(</span><span class='va'>datos_tbl_ie</span><span class='op'>)</span> </span>
@@ -1807,10 +1759,8 @@ disco finalmente.</p>
 </div>
 <p><img src="datos-para-netica_files/figure-html5/unnamed-chunk-10-1.png" width="624" /></p>
 </div>
-<p>Hemos llegado al final del proceso y ya tenemos el mapa del índice de
-integridad ecosistémica en el disco.</p>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>Hemos llegado al final del proceso y ya tenemos el mapa del índice de integridad ecosistémica en el disco.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
