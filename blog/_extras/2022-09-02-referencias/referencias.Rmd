@@ -35,13 +35,13 @@ knitr::include_graphics("robots-judea-pearl-IA.jpg")
 |Documento | Vínculo |
 |---------|---------|
 |![](../../figuras/PNAS-modelling.png){width=40%} |[Compartir código](https://www.pnas.org/doi/10.1073/pnas.2202112119)|
-|![](../../figuras/Procesos reproducible de análisis.png){width=40%}|[Reproducible Analytical Pipelines](http://dataingovernment.blog.gov.uk/2017/03/27/reproducible-analytical-pipeline/)|
-|![](../../figuras/officeverse.png){width=40%}|[Los documentos de "office" como vehículos de datos verse](http://ardata-fr.github.io/officeverse/)|
+|![](../../figuras/Procesos reproducible de análisis.png){width=40%}|[Hacer reproducibles las rutinas de proceso (pipelines) analíticas](http://dataingovernment.blog.gov.uk/2017/03/27/reproducible-analytical-pipeline/)|
+|![](../../figuras/officeverse.png){width=40%}|[Los documentos de **Office** como vehículos de datos](http://ardata-fr.github.io/officeverse/)|
 
 ### Sugerencias sobre modelación causal
 
 |Documento | Vínculo |
 |---------|---------|
-|![](../../figuras/el_libro_del_porqué.png){width=40%}|[El Libro del Porqué](http://www.filosofiadebolsillo.com/el-libro-del-porque-la-nueva-ciencia-de-la-causa-y-el-efecto-de-judea-pearl/)|
+|![](../../figuras/el_libro_del_porqué.png){width=40%}|[Judea Pear y la *revolución causal* en marcha ](http://www.filosofiadebolsillo.com/el-libro-del-porque-la-nueva-ciencia-de-la-causa-y-el-efecto-de-judea-pearl/)|
 |![](../../figuras/causal_inference.png){width=40%} | [Inferencia causal moderna](https://mitpress.mit.edu/9780262037310/elements-of-causal-inference/)|
 |![](../../figuras/blackboxes.png){width=40%}) | [No explicar cajas negras](https://www.nature.com/articles/s42256-019-0048-x)|
