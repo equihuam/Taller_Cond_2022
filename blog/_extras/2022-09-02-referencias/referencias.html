@@ -118,7 +118,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["referencias_files/anchor-4.2.2/anchor.min.js","referencias_files/bowser-1.9.3/bowser.min.js","referencias_files/distill-2.2.21/template.v2.js","referencias_files/header-attrs-2.14/header-attrs.js","referencias_files/jquery-3.6.0/jquery-3.6.0.js","referencias_files/jquery-3.6.0/jquery-3.6.0.min.js","referencias_files/jquery-3.6.0/jquery-3.6.0.min.map","referencias_files/popper-2.6.0/popper.min.js","referencias_files/tippy-6.2.7/tippy-bundle.umd.min.js","referencias_files/tippy-6.2.7/tippy-light-border.css","referencias_files/tippy-6.2.7/tippy.css","referencias_files/tippy-6.2.7/tippy.umd.min.js","referencias_files/webcomponents-2.0.0/webcomponents.js","robots-judea-pearl-IA.jpg"]}
+  {"type":"character","attributes":{},"value":["referencias_files/anchor-4.2.2/anchor.min.js","referencias_files/bowser-1.9.3/bowser.min.js","referencias_files/distill-2.2.21/template.v2.js","referencias_files/header-attrs-2.14/header-attrs.js","referencias_files/header-attrs-2.16/header-attrs.js","referencias_files/jquery-3.6.0/jquery-3.6.0.js","referencias_files/jquery-3.6.0/jquery-3.6.0.min.js","referencias_files/jquery-3.6.0/jquery-3.6.0.min.map","referencias_files/popper-2.6.0/popper.min.js","referencias_files/tippy-6.2.7/tippy-bundle.umd.min.js","referencias_files/tippy-6.2.7/tippy-light-border.css","referencias_files/tippy-6.2.7/tippy.css","referencias_files/tippy-6.2.7/tippy.umd.min.js","referencias_files/webcomponents-2.0.0/webcomponents.js","robots-judea-pearl-IA.jpg"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -189,6 +189,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   d-article table.gt_table td,
   d-article table.gt_table th {
     border-bottom: none;
+    font-size: 100%;
   }
 
   .html-widget {
@@ -1261,15 +1262,21 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
-        if ($(this).children()[0].nodeName == "D-FOOTNOTE") {
-          var fn = $(this).children()[0]
+        const citeChild = $(this).children()[0]
+        // Do not process if @xyz has been used without escaping and without bibliography activated
+        // https://github.com/rstudio/distill/issues/466
+        if (citeChild === undefined) return true
+
+        if (citeChild.nodeName == "D-FOOTNOTE") {
+          var fn = citeChild
           $(this).html(fn.shadowRoot.querySelector("sup"))
           $(this).id = fn.id
           fn.remove()
         }
         var refs = $(this).attr('data-cites').split(" ");
         var refHtml = refs.map(function(ref) {
-          return "<p>" + $('#ref-' + ref).html() + "</p>";
+          // Could use CSS.escape too here, we insure backward compatibility in navigator
+          return "<p>" + $('div[id="ref-' + ref + '"]').html() + "</p>";
         }).join("\n");
         window.tippy(this, {
           allowHTML: true,
@@ -1468,7 +1475,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="referencias_files/header-attrs-2.14/header-attrs.js"></script>
+  <script src="referencias_files/header-attrs-2.16/header-attrs.js"></script>
   <script src="referencias_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="referencias_files/popper-2.6.0/popper.min.js"></script>
   <link href="referencias_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
@@ -1515,6 +1522,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="robots-judea-pearl-IA.jpg" width="30%" style="display: block; margin: auto;" /></p>
 </div>
+<h3 id="la-experiencia-ncaves">La experiencia NCAVES</h3>
 <table>
 <colgroup>
 <col style="width: 50%" />
@@ -1528,53 +1536,78 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </thead>
 <tbody>
 <tr class="odd">
-<td><img src="../../figuras/el_libro_del_porqué.png"
-style="width:40.0%" /></td>
-<td><a
-href="http://www.filosofiadebolsillo.com/el-libro-del-porque-la-nueva-ciencia-de-la-causa-y-el-efecto-de-judea-pearl/">El
-Libro del Porqué</a></td>
-</tr>
-<tr class="even">
-<td><img src="../../figuras/Procesos%20reproducible%20de%20análisis.png"
-style="width:40.0%" /></td>
-<td><a
-href="http://dataingovernment.blog.gov.uk/2017/03/27/reproducible-analytical-pipeline/">Reproducible
-Analytical Pipelines</a></td>
-</tr>
-<tr class="odd">
-<td><img src="../../figuras/officeverse.png" style="width:40.0%" /></td>
-<td><a href="http://ardata-fr.github.io/officeverse/">Office
-verse</a></td>
-</tr>
-<tr class="even">
 <td><img src="../../figuras/SEEA%20EA.png" style="width:40.0%" /></td>
-<td><a href="http://seea.un.org/ecosystem-accounting">Página SEEA
-EA</a></td>
-</tr>
-<tr class="odd">
-<td><img src="../../figuras/SEEA%20EA_NCAVES.png"
-style="width:40.0%" /></td>
-<td><a href="http://seea.un.org/content/mexico-0">Página SEEA EA -
-NCAVES-Mexico</a></td>
+<td><a href="http://seea.un.org/ecosystem-accounting">Página SEEA EA</a></td>
 </tr>
 <tr class="even">
-<td><img src="../../figuras/Portada_NCAVES_report_Mexico.png"
-style="width:40.0%" /></td>
-<td><a
-href="http://seea.un.org/sites/seea.un.org/files/images/Mexico/ncaves_-_mexico_-_country_report_-_final.pdf">Reporte
-SEEA EA NCAVES-México</a></td>
+<td><img src="../../figuras/SEEA%20EA_NCAVES.png" style="width:40.0%" /></td>
+<td><a href="http://seea.un.org/content/mexico-0">Página SEEA EA - NCAVES-Mexico</a></td>
 </tr>
 <tr class="odd">
-<td><img src="../../figuras/Reporte%20NCAVES-INEGI.jpg"
-style="width:40.0%" /></td>
-<td><a
-href="https://www.inegi.org.mx/contenidos/investigacion/cem/doc/docNCAVES.pdf">Reporte
-INEGI NCAVES</a></td>
+<td><img src="../../figuras/Portada_NCAVES_report_Mexico.png" style="width:40.0%" /></td>
+<td><a href="http://seea.un.org/sites/seea.un.org/files/images/Mexico/ncaves_-_mexico_-_country_report_-_final.pdf">Reporte SEEA EA NCAVES-México</a></td>
+</tr>
+<tr class="even">
+<td><img src="../../figuras/Reporte%20NCAVES-INEGI.jpg" style="width:40.0%" /></td>
+<td><a href="https://www.inegi.org.mx/contenidos/investigacion/cem/doc/docNCAVES.pdf">Reporte INEGI NCAVES</a></td>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<h3 id="compartir-datos-y-código-abiertos">Compartir: datos y código abiertos</h3>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Documento</th>
+<th>Vínculo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><img src="../../figuras/PNAS-modelling.png" style="width:40.0%" /></td>
+<td><a href="https://www.pnas.org/doi/10.1073/pnas.2202112119">Compartir código</a></td>
+</tr>
+<tr class="even">
+<td><img src="../../figuras/Procesos%20reproducible%20de%20análisis.png" style="width:40.0%" /></td>
+<td><a href="http://dataingovernment.blog.gov.uk/2017/03/27/reproducible-analytical-pipeline/">Reproducible Analytical Pipelines</a></td>
+</tr>
+<tr class="odd">
+<td><img src="../../figuras/officeverse.png" style="width:40.0%" /></td>
+<td><a href="http://ardata-fr.github.io/officeverse/">Los documentos de “office” como vehículos de datos verse</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="sugerencias-sobre-modelación-causal">Sugerencias sobre modelación causal</h3>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Documento</th>
+<th>Vínculo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><img src="../../figuras/el_libro_del_porqué.png" style="width:40.0%" /></td>
+<td><a href="http://www.filosofiadebolsillo.com/el-libro-del-porque-la-nueva-ciencia-de-la-causa-y-el-efecto-de-judea-pearl/">El Libro del Porqué</a></td>
+</tr>
+<tr class="even">
+<td><img src="../../figuras/causal_inference.png" style="width:40.0%" /></td>
+<td><a href="https://mitpress.mit.edu/9780262037310/elements-of-causal-inference/">Inferencia causal moderna</a></td>
+</tr>
+<tr class="odd">
+<td><img src="../../figuras/blackboxes.png" style="width:40.0%" />)</td>
+<td><a href="https://www.nature.com/articles/s42256-019-0048-x">No explicar cajas negras</a></td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

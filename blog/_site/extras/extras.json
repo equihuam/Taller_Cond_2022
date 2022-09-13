@@ -11,10 +11,10 @@
     ],
     "date": "2022-09-02",
     "categories": [],
-    "contents": "\r\n\r\n\r\n\r\nDocumento\r\nVínculo\r\n\r\nEl\r\nLibro del Porqué\r\n\r\nReproducible\r\nAnalytical Pipelines\r\n\r\nOffice\r\nverse\r\n\r\nPágina SEEA\r\nEA\r\n\r\nPágina SEEA EA -\r\nNCAVES-Mexico\r\n\r\nReporte\r\nSEEA EA NCAVES-México\r\n\r\nReporte\r\nINEGI NCAVES\r\n\r\n\r\n\r\n",
+    "contents": "\r\n\r\n\r\n\r\nLa experiencia NCAVES\r\nDocumento\r\nVínculo\r\n\r\nPágina SEEA EA\r\n\r\nPágina SEEA EA - NCAVES-Mexico\r\n\r\nReporte SEEA EA NCAVES-México\r\n\r\nReporte INEGI NCAVES\r\nCompartir: datos y código abiertos\r\nDocumento\r\nVínculo\r\n\r\nCompartir código\r\n\r\nReproducible Analytical Pipelines\r\n\r\nLos documentos de “office” como vehículos de datos verse\r\nSugerencias sobre modelación causal\r\nDocumento\r\nVínculo\r\n\r\nEl Libro del Porqué\r\n\r\nInferencia causal moderna\r\n)\r\nNo explicar cajas negras\r\n\r\n\r\n\r\n",
     "preview": "extras/2022-09-02-referencias/robots-judea-pearl-IA.jpg",
-    "last_modified": "2022-09-04T15:05:33-05:00",
-    "input_file": {}
+    "last_modified": "2022-09-13T13:09:27-05:00",
+    "input_file": "referencias.knit.md"
   },
   {
     "path": "extras/2022-08-29-datos/",
