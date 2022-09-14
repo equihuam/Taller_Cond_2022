@@ -1,0 +1,195 @@
+---
+title: "Cálculo del Índice con Netica"
+description: |
+  Ejercicio que ejemplifica la obtención de los valores del índice con Netica.
+author:
+  - name: Octavio Pérez Maqueo y Miguel Equihua Zamora
+    url: {}
+date: 2022-08-30
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+
+```{r, echo = FALSE, fig.align = 'center', out.width = "60%"}
+
+knitr::include_graphics("../../figuras/Netica_portada.png")
+
+```
+
+
+
+Uso de Netica para el calculo del índice de integridad ecosistémica que se us+o para generar la cuenta de condición de los ecosistemas de México.
+
+
+```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
+
+knitr::include_graphics("../../figuras/Netica_inicio.png")
+
+```
+
+
+```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
+
+knitr::include_graphics("../../figuras/Netica_nueva_red.png")
+
+```
+
+
+```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
+
+knitr::include_graphics("../../figuras/Netica_agrega_nodos.png")
+
+```
+
+
+```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
+
+knitr::include_graphics("../../figuras/Netica_no_discretizar.png")
+
+```
+
+
+```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
+
+knitr::include_graphics("../../figuras/Netica_nodos.png")
+
+```
+
+
+```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
+
+knitr::include_graphics("../../figuras/Netica_define_zvh_discreta.png")
+
+```
+
+
+```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
+
+knitr::include_graphics("../../figuras/Netica_hemerobia_10_niveles.png")
+
+```
+
+
+```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
+
+knitr::include_graphics("../../figuras/Netica_autodiscretizar.png")
+
+```
+
+
+```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
+
+knitr::include_graphics("../../figuras/Netica_no_hay_suficientes_niveles.png")
+
+```
+
+
+```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
+
+knitr::include_graphics("../../figuras/Netica_nodos_discretizados.png")
+
+```
+
+
+
+```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
+
+knitr::include_graphics("../../figuras/Netica_TAN.png")
+
+```
+
+
+```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
+
+knitr::include_graphics("../../figuras/Netica_TAN_IIE.png")
+
+```
+
+
+```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
+
+knitr::include_graphics("../../figuras/Netica_elige_datos_TAN.png")
+
+```
+
+
+```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
+
+knitr::include_graphics("../../figuras/Netica_entrena_TAN.png")
+
+```
+
+
+
+```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
+
+knitr::include_graphics("../../figuras/Netica_entrenar_red_TAN.png")
+
+```
+
+
+```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
+
+knitr::include_graphics("../../figuras/Netica_red_entrenada.png")
+
+```
+
+
+```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
+
+knitr::include_graphics("../../figuras/Netica_agrega_contexto.png")
+
+```
+
+
+```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
+
+knitr::include_graphics("../../figuras/Netica_iie_3capas.png")
+
+```
+
+
+```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
+
+knitr::include_graphics("../../figuras/Netica_red_iie_completa.png")
+
+```
+
+
+
+```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
+
+knitr::include_graphics("../../figuras/Netica_procesar_casos.png")
+
+```
+
+
+```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
+
+knitr::include_graphics("../../figuras/Netica_control.png")
+
+```
+
+
+```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
+
+knitr::include_graphics("../../figuras/Netica_archivo_casos.png")
+
+```
+
+
+```{r, echo = FALSE, fig.align = 'center', out.width = "80%"}
+
+knitr::include_graphics("../../figuras/Netica_archivo_salida.png")
+
+```
+
+

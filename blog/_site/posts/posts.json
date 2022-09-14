@@ -85,6 +85,23 @@
     "input_file": {}
   },
   {
+    "path": "posts/2022-09-14-clculo-con-netica/",
+    "title": "Cálculo del Índice con Netica",
+    "description": "Ejercicio que ejemplifica la obtención de los valores del índice con Netica.",
+    "author": [
+      {
+        "name": "Octavio Pérez Maqueo y Miguel Equihua Zamora",
+        "url": {}
+      }
+    ],
+    "date": "2022-08-30",
+    "categories": [],
+    "contents": "\r\n\r\n\r\n\r\nUso de Netica para el calculo del índice de integridad ecosistémica que se us+o para generar la cuenta de condición de los ecosistemas de México.\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+    "preview": "posts/2022-09-14-clculo-con-netica/../../figuras/Netica_portada.png",
+    "last_modified": "2022-09-14T01:59:32-05:00",
+    "input_file": {}
+  },
+  {
     "path": "posts/2022-08-26-dinmica-del-taller/",
     "title": "Dinámica del Taller",
     "description": "Objetivos y plan de trabajo.",
