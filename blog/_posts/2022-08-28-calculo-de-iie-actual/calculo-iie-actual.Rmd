@@ -6,7 +6,7 @@ description: |
 author:
   - name: Miguel Equihua Zamora
     url: {}
-date: 2022-08-28
+date: 2022-08-29
 output:
   distill::distill_article:
     self_contained: false
@@ -24,8 +24,12 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 En esta presentación se describen los conceptos utilizados para integrar la estrategia analítica basada en *redes bayesianas* que condujo al cómputo del índice de integridad ecosistémica que se empleó en el proyecto piloto [NCAVES en el que participó México](https://seea.un.org/home/Natural-Capital-Accounting-Project). Así se obtuvieron estimadores de condición para todos los ecosistemas del país en pixeles con resolución de 250m. Las fechas nominales de estos cálculos son 2004 y 2018. En esta charla nos proponemos el siguiente objetivo.
 
+  \
+
 > El participante conoce la metodología para el cálculo del índice de integridad ecosistémica (IIE) y las oportunidades que ofrece la aproximación empleada.
 
+  \
+  \
 
-<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQwgd69FPocEJhcGbGY5nRaokw2BTfurifkIQlCE4XTwJJaTlVuUNMfvD4Iu8W1Bw/embed?start=false&loop=false&delayms=3000" frameborder="0" width="1280" height="450" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQwgd69FPocEJhcGbGY5nRaokw2BTfurifkIQlCE4XTwJJaTlVuUNMfvD4Iu8W1Bw/embed?start=false&loop=false&delayms=3000" frameborder="0" width="1280" height="392" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 

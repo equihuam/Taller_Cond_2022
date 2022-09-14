@@ -4,7 +4,7 @@ description: |
   Lecturas y vinculos de interés
 author:
   - name: Miguel Equihua Zamora, Julián Equihua Benítez y Octavio Pérez Maqueo
-date: 2022-09-02
+date: 2022-08-31
 output:
   distill::distill_article:
     self_contained: false

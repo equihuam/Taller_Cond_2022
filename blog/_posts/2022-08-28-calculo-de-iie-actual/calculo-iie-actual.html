@@ -94,8 +94,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
   <!--  https://schema.org/Article -->
-  <meta property="article:published" itemprop="datePublished" content="2022-08-28"/>
-  <meta property="article:created" itemprop="dateCreated" content="2022-08-28"/>
+  <meta property="article:published" itemprop="datePublished" content="2022-08-29"/>
+  <meta property="article:created" itemprop="dateCreated" content="2022-08-29"/>
   <meta name="article:author" content="Miguel Equihua Zamora"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
@@ -113,12 +113,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Calculo de IIE actual"]},{"type":"character","attributes":{},"value":["Conceptos, herramientas y mecanísmo de cálculo usado para el cómputo del\níndice de integridad ecosistémica basado en redes bayesianas.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Miguel Equihua Zamora"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["2022-08-28"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Calculo de IIE actual"]},{"type":"character","attributes":{},"value":["Conceptos, herramientas y mecanísmo de cálculo usado para el cómputo del\níndice de integridad ecosistémica basado en redes bayesianas.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Miguel Equihua Zamora"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["2022-08-29"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["calculo-iie-actual_files/anchor-4.2.2/anchor.min.js","calculo-iie-actual_files/bowser-1.9.3/bowser.min.js","calculo-iie-actual_files/distill-2.2.21/template.v2.js","calculo-iie-actual_files/header-attrs-2.14/header-attrs.js","calculo-iie-actual_files/jquery-3.6.0/jquery-3.6.0.js","calculo-iie-actual_files/jquery-3.6.0/jquery-3.6.0.min.js","calculo-iie-actual_files/jquery-3.6.0/jquery-3.6.0.min.map","calculo-iie-actual_files/popper-2.6.0/popper.min.js","calculo-iie-actual_files/tippy-6.2.7/tippy-bundle.umd.min.js","calculo-iie-actual_files/tippy-6.2.7/tippy-light-border.css","calculo-iie-actual_files/tippy-6.2.7/tippy.css","calculo-iie-actual_files/tippy-6.2.7/tippy.umd.min.js","calculo-iie-actual_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["calculo-iie-actual_files/anchor-4.2.2/anchor.min.js","calculo-iie-actual_files/bowser-1.9.3/bowser.min.js","calculo-iie-actual_files/distill-2.2.21/template.v2.js","calculo-iie-actual_files/header-attrs-2.14/header-attrs.js","calculo-iie-actual_files/header-attrs-2.16/header-attrs.js","calculo-iie-actual_files/jquery-3.6.0/jquery-3.6.0.js","calculo-iie-actual_files/jquery-3.6.0/jquery-3.6.0.min.js","calculo-iie-actual_files/jquery-3.6.0/jquery-3.6.0.min.map","calculo-iie-actual_files/popper-2.6.0/popper.min.js","calculo-iie-actual_files/tippy-6.2.7/tippy-bundle.umd.min.js","calculo-iie-actual_files/tippy-6.2.7/tippy-light-border.css","calculo-iie-actual_files/tippy-6.2.7/tippy.css","calculo-iie-actual_files/tippy-6.2.7/tippy.umd.min.js","calculo-iie-actual_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -189,6 +189,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   d-article table.gt_table td,
   d-article table.gt_table th {
     border-bottom: none;
+    font-size: 100%;
   }
 
   .html-widget {
@@ -1261,15 +1262,21 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
-        if ($(this).children()[0].nodeName == "D-FOOTNOTE") {
-          var fn = $(this).children()[0]
+        const citeChild = $(this).children()[0]
+        // Do not process if @xyz has been used without escaping and without bibliography activated
+        // https://github.com/rstudio/distill/issues/466
+        if (citeChild === undefined) return true
+
+        if (citeChild.nodeName == "D-FOOTNOTE") {
+          var fn = citeChild
           $(this).html(fn.shadowRoot.querySelector("sup"))
           $(this).id = fn.id
           fn.remove()
         }
         var refs = $(this).attr('data-cites').split(" ");
         var refHtml = refs.map(function(ref) {
-          return "<p>" + $('#ref-' + ref).html() + "</p>";
+          // Could use CSS.escape too here, we insure backward compatibility in navigator
+          return "<p>" + $('div[id="ref-' + ref + '"]').html() + "</p>";
         }).join("\n");
         window.tippy(this, {
           allowHTML: true,
@@ -1468,7 +1475,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="calculo-iie-actual_files/header-attrs-2.14/header-attrs.js"></script>
+  <script src="calculo-iie-actual_files/header-attrs-2.16/header-attrs.js"></script>
   <script src="calculo-iie-actual_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="calculo-iie-actual_files/popper-2.6.0/popper.min.js"></script>
   <link href="calculo-iie-actual_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
@@ -1489,7 +1496,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Calculo de IIE actual","description":"Conceptos, herramientas y mecanísmo de cálculo usado para el cómputo del\níndice de integridad ecosistémica basado en redes bayesianas.","authors":[{"author":"Miguel Equihua Zamora","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2022-08-28T00:00:00.000-05:00","citationText":"Zamora, 2022"}
+{"title":"Calculo de IIE actual","description":"Conceptos, herramientas y mecanísmo de cálculo usado para el cómputo del\níndice de integridad ecosistémica basado en redes bayesianas.","authors":[{"author":"Miguel Equihua Zamora","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2022-08-29T00:00:00.000-05:00","citationText":"Zamora, 2022"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -1502,39 +1509,32 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h1>Calculo de IIE actual</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>Conceptos, herramientas y mecanísmo de cálculo usado para el
-cómputo del índice de integridad ecosistémica basado en redes
-bayesianas.</p></p>
+<p><p>Conceptos, herramientas y mecanísmo de cálculo usado para el cómputo del
+índice de integridad ecosistémica basado en redes bayesianas.</p></p>
 </div>
 
 <div class="d-byline">
   Miguel Equihua Zamora true 
   
-<br/>2022-08-28
+<br/>2022-08-29
 </div>
 
 <div class="d-article">
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="../../figuras/datos_geoespaciales.png" width="30%" style="display: block; margin: auto;" /></p>
 </div>
-<p>En esta presentación se describen los conceptos utilizados para
-integrar la estrategia analítica basada en <em>redes bayesianas</em> que
-condujo al cómputo del índice de integridad ecosistémica que se empleó
-en el proyecto piloto <a
-href="https://seea.un.org/home/Natural-Capital-Accounting-Project">NCAVES
-en el que participó México</a>. Así se obtuvieron estimadores de
-condición para todos los ecosistemas del país en pixeles con resolución
-de 250m. Las fechas nominales de estos cálculos son 2004 y 2018. En esta
-charla nos proponemos el siguiente objetivo.</p>
+<p>En esta presentación se describen los conceptos utilizados para integrar la estrategia analítica basada en <em>redes bayesianas</em> que condujo al cómputo del índice de integridad ecosistémica que se empleó en el proyecto piloto <a href="https://seea.un.org/home/Natural-Capital-Accounting-Project">NCAVES en el que participó México</a>. Así se obtuvieron estimadores de condición para todos los ecosistemas del país en pixeles con resolución de 250m. Las fechas nominales de estos cálculos son 2004 y 2018. En esta charla nos proponemos el siguiente objetivo.</p>
+<p><br />
+</p>
 <blockquote>
-<p>El participante conoce la metodología para el cálculo del índice de
-integridad ecosistémica (IIE) y las oportunidades que ofrece la
-aproximación empleada.</p>
+<p>El participante conoce la metodología para el cálculo del índice de integridad ecosistémica (IIE) y las oportunidades que ofrece la aproximación empleada.</p>
 </blockquote>
-<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQwgd69FPocEJhcGbGY5nRaokw2BTfurifkIQlCE4XTwJJaTlVuUNMfvD4Iu8W1Bw/embed?start=false&amp;loop=false&amp;delayms=3000" frameborder="0" width="1280" height="450" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true">
+<p><br />
+<br />
+</p>
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQwgd69FPocEJhcGbGY5nRaokw2BTfurifkIQlCE4XTwJJaTlVuUNMfvD4Iu8W1Bw/embed?start=false&amp;loop=false&amp;delayms=3000" frameborder="0" width="1280" height="392" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true">
 </iframe>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

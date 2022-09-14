@@ -6,7 +6,7 @@ description: |
 author:
   - name: Miguel Equihua Zamora
     url: {}
-date: 2022-08-29
+date: 2022-08-31
 output:
   distill::distill_article:
     self_contained: false
@@ -28,4 +28,4 @@ La multiplicidad de descriptores del entorno natural hacen necesario considerar 
 
 > El participante conoce la posibilidad de utilizar una aproximación probabilística basada en redes bayesianas para relacionar distintos índices de condición.
   
-  <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSACZYGN6q7tjcxJYo_74T4W1li2MpW0qY2qiWdfHFSbBnx11lkv8OYE8dcQl8Mog/embed?start=false&loop=false&delayms=3000" frameborder="0" width="1280" height="450" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+  <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSACZYGN6q7tjcxJYo_74T4W1li2MpW0qY2qiWdfHFSbBnx11lkv8OYE8dcQl8Mog/embed?start=false&loop=false&delayms=3000" frameborder="0" width="1280" height="392" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>

@@ -94,8 +94,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
   <!--  https://schema.org/Article -->
-  <meta property="article:published" itemprop="datePublished" content="2022-08-26"/>
-  <meta property="article:created" itemprop="dateCreated" content="2022-08-26"/>
+  <meta property="article:published" itemprop="datePublished" content="2022-08-29"/>
+  <meta property="article:created" itemprop="dateCreated" content="2022-08-29"/>
   <meta name="article:author" content="Francisco Guillén Martín"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
@@ -113,12 +113,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Introducción"]},{"type":"character","attributes":{},"value":["Se presenta el marco conceptual general del nuevo sistema de contabilidad ambiental\nSEEA EA y su contexto nacional e internacional de desarrollo.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Francisco Guillén Martín"]},{"type":"character","attributes":{},"value":["https://https://www.inegi.org.mx/contenidos/eventos/2013/fne/S_Francisco_Guillen.pdf"]}]}]},{"type":"character","attributes":{},"value":["2022-08-26"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Introducción"]},{"type":"character","attributes":{},"value":["Se presenta el marco conceptual general del nuevo sistema de contabilidad ambiental\nSEEA EA y su contexto nacional e internacional de desarrollo.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Francisco Guillén Martín"]},{"type":"character","attributes":{},"value":["https://https://www.inegi.org.mx/contenidos/eventos/2013/fne/S_Francisco_Guillen.pdf"]}]}]},{"type":"character","attributes":{},"value":["2022-08-29"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["Francisco-Guillen.png","introduccin_files/anchor-4.2.2/anchor.min.js","introduccin_files/bowser-1.9.3/bowser.min.js","introduccin_files/distill-2.2.21/template.v2.js","introduccin_files/header-attrs-2.14/header-attrs.js","introduccin_files/jquery-3.6.0/jquery-3.6.0.js","introduccin_files/jquery-3.6.0/jquery-3.6.0.min.js","introduccin_files/jquery-3.6.0/jquery-3.6.0.min.map","introduccin_files/popper-2.6.0/popper.min.js","introduccin_files/tippy-6.2.7/tippy-bundle.umd.min.js","introduccin_files/tippy-6.2.7/tippy-light-border.css","introduccin_files/tippy-6.2.7/tippy.css","introduccin_files/tippy-6.2.7/tippy.umd.min.js","introduccin_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["Francisco-Guillen.png","introduccin_files/anchor-4.2.2/anchor.min.js","introduccin_files/bowser-1.9.3/bowser.min.js","introduccin_files/distill-2.2.21/template.v2.js","introduccin_files/header-attrs-2.14/header-attrs.js","introduccin_files/header-attrs-2.16/header-attrs.js","introduccin_files/jquery-3.6.0/jquery-3.6.0.js","introduccin_files/jquery-3.6.0/jquery-3.6.0.min.js","introduccin_files/jquery-3.6.0/jquery-3.6.0.min.map","introduccin_files/popper-2.6.0/popper.min.js","introduccin_files/tippy-6.2.7/tippy-bundle.umd.min.js","introduccin_files/tippy-6.2.7/tippy-light-border.css","introduccin_files/tippy-6.2.7/tippy.css","introduccin_files/tippy-6.2.7/tippy.umd.min.js","introduccin_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -189,6 +189,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   d-article table.gt_table td,
   d-article table.gt_table th {
     border-bottom: none;
+    font-size: 100%;
   }
 
   .html-widget {
@@ -1261,15 +1262,21 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
-        if ($(this).children()[0].nodeName == "D-FOOTNOTE") {
-          var fn = $(this).children()[0]
+        const citeChild = $(this).children()[0]
+        // Do not process if @xyz has been used without escaping and without bibliography activated
+        // https://github.com/rstudio/distill/issues/466
+        if (citeChild === undefined) return true
+
+        if (citeChild.nodeName == "D-FOOTNOTE") {
+          var fn = citeChild
           $(this).html(fn.shadowRoot.querySelector("sup"))
           $(this).id = fn.id
           fn.remove()
         }
         var refs = $(this).attr('data-cites').split(" ");
         var refHtml = refs.map(function(ref) {
-          return "<p>" + $('#ref-' + ref).html() + "</p>";
+          // Could use CSS.escape too here, we insure backward compatibility in navigator
+          return "<p>" + $('div[id="ref-' + ref + '"]').html() + "</p>";
         }).join("\n");
         window.tippy(this, {
           allowHTML: true,
@@ -1468,7 +1475,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="introduccin_files/header-attrs-2.14/header-attrs.js"></script>
+  <script src="introduccin_files/header-attrs-2.16/header-attrs.js"></script>
   <script src="introduccin_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="introduccin_files/popper-2.6.0/popper.min.js"></script>
   <link href="introduccin_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
@@ -1489,7 +1496,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Introducción","description":"Se presenta el marco conceptual general del nuevo sistema de contabilidad ambiental\nSEEA EA y su contexto nacional e internacional de desarrollo.","authors":[{"author":"Francisco Guillén Martín","authorURL":"https://https://www.inegi.org.mx/contenidos/eventos/2013/fne/S_Francisco_Guillen.pdf","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2022-08-26T00:00:00.000-05:00","citationText":"Martín, 2022"}
+{"title":"Introducción","description":"Se presenta el marco conceptual general del nuevo sistema de contabilidad ambiental\nSEEA EA y su contexto nacional e internacional de desarrollo.","authors":[{"author":"Francisco Guillén Martín","authorURL":"https://https://www.inegi.org.mx/contenidos/eventos/2013/fne/S_Francisco_Guillen.pdf","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2022-08-29T00:00:00.000-05:00","citationText":"Martín, 2022"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -1502,53 +1509,28 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h1>Introducción</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>Se presenta el marco conceptual general del nuevo sistema de
-contabilidad ambiental SEEA EA y su contexto nacional e internacional de
-desarrollo.</p></p>
+<p><p>Se presenta el marco conceptual general del nuevo sistema de contabilidad ambiental
+SEEA EA y su contexto nacional e internacional de desarrollo.</p></p>
 </div>
 
 <div class="d-byline">
-  Francisco Guillén Martín <a
-href="https://https://www.inegi.org.mx/contenidos/eventos/2013/fne/S_Francisco_Guillen.pdf"
-class="uri">https://https://www.inegi.org.mx/contenidos/eventos/2013/fne/S_Francisco_Guillen.pdf</a> 
+  Francisco Guillén Martín <a href="https://https://www.inegi.org.mx/contenidos/eventos/2013/fne/S_Francisco_Guillen.pdf" class="uri">https://https://www.inegi.org.mx/contenidos/eventos/2013/fne/S_Francisco_Guillen.pdf</a> 
   
-<br/>2022-08-26
+<br/>2022-08-29
 </div>
 
 <div class="d-article">
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="Francisco-Guillen.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="../../figuras/Francisco-guillen.png" width="50%" style="display: block; margin: auto;" /></p>
 </div>
-<p>Mi carrera profesional se ha desarrollado principalmente en el sector
-público, en el que he colaborado por más de 30 años. Particularmente he
-trabajado para el <em>Instituto Nacional de Estadística y Geografía</em>
-(<strong>INEGI</strong>). Hace años tuve la oportunidad de dar a conocer
-la primera serie anual del Producto Interno Bruto por Entidad
-Federativa. Fui iniciador y coordinador del proyecto denominado
-<em>Sistema de Cuentas Económicas y Ecológicas de México</em>
-(<strong>SCEEM</strong>). Más recientemente, fui iniciador y coordinador
-del nuevo proyecto denominado <em>Sistema de Cuentas Económicas y
-Ecológicas de México</em> (<strong>SCEEM</strong>), llevado a cabo por
-el <strong>INEGI</strong> y auspiciado por la <em>Organización de las
-Naciones Unidas</em> y el <em>Banco Mundial</em>, proyecto pionero en su
-tipo a nivel mundial.</p>
-<p>Participo en el <em>Buro de Expertos de Cuentas Nacionales y
-Financieras</em> de la <strong>OCDE</strong>. También he participado en
-varios grupos de expertos asociados a la economía y el medio ambiente.
-Actualmente soy Director General Adjunto de Cuentas Nacionales del
-<strong>INEGI</strong>, así que tengo bajo mi responsabilidad el
-<em>Sistema de Cuentas Nacionales de México</em> en su conjunto. Les
-hablaré sobe el <em>Sistema de Cuentas de los Ecosistemas de
-México</em>.</p>
+<p>Mi carrera profesional se ha desarrollado principalmente en el sector público, en el que he colaborado por más de 30 años. Particularmente he trabajado para el <em>Instituto Nacional de Estadística y Geografía</em> (<strong>INEGI</strong>). Hace años tuve la oportunidad de dar a conocer la primera serie anual del Producto Interno Bruto por Entidad Federativa. Fui iniciador y coordinador del proyecto denominado <em>Sistema de Cuentas Económicas y Ecológicas de México</em> (<strong>SCEEM</strong>). Más recientemente, fui iniciador y coordinador del nuevo proyecto denominado <em>Sistema de Cuentas Económicas y Ecológicas de México</em> (<strong>SCEEM</strong>), llevado a cabo por el <strong>INEGI</strong> y auspiciado por la <em>Organización de las Naciones Unidas</em> y el <em>Banco Mundial</em>, proyecto pionero en su tipo a nivel mundial.</p>
+<p>Participo en el <em>Buro de Expertos de Cuentas Nacionales y Financieras</em> de la <strong>OCDE</strong>. También he participado en varios grupos de expertos asociados a la economía y el medio ambiente. Actualmente soy Director General Adjunto de Cuentas Nacionales del <strong>INEGI</strong>, así que tengo bajo mi responsabilidad el <em>Sistema de Cuentas Nacionales de México</em> en su conjunto. Les hablaré sobe el <em>Sistema de Cuentas de los Ecosistemas de México</em>.</p>
 <blockquote>
-<p>El participante comprende el marco conceptual del <strong>SEEA
-EA</strong> y su relevancia en el marco de <em>beyond GDP</em> y la
-agenda de desarrollo sostenible.</p>
+<p>El participante comprende el marco conceptual del <strong>SEEA EA</strong> y su relevancia en el marco de <em>beyond GDP</em> y la agenda de desarrollo sostenible.</p>
 </blockquote>
 <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTLevj0BWeXU5gAgnUYB09YUCRGj86q_8rEaKPU2ZBP4iU3kBbVAJe1uZkvReHsuw/embed?start=false&amp;loop=false&amp;delayms=3000" frameborder="0" width="1280" height="450" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true">
 </iframe>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

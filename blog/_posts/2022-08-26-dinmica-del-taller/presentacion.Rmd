@@ -5,7 +5,8 @@ description: |
 author:
   - name: Octavio Pérez Maqueo, Miguel Equihua Zamora y Julián Equihua Benítez
     url: https://ie-gamma.net
-date: 2022-08-26
+date: 2022-08-29
+time: 09:01
 output:
   distill::distill_article:
     self_contained: false

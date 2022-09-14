@@ -1,5 +1,18 @@
 ---
 title: "Condición: IIE"
 site: distill::distill_website
-listing: posts
+listing: 
+  posts:
+    - welcome
+    - 2022-08-26-dinmica-del-taller
+    - 2022-08-26-introduccin
+    - 2022-08-27-conceptos-clave
+    - 2022-08-27-integracin-de-datos
+    - 2022-08-28-calculo-de-iie-actual
+    - 2022-08-28-prepara-datos-para-modelar
+    - 2022-08-29-interoperabilidad
+    - 2022-08-30-resultados
+    - 2022-08-31-flujos-de-trabajo
+    - 2022-09-06-resultados-miro
 ---
+ 

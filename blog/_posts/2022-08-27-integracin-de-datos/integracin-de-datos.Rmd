@@ -5,10 +5,11 @@ description: |
 author:
   - name: Julián Equihua
     url: https://taller-cuenta-condicion.netlify.app/posts/2022-08-27-integracin-de-datos/
-date: 2022-08-27
+date: 2022-08-29
 output:
   distill::distill_article:
     self_contained: false
+    code_folding: true
 ---
 
 # Aprendizaje de máquina (Machine learning)
@@ -231,6 +232,9 @@ rutasAMulti = function(dep_path,
   }
   return(bnbrik)
 }
+
+# Hemerobia etá también en ruta_indep, así que lo elimino para no duplicar la capa
+ruta_indep <- ruta_indep[!grepl("hemerobia", ruta_indep)]
 
 raster_multi <- rutasAMulti("../../../data/delta_vp/hemerobia_250m.tif", ruta_indep)
 

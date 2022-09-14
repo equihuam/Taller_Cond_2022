@@ -94,8 +94,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
   <!--  https://schema.org/Article -->
-  <meta property="article:published" itemprop="datePublished" content="2022-08-29"/>
-  <meta property="article:created" itemprop="dateCreated" content="2022-08-29"/>
+  <meta property="article:published" itemprop="datePublished" content="2022-08-31"/>
+  <meta property="article:created" itemprop="dateCreated" content="2022-08-31"/>
   <meta name="article:author" content="Miguel Equihua Zamora"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
@@ -113,12 +113,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Interoperabilidad"]},{"type":"character","attributes":{},"value":["La interoperabilidad es fundamental para la operación intersectorial e incluso\ninterdisciplinar.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Miguel Equihua Zamora"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["2022-08-29"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Interoperabilidad"]},{"type":"character","attributes":{},"value":["La interoperabilidad es fundamental para la operación intersectorial e incluso\ninterdisciplinar.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Miguel Equihua Zamora"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["2022-08-31"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["interoperabilidad_files/anchor-4.2.2/anchor.min.js","interoperabilidad_files/bowser-1.9.3/bowser.min.js","interoperabilidad_files/distill-2.2.21/template.v2.js","interoperabilidad_files/header-attrs-2.14/header-attrs.js","interoperabilidad_files/jquery-3.6.0/jquery-3.6.0.js","interoperabilidad_files/jquery-3.6.0/jquery-3.6.0.min.js","interoperabilidad_files/jquery-3.6.0/jquery-3.6.0.min.map","interoperabilidad_files/popper-2.6.0/popper.min.js","interoperabilidad_files/tippy-6.2.7/tippy-bundle.umd.min.js","interoperabilidad_files/tippy-6.2.7/tippy-light-border.css","interoperabilidad_files/tippy-6.2.7/tippy.css","interoperabilidad_files/tippy-6.2.7/tippy.umd.min.js","interoperabilidad_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["interoperabilidad_files/anchor-4.2.2/anchor.min.js","interoperabilidad_files/bowser-1.9.3/bowser.min.js","interoperabilidad_files/distill-2.2.21/template.v2.js","interoperabilidad_files/header-attrs-2.14/header-attrs.js","interoperabilidad_files/header-attrs-2.16/header-attrs.js","interoperabilidad_files/jquery-3.6.0/jquery-3.6.0.js","interoperabilidad_files/jquery-3.6.0/jquery-3.6.0.min.js","interoperabilidad_files/jquery-3.6.0/jquery-3.6.0.min.map","interoperabilidad_files/popper-2.6.0/popper.min.js","interoperabilidad_files/tippy-6.2.7/tippy-bundle.umd.min.js","interoperabilidad_files/tippy-6.2.7/tippy-light-border.css","interoperabilidad_files/tippy-6.2.7/tippy.css","interoperabilidad_files/tippy-6.2.7/tippy.umd.min.js","interoperabilidad_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -189,6 +189,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   d-article table.gt_table td,
   d-article table.gt_table th {
     border-bottom: none;
+    font-size: 100%;
   }
 
   .html-widget {
@@ -1261,15 +1262,21 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
-        if ($(this).children()[0].nodeName == "D-FOOTNOTE") {
-          var fn = $(this).children()[0]
+        const citeChild = $(this).children()[0]
+        // Do not process if @xyz has been used without escaping and without bibliography activated
+        // https://github.com/rstudio/distill/issues/466
+        if (citeChild === undefined) return true
+
+        if (citeChild.nodeName == "D-FOOTNOTE") {
+          var fn = citeChild
           $(this).html(fn.shadowRoot.querySelector("sup"))
           $(this).id = fn.id
           fn.remove()
         }
         var refs = $(this).attr('data-cites').split(" ");
         var refHtml = refs.map(function(ref) {
-          return "<p>" + $('#ref-' + ref).html() + "</p>";
+          // Could use CSS.escape too here, we insure backward compatibility in navigator
+          return "<p>" + $('div[id="ref-' + ref + '"]').html() + "</p>";
         }).join("\n");
         window.tippy(this, {
           allowHTML: true,
@@ -1468,7 +1475,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="interoperabilidad_files/header-attrs-2.14/header-attrs.js"></script>
+  <script src="interoperabilidad_files/header-attrs-2.16/header-attrs.js"></script>
   <script src="interoperabilidad_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="interoperabilidad_files/popper-2.6.0/popper.min.js"></script>
   <link href="interoperabilidad_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
@@ -1489,7 +1496,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Interoperabilidad","description":"La interoperabilidad es fundamental para la operación intersectorial e incluso\ninterdisciplinar.","authors":[{"author":"Miguel Equihua Zamora","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2022-08-29T00:00:00.000-05:00","citationText":"Zamora, 2022"}
+{"title":"Interoperabilidad","description":"La interoperabilidad es fundamental para la operación intersectorial e incluso\ninterdisciplinar.","authors":[{"author":"Miguel Equihua Zamora","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2022-08-31T00:00:00.000-05:00","citationText":"Zamora, 2022"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -1502,33 +1509,26 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h1>Interoperabilidad</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>La interoperabilidad es fundamental para la operación
-intersectorial e incluso interdisciplinar.</p></p>
+<p><p>La interoperabilidad es fundamental para la operación intersectorial e incluso
+interdisciplinar.</p></p>
 </div>
 
 <div class="d-byline">
   Miguel Equihua Zamora true 
   
-<br/>2022-08-29
+<br/>2022-08-31
 </div>
 
 <div class="d-article">
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="../../figuras/interoperabilidad.png" width="50%" style="display: block; margin: auto;" /></p>
 </div>
-<p>La multiplicidad de descriptores del entorno natural hacen necesario
-considerar enfoque que permitan la interoperabilidad y favorezcan la
-compartición de conceptos fundamentales, como los derivados del sistema
-de contabilidad ambiental. En este casoel índice de condición:
-integridad ecosistémica basado en el modelo de 3 capas.</p>
+<p>La multiplicidad de descriptores del entorno natural hacen necesario considerar enfoque que permitan la interoperabilidad y favorezcan la compartición de conceptos fundamentales, como los derivados del sistema de contabilidad ambiental. En este casoel índice de condición: integridad ecosistémica basado en el modelo de 3 capas.</p>
 <blockquote>
-<p>El participante conoce la posibilidad de utilizar una aproximación
-probabilística basada en redes bayesianas para relacionar distintos
-índices de condición.</p>
+<p>El participante conoce la posibilidad de utilizar una aproximación probabilística basada en redes bayesianas para relacionar distintos índices de condición.</p>
 </blockquote>
-<p><iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSACZYGN6q7tjcxJYo_74T4W1li2MpW0qY2qiWdfHFSbBnx11lkv8OYE8dcQl8Mog/embed?start=false&loop=false&delayms=3000" frameborder="0" width="1280" height="450" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe></p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p><iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSACZYGN6q7tjcxJYo_74T4W1li2MpW0qY2qiWdfHFSbBnx11lkv8OYE8dcQl8Mog/embed?start=false&loop=false&delayms=3000" frameborder="0" width="1280" height="392" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
