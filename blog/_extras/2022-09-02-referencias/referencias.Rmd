@@ -28,7 +28,7 @@ knitr::include_graphics("robots-judea-pearl-IA.jpg")
 |![](../../figuras/SEEA EA_NCAVES.png){width=40%}|[Página SEEA EA - NCAVES-Mexico](http://seea.un.org/content/mexico-0)|
 |![](../../figuras/Portada_NCAVES_report_Mexico.png){width=40%}|[Reporte SEEA EA NCAVES-México](http://seea.un.org/sites/seea.un.org/files/images/Mexico/ncaves_-_mexico_-_country_report_-_final.pdf)|
 |![](../../figuras/Reporte NCAVES-INEGI.jpg){width=40%}|[Reporte INEGI NCAVES](https://www.inegi.org.mx/contenidos/investigacion/cem/doc/docNCAVES.pdf)|
-|![](../../figuras/UN_learning.png){width=40%}|[Materiales de ayuda y aprendizaje de ONU-SCAE NCAVES](https://learning.officialstatistics.org/course/index.php?categoryid=3)|
+|![](../../figuras/UN_learning.png){width=80%}|[Materiales de ayuda y aprendizaje de ONU-SCAE](https://learning.officialstatistics.org/course/index.php?categoryid=3)|
 
 
 
