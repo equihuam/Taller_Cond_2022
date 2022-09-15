@@ -46,4 +46,4 @@ knitr::include_graphics("robots-judea-pearl-IA.jpg")
 |---------|---------|
 |![](../../figuras/el_libro_del_porqué.png){width=40%}|[Judea Pear y la *revolución causal* en marcha ](http://www.filosofiadebolsillo.com/el-libro-del-porque-la-nueva-ciencia-de-la-causa-y-el-efecto-de-judea-pearl/)|
 |![](../../figuras/causal_inference.png){width=40%} | [Inferencia causal moderna](https://mitpress.mit.edu/9780262037310/elements-of-causal-inference/)|
-|![](../../figuras/blackboxes.png){width=40%}) | [No explicar cajas negras](https://www.nature.com/articles/s42256-019-0048-x)|
+|![](../../figuras/blackboxes.png){width=80%}) | [No explicar cajas negras](https://www.nature.com/articles/s42256-019-0048-x)|
