@@ -44,7 +44,7 @@ Los días 29, 30 y 31 de agosto se desarrolla este taller con la participación 
 ## Agenda del taller
 
 ```{r}
-agenda <- read_excel("../../figuras/Agenda.xlsx", skip = 1, range = "B1:H30")
+agenda <- read_excel("../../../Agenda.xlsx", skip = 1, range = "B1:H30")
 
 names(agenda) <- c("tema", "tiempo", "hora_i", "hora_f", "expone", "objetivo", "temas")
 temas <- agenda$tema[!grepl("Duración|Día", agenda$tema) & !is.na(agenda$tema)]
@@ -57,9 +57,23 @@ horas_f <- as.character(agenda$hora_f[!grepl("Duración|Día", agenda$tema) &
 tiempos <- as.character(agenda$tiempo[!grepl("Duración|Día", agenda$tema) &
                                       !is.na(agenda$tema)], format = "%H:%M")
 
+# ubicación de los artículoa
+posts_lnk <- list.dirs("../../_posts", recursive = FALSE, full.names = FALSE)
+posts_lnk <- posts_lnk[c(12,1,2,3,5,4,6,11,8,7,9,10)]
+posts_lnk <- data.frame(tema = temas[!grepl("Día|Desc|Discu|Ini", temas)], 
+                        dir = posts_lnk)
+
+datatemas <- character(0)
+for (i in 1:length(posts_lnk$tema))
+{
+  datatemas[i] <- paste0("[", posts_lnk$tema[i] , "](../", 
+                         posts_lnk$dir[i], "/index.html)")
+}
+
 tiempos[temas == "Inicio"] <- c("", "", "")
 horas_i[temas == "Inicio"] <- c("", "", "")
 horas_f[temas == "Inicio"] <- c("", "", "")
+temas[!grepl("Día|Desc|Discu|Ini", temas)] <- datatemas
 temas[temas=="Inicio"] <- c("Día 29", "Día 30", "Día 31")
 
 # Add indentations to the 2nd & 4th row
@@ -69,10 +83,10 @@ programa <- data.frame(Tema = temas, Inicia = horas_i, Termina =horas_f, "Duraci
 programa %>%
   kbl("html") %>%
   kable_minimal("hover",  full_width = F) %>%
-  add_indent( c(2:6, 8, 10, 12:14, 16:17, 19), level_of_indent = 1) %>%
-  add_indent( c(7, 11, 18), level_of_indent = 2) %>%
+  add_indent( c(2:5, 7, 8, 10, 11, 13:14, 16:17, 19), level_of_indent = 1) %>%
+  add_indent( c(6, 12, 18), level_of_indent = 2) %>%
   row_spec(c(1, 9, 15), bold = T, color = "gray50", background = "burlywood") %>%
-  row_spec(c(7, 11, 18), bold = T, color = "green", background = "burlywood") %>%
+  row_spec(c(6, 12, 18), bold = T, color = "green", background = "burlywood") %>%
   row_spec(c(2:8, 10:14, 16:19), bold = T, color = "gray70", background = "ivory") %>%
   row_spec(0, bold = T, color = "brown", font_size = 20)
 
