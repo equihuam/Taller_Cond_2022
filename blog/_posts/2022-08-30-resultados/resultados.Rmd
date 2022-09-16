@@ -120,7 +120,7 @@ Un poco en esta misma tónica hicimos un ensayo en el *piloto NCAVES*. Produjimo
     title="Inline Frame Example"
     width="100%"
     height=200%"
-    src="1_dynamic_maps_seea_ie.html"
+    src="reporte/1_dynamic_maps_seea_ie.html"
     allow="fullscreen" 
     webkitallowfullscreen="true" 
     mozallowfullscreen="true" 
