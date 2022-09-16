@@ -183,7 +183,11 @@
     "categories": [],
     "contents": "\r\n\r\n\r\n\r\nEn esta presentación se describen los conceptos utilizados para integrar la estrategia analítica basada en redes bayesianas que condujo al cómputo del índice de integridad ecosistémica que se empleó en el proyecto piloto NCAVES en el que participó México. Así se obtuvieron estimadores de condición para todos los ecosistemas del país en pixeles con resolución de 250m. Las fechas nominales de estos cálculos son 2004 y 2018. En esta charla nos proponemos el siguiente objetivo.\r\n\r\n\r\nEl participante conoce la metodología para el cálculo del índice de integridad ecosistémica (IIE) y las oportunidades que ofrece la aproximación empleada.\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
     "preview": "posts/2022-08-28-calculo-de-iie-actual/../../figuras/datos_geoespaciales.png",
+<<<<<<< HEAD
     "last_modified": "2022-09-16T00:36:12-05:00",
+=======
+    "last_modified": "2022-09-16T00:33:05-05:00",
+>>>>>>> 48308ccd966661acdc37666e207583eb34cf8315
     "input_file": "calculo-iie-actual.knit.md"
   },
   {
