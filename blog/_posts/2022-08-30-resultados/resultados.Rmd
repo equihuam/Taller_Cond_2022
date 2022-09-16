@@ -113,8 +113,16 @@ Hay una tendencia actual a la producción de de *documentos vivos*. Es el caso d
 knitr::include_graphics("../../figuras/procesos reproducible de análisis.png")
 ```
 
+  \
+  \
+  
 
-Un poco en esta misma tónica hicimos un ensayo en el *piloto NCAVES*. Produjimos un reporte dinámico. El código que desarrollamos para hacer esto, usando R y [RMarkdown precisamente está aquí](https://github.com/equihuam/Taller_Cond_2022/blob/main/Scripts/1_dynamic_maps_seea_ie.Rmd), y el [resultado se ilustra en el recuadro siguiente](reporte/1_dynamic_maps_seea_ie.html).
+Un poco en esta misma tónica hicimos un ensayo en el *piloto NCAVES*. Produjimos un reporte dinámico. El código que desarrollamos para hacer esto, usando R y [RMarkdown está aquí](https://github.com/equihuam/Taller_Cond_2022/blob/main/Scripts/1_dynamic_maps_seea_ie.Rmd). El [resultado lo encontraras aquí](reporte/1_dynamic_maps_seea_ie.html) y se ilustra en el recuadro siguiente.
+
+
+  \
+  \
+  
 
 <iframe id="inlineFrameExample"
     title="Inline Frame Example"
