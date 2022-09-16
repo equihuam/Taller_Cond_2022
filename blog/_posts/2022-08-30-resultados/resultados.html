@@ -113,12 +113,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Resultados"]},{"type":"character","attributes":{},"value":["Generación de reportes dinámicos y análisis con datos embebidos. Procesos reproducibles de integración analítica de reportes para consumo humano.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Miguel Equihua Zamora"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["2022-08-30"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Resultados"]},{"type":"character","attributes":{},"value":["Generación de reportes dinámicos y análisis con datos embebidos. Procesos reproducibles de integración analítica de reportes para consumo humano.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Miguel Equihua Zamora"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["2022-08-30"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","code_folding"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"logical","attributes":{},"value":[true]}]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["resultados_files/anchor-4.2.2/anchor.min.js","resultados_files/bowser-1.9.3/bowser.min.js","resultados_files/distill-2.2.21/template.v2.js","resultados_files/figure-html5/unnamed-chunk-6-1.png","resultados_files/figure-html5/unnamed-chunk-7-1.png","resultados_files/header-attrs-2.14/header-attrs.js","resultados_files/jquery-3.6.0/jquery-3.6.0.js","resultados_files/jquery-3.6.0/jquery-3.6.0.min.js","resultados_files/jquery-3.6.0/jquery-3.6.0.min.map","resultados_files/popper-2.6.0/popper.min.js","resultados_files/tippy-6.2.7/tippy-bundle.umd.min.js","resultados_files/tippy-6.2.7/tippy-light-border.css","resultados_files/tippy-6.2.7/tippy.css","resultados_files/tippy-6.2.7/tippy.umd.min.js","resultados_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["reporte/1_dynamic_maps_seea_ie.html","resultados_files/anchor-4.2.2/anchor.min.js","resultados_files/bowser-1.9.3/bowser.min.js","resultados_files/distill-2.2.21/template.v2.js","resultados_files/figure-html5/unnamed-chunk-6-1.png","resultados_files/figure-html5/unnamed-chunk-7-1.png","resultados_files/header-attrs-2.14/header-attrs.js","resultados_files/header-attrs-2.16/header-attrs.js","resultados_files/jquery-3.6.0/jquery-3.6.0.js","resultados_files/jquery-3.6.0/jquery-3.6.0.min.js","resultados_files/jquery-3.6.0/jquery-3.6.0.min.map","resultados_files/popper-2.6.0/popper.min.js","resultados_files/tippy-6.2.7/tippy-bundle.umd.min.js","resultados_files/tippy-6.2.7/tippy-light-border.css","resultados_files/tippy-6.2.7/tippy.css","resultados_files/tippy-6.2.7/tippy.umd.min.js","resultados_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -189,6 +189,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   d-article table.gt_table td,
   d-article table.gt_table th {
     border-bottom: none;
+    font-size: 100%;
   }
 
   .html-widget {
@@ -1261,15 +1262,21 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
-        if ($(this).children()[0].nodeName == "D-FOOTNOTE") {
-          var fn = $(this).children()[0]
+        const citeChild = $(this).children()[0]
+        // Do not process if @xyz has been used without escaping and without bibliography activated
+        // https://github.com/rstudio/distill/issues/466
+        if (citeChild === undefined) return true
+
+        if (citeChild.nodeName == "D-FOOTNOTE") {
+          var fn = citeChild
           $(this).html(fn.shadowRoot.querySelector("sup"))
           $(this).id = fn.id
           fn.remove()
         }
         var refs = $(this).attr('data-cites').split(" ");
         var refHtml = refs.map(function(ref) {
-          return "<p>" + $('#ref-' + ref).html() + "</p>";
+          // Could use CSS.escape too here, we insure backward compatibility in navigator
+          return "<p>" + $('div[id="ref-' + ref + '"]').html() + "</p>";
         }).join("\n");
         window.tippy(this, {
           allowHTML: true,
@@ -1468,7 +1475,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="resultados_files/header-attrs-2.14/header-attrs.js"></script>
+  <script src="resultados_files/header-attrs-2.16/header-attrs.js"></script>
   <script src="resultados_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="resultados_files/popper-2.6.0/popper.min.js"></script>
   <link href="resultados_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
@@ -1502,9 +1509,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h1>Resultados</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>Generación de reportes dinámicos y análisis con datos embebidos.
-Procesos reproducibles de integración analítica de reportes para consumo
-humano.</p></p>
+<p><p>Generación de reportes dinámicos y análisis con datos embebidos. Procesos reproducibles de integración analítica de reportes para consumo humano.</p></p>
 </div>
 
 <div class="d-byline">
@@ -1515,67 +1520,95 @@ humano.</p></p>
 
 <div class="d-article">
 <div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"../../figuras/resultados.jpg"</span><span class='op'>)</span></span></code></pre>
+</div>
+</details>
 <p><img src="../../figuras/resultados.jpg" width="50%" style="display: block; margin: auto;" /></p>
 </div>
 <h1 id="r-markdown">R Markdown</h1>
-<p>Este es un documento de R Markdown. Markdown es una sintáxis simple
-para editar HTMLs, PDFs y documentos de Microsoft Word. Para más
-detalles ver: <a href="http://rmarkdown.rstudio.com"
-class="uri">http://rmarkdown.rstudio.com</a>.</p>
-<p>Cuando presionas el botón <strong>Knit</strong> un documento será
-generado que incluye tanto el texto plano que incluyas, como código
-HTML, código matemático LaTeX y código R. Estos pueden ser desplegados
-para fines didácticos o pueden ser ocultados para simplemente generar un
-documento sin código.</p>
-<p>Si escribo la opción <code>**echo = FALSE**</code> el código no es
-desplegado, por eso, en este caso, lo he puesto en
-<strong>TRUE</strong>. Hay varias opciónes para el <em>bloque de
-código</em> que permiten controlar los resultados y como se presentan al
-lector humano.</p>
-<h1 id="distribución-de-ie-por-municipio-para-yucatán">Distribución de
-IE por municipio para Yucatán</h1>
-<p>Por poner un ejemplo podemos cargar el mapa de IE correspondiente al
-estado de Yucatán utilizando la biblioteca <em>terra</em>.</p>
+<p>Este es un documento de R Markdown. Markdown es una sintáxis simple para editar HTMLs, PDFs y documentos de Microsoft Word. Para más detalles ver: <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
+<p>Cuando presionas el botón <strong>Knit</strong> un documento será generado que incluye tanto el texto plano que incluyas, como código HTML, código matemático LaTeX y código R. Estos pueden ser desplegados para fines didácticos o pueden ser ocultados para simplemente generar un documento sin código.</p>
+<p>Si escribo la opción <code>**echo = FALSE**</code> el código no es desplegado, por eso, en este caso, lo he puesto en <strong>TRUE</strong>. Hay varias opciónes para el <em>bloque de código</em> que permiten controlar los resultados y como se presentan al lector humano.</p>
+<h1 id="distribución-de-ie-por-municipio-para-yucatán">Distribución de IE por municipio para Yucatán</h1>
+<p>Por poner un ejemplo podemos cargar el mapa de IE correspondiente al estado de Yucatán utilizando la biblioteca <em>terra</em>.</p>
 <div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'><a href='https://rspatial.org/terra/'>"terra"</a></span><span class='op'>)</span></span>
 <span></span>
 <span><span class='va'>ie_yucatan</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/terra/man/rast.html'>rast</a></span><span class='op'>(</span><span class='st'>"../../../data/ie/ie_yucatan_2018.tif"</span><span class='op'>)</span></span></code></pre>
 </div>
+</details>
 </div>
 <p>Luego podemos cargar un shapefile de los municipios del estado.</p>
 <div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>mu_yucatan</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/terra/man/vect.html'>vect</a></span><span class='op'>(</span><span class='st'>"../../../data/shapefiles/Basemap_municipios.shp"</span><span class='op'>)</span></span></code></pre>
 </div>
+</details>
 </div>
 <p>Pero como podemos ver tienen proyecciones ligeramente distintas.</p>
 <div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/pkg/terra/man/crs.html'>crs</a></span><span class='op'>(</span><span class='va'>ie_yucatan</span>, proj <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span></code></pre>
 </div>
+</details>
 <pre><code>[1] &quot;+proj=lcc +lat_0=12 +lon_0=-102 +lat_1=17.5 +lat_2=29.5 +x_0=2500000 +y_0=0 +datum=WGS84 +units=m +no_defs&quot;</code></pre>
+<details>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/pkg/terra/man/crs.html'>crs</a></span><span class='op'>(</span><span class='va'>mu_yucatan</span>, proj <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span></code></pre>
 </div>
+</details>
 <pre><code>[1] &quot;+proj=lcc +lat_0=12 +lon_0=-102 +lat_1=17.5 +lat_2=29.5 +x_0=2500000 +y_0=0 +ellps=GRS80 +units=m +no_defs&quot;</code></pre>
 </div>
-<p>Podemos asignar el sistema de coordenadas de referencia del shapefile
-“al vuelo”.</p>
+<p>Podemos asignar el sistema de coordenadas de referencia del shapefile “al vuelo”.</p>
 <div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>mu_yucatan</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/terra/man/project.html'>project</a></span><span class='op'>(</span><span class='va'>mu_yucatan</span>, <span class='fu'><a href='https://rdrr.io/pkg/terra/man/crs.html'>crs</a></span><span class='op'>(</span><span class='va'>ie_yucatan</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
 </div>
+</details>
 </div>
 <p>Luego extraer los pixeles correspondientes a cada municipio.</p>
 <div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>mu_yucatan_ei</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/terra/man/extract.html'>extract</a></span><span class='op'>(</span><span class='va'>ie_yucatan</span>, <span class='va'>mu_yucatan</span><span class='op'>)</span></span>
 <span><span class='va'>mu_yucatan_ei</span> <span class='op'>&lt;-</span> <span class='va'>mu_yucatan_ei</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/stats/complete.cases.html'>complete.cases</a></span><span class='op'>(</span><span class='va'>mu_yucatan_ei</span><span class='op'>)</span>,<span class='op'>]</span></span></code></pre>
 </div>
+</details>
 </div>
 <p>Para luego, finalmente, ver la distribución de IE por municipio:</p>
 <div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'><a href='https://ggplot2.tidyverse.org'>"ggplot2"</a></span><span class='op'>)</span></span>
 <span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='st'><a href='https://wilkelab.org/ggridges/'>"ggridges"</a></span><span class='op'>)</span></span>
@@ -1603,27 +1636,26 @@ estado de Yucatán utilizando la biblioteca <em>terra</em>.</p>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>xlab</a></span><span class='op'>(</span><span class='st'>"Integridad Ecosistémica"</span><span class='op'>)</span> <span class='op'>+</span> </span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>ylab</a></span><span class='op'>(</span><span class='st'>" "</span><span class='op'>)</span></span></code></pre>
 </div>
+</details>
 <p><img src="resultados_files/figure-html5/unnamed-chunk-7-1.png" width="100%" /></p>
 </div>
-<h2 id="reporte-dinámico-basado-en-datos">Reporte dinámico basado en
-datos</h2>
-<p>Hay una tendencia actual a la producción de de <em>documentos
-vivos</em>. Es el caso de este trabajo sobre <a
-href="https://dataingovernment.blog.gov.uk/2017/03/27/reproducible-analytical-pipeline/">procesos
-reproducibles de análisis</a>. En el mismo sentido están surgiendo
-capacidades como las del <a
-href="https://ardata-fr.github.io/officeverse/">officeverse</a>, con el
-interés de vincular herramientas de office con R. Aries mismo, en el
-“ecosistema SEEA EA” avanza en esta misma dirección.</p>
+<h2 id="reporte-dinámico-basado-en-datos">Reporte dinámico basado en datos</h2>
+<p>Hay una tendencia actual a la producción de de <em>documentos vivos</em>. Es el caso de este trabajo sobre <a href="https://dataingovernment.blog.gov.uk/2017/03/27/reproducible-analytical-pipeline/">procesos reproducibles de análisis</a>. En el mismo sentido están surgiendo capacidades como las del <a href="https://ardata-fr.github.io/officeverse/">officeverse</a>, con el interés de vincular herramientas de office con R. Aries mismo, en el “ecosistema SEEA EA” avanza en esta misma dirección.</p>
 <div class="layout-chunk" data-layout="l-body">
+<details>
+<summary>
+Show code
+</summary>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/include_graphics.html'>include_graphics</a></span><span class='op'>(</span><span class='st'>"../../figuras/procesos reproducible de análisis.png"</span><span class='op'>)</span></span></code></pre>
+</div>
+</details>
 <p><img src="../../figuras/procesos reproducible de análisis.png" width="50%" style="display: block; margin: auto;" /></p>
 </div>
-<p>Un poco en esta misma tónica hicimos un ensayo en el <em>piloto
-NCAVES</em>. Produjimos un reporte dinámico. Les mostraremos el código
-que desarrollamos para hacer esto, usando R y RMarkdown precisamente y
-también les mostraremos el resultado.</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>Un poco en esta misma tónica hicimos un ensayo en el <em>piloto NCAVES</em>. Produjimos un reporte dinámico. El código que desarrollamos para hacer esto, usando R y <a href="https://github.com/equihuam/Taller_Cond_2022/blob/main/Scripts/1_dynamic_maps_seea_ie.Rmd">RMarkdown precisamente está aquí</a>, y el <a href="reporte/1_dynamic_maps_seea_ie.html">resultado se ilustra en el recuadro siguiente</a>.</p>
+<iframe id="inlineFrameExample" title="Inline Frame Example" width="100%" height="200%&quot;" src="1_dynamic_maps_seea_ie.html" allow="fullscreen" webkitallowfullscreen="true" mozallowfullscreen="true" oallowfullscreen="true" msallowfullscreen="true" style="border: 5px solid #464646;" target="_blank">
+</iframe>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

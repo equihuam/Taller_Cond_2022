@@ -11,11 +11,6 @@ output:
   distill::distill_article:
     self_contained: false
 ---
-<style>
-.table-hover > tbody > tr:hover { 
-  background-color: #EAE677;
-}
-</style>
 
 
 ```{r setup, include=FALSE}

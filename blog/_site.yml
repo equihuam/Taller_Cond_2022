@@ -1,11 +1,11 @@
 name: "blog"
 title: "Condición: IIE"
+theme: Blog_taller.css
+
 description: |
   Condición con base en el índice de integridad ecosistémica 
   estimado con base en redes bayesianas
 output_dir: "_site"
-logo:
-    image: images/logo.png
 favicon: figuras/i-Gamma-1.ico
 repository_url: https://github.com/equihuam/Taller_Cond_2022
 collections:
@@ -14,6 +14,9 @@ collections:
   extras:
     categories: true
 navbar:
+  logo: 
+      image: figuras/i-Gamma-1.ico
+      href: http://i-gamma.net/
   right:
     - text: "Extras"
       menu:
