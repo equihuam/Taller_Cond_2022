@@ -33,5 +33,5 @@ Participo en el *Buro de Expertos de Cuentas Nacionales y Financieras* de la **O
 > El participante comprende el marco conceptual del **SEEA EA** y su relevancia en el marco de  *beyond GDP* y la agenda de desarrollo sostenible.
 
 
-<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTLevj0BWeXU5gAgnUYB09YUCRGj86q_8rEaKPU2ZBP4iU3kBbVAJe1uZkvReHsuw/embed?start=false&loop=false&delayms=3000" frameborder="0" width="1280" height="450" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTLevj0BWeXU5gAgnUYB09YUCRGj86q_8rEaKPU2ZBP4iU3kBbVAJe1uZkvReHsuw/embed?start=false&loop=false&delayms=3000" frameborder="0" width="1280" height="425" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 

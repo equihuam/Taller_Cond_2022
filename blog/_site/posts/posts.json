@@ -132,8 +132,8 @@
     "categories": [],
     "contents": "\r\n\r\n\r\n\r\nMi carrera profesional se ha desarrollado principalmente en el sector público, en el que he colaborado por más de 30 años. Particularmente he trabajado para el Instituto Nacional de Estadística y Geografía (INEGI). Hace años tuve la oportunidad de dar a conocer la primera serie anual del Producto Interno Bruto por Entidad Federativa. Fui iniciador y coordinador del proyecto denominado Sistema de Cuentas Económicas y Ecológicas de México (SCEEM). Más recientemente, fui iniciador y coordinador del nuevo proyecto denominado Sistema de Cuentas Económicas y Ecológicas de México (SCEEM), llevado a cabo por el INEGI y auspiciado por la Organización de las Naciones Unidas y el Banco Mundial, proyecto pionero en su tipo a nivel mundial.\r\nParticipo en el Buro de Expertos de Cuentas Nacionales y Financieras de la OCDE. También he participado en varios grupos de expertos asociados a la economía y el medio ambiente. Actualmente soy Director General Adjunto de Cuentas Nacionales del INEGI, así que tengo bajo mi responsabilidad el Sistema de Cuentas Nacionales de México en su conjunto. Les hablaré sobe el Sistema de Cuentas de los Ecosistemas de México.\r\n\r\nEl participante comprende el marco conceptual del SEEA EA y su relevancia en el marco de beyond GDP y la agenda de desarrollo sostenible.\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
     "preview": "posts/2022-08-26-introduccin/../../figuras/Francisco-guillen.png",
-    "last_modified": "2022-09-13T16:28:48-05:00",
-    "input_file": {}
+    "last_modified": "2022-09-16T00:20:47-05:00",
+    "input_file": "introduccin.knit.md"
   },
   {
     "path": "posts/2022-08-27-conceptos-clave/",
@@ -149,7 +149,7 @@
     "categories": [],
     "contents": "\r\n\r\n\r\n\r\nEn esta presentación buscamos compartir estructura conceptual y las definiciones operativas de los elementos que intervienen la integración de un sistema de contabilidad ambiental y económica basado en ecosistemas (SCAE CE, SEEA EA en inglés). El objetivo que proponemos para esta participación es:\r\n\r\nEl participante identifica los conceptos clave de la tipología SCAE EA y conoce la forma como se aplicó el enfoque en el piloto mexicano\r\n\r\nLo que sigue es el vínculo a la presentación que usaremos para discutir el tema.\r\n\r\n\r\n\r\n\r\n\r\n",
     "preview": "posts/2022-08-27-conceptos-clave/../../figuras/sp-Enfoque espacial_es.png",
-    "last_modified": "2022-09-13T22:41:45-05:00",
+    "last_modified": "2022-09-16T00:19:12-05:00",
     "input_file": {}
   },
   {
@@ -183,7 +183,7 @@
     "categories": [],
     "contents": "\r\n\r\n\r\n\r\nEn esta presentación se describen los conceptos utilizados para integrar la estrategia analítica basada en redes bayesianas que condujo al cómputo del índice de integridad ecosistémica que se empleó en el proyecto piloto NCAVES en el que participó México. Así se obtuvieron estimadores de condición para todos los ecosistemas del país en pixeles con resolución de 250m. Las fechas nominales de estos cálculos son 2004 y 2018. En esta charla nos proponemos el siguiente objetivo.\r\n\r\n\r\nEl participante conoce la metodología para el cálculo del índice de integridad ecosistémica (IIE) y las oportunidades que ofrece la aproximación empleada.\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
     "preview": "posts/2022-08-28-calculo-de-iie-actual/../../figuras/datos_geoespaciales.png",
-    "last_modified": "2022-09-13T22:41:11-05:00",
+    "last_modified": "2022-09-16T00:18:31-05:00",
     "input_file": {}
   },
   {
