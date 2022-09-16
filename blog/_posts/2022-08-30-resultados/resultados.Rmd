@@ -17,7 +17,7 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-```{r, echo = FALSE, fig.align = 'center', out.width = '50%'}
+```{r, echo = FALSE, fig.align = 'center', out.width = '30%'}
 
 knitr::include_graphics("../../figuras/resultados.jpg")
 ```
@@ -108,7 +108,7 @@ ggplot(mu_yucatan_ei,
 
 Hay una tendencia actual a la producción de de *documentos vivos*. Es el caso de este trabajo sobre [procesos reproducibles de análisis](https://dataingovernment.blog.gov.uk/2017/03/27/reproducible-analytical-pipeline/). En el mismo sentido están surgiendo capacidades como las del [officeverse](https://ardata-fr.github.io/officeverse/), con el interés de vincular herramientas de office con R. Aries mismo, en el "ecosistema SEEA EA" avanza en esta misma dirección.
 
-```{r, echo = FALSE, fig.align = 'center', out.width = '50%'}
+```{r, echo = FALSE, fig.align = 'center', out.width = '50px'}
 
 knitr::include_graphics("../../figuras/procesos reproducible de análisis.png")
 ```
