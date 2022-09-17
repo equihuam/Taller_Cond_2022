@@ -140,5 +140,11 @@ Un poco en esta misma tónica hicimos un ensayo en el *piloto NCAVES*. Produjimo
 
 ### Tableros
 
-Otra forma de presentar los resultados es un "panel de control". Hay varias opciones que hemos anotado en las referencias, pero una muy accesible es la biblioteca [flexdashboard](https://rstudio.github.io/flexdashboard/articles/using.html). Con lo que hemos venido haciendo podemos construir un [ejemplo crudo como este](../../ejemplos/flexdashboard.html)
+Otra forma de presentar los resultados es un "panel de control". Hay varias opciones que hemos anotado en las referencias, pero una muy accesible es la biblioteca [flexdashboard](https://rstudio.github.io/flexdashboard/articles/using.html). Con lo que hemos venido haciendo podemos construir un [ejemplo crudo como este](../../ejemplos/flexdashboard.html), que se ilustra a continuación y [se hace así](https://github.com/equihuam/Taller_Cond_2022/blob/main/blog/ejemplos/flexdashboard.Rmd).
+
+```{r, echo = FALSE, fig.align = 'center', out.width = '70%'}
+
+knitr::include_graphics("../../figuras/dashboard_crudo.png")
+```
+
 
