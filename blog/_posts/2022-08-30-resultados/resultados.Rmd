@@ -119,15 +119,13 @@ knitr::include_graphics("../../figuras/procesos reproducible de análisis.png")
 
 Un poco en esta misma tónica hicimos un ensayo en el *piloto NCAVES*. Produjimos un reporte dinámico. El código que desarrollamos para hacer esto, usando R y [RMarkdown está aquí](https://github.com/equihuam/Taller_Cond_2022/blob/main/Scripts/1_dynamic_maps_seea_ie.Rmd). El [resultado lo encontraras en este vínculo](reporte/1_dynamic_maps_seea_ie.html), pero para verlo rapidamente también lo hemos incluido aquí, en el recuadro siguiente.
 
-
   \
   \
-  
 
 <iframe id="inlineFrameExample"
     title="Inline Frame Example"
     width="100%"
-    height=200%"
+    height=700px"
     src="reporte/1_dynamic_maps_seea_ie.html"
     allow="fullscreen" 
     webkitallowfullscreen="true" 
@@ -137,17 +135,10 @@ Un poco en esta misma tónica hicimos un ensayo en el *piloto NCAVES*. Produjimo
     target="_blank">
 </iframe>
 
-
-
-
-  \
-  \
-  \
-  \
   \
   \
 
 ### Tableros
 
-Otra forma de presentar los resultados es un "panel de control". Hay varias opciones que hemos anotado en las referencias, pero una muy accesible es la biblioteca [flexdashboard](https://rstudio.github.io/flexdashboard/articles/using.html). Con lo que hemos venido haciendo podemos construir un [ejemplo crudo como este](../ejemplos/flexdashboard.html)
+Otra forma de presentar los resultados es un "panel de control". Hay varias opciones que hemos anotado en las referencias, pero una muy accesible es la biblioteca [flexdashboard](https://rstudio.github.io/flexdashboard/articles/using.html). Con lo que hemos venido haciendo podemos construir un [ejemplo crudo como este](../../ejemplos/flexdashboard.html)
 
