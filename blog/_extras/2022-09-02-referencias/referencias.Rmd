@@ -47,3 +47,18 @@ knitr::include_graphics("robots-judea-pearl-IA.jpg")
 |![](../../figuras/el_libro_del_porqué.png){width=40%}|[Judea Pear y la *revolución causal* en marcha ](http://www.filosofiadebolsillo.com/el-libro-del-porque-la-nueva-ciencia-de-la-causa-y-el-efecto-de-judea-pearl/)|
 |![](../../figuras/causal_inference.png){width=40%} | [Inferencia causal moderna](https://mitpress.mit.edu/9780262037310/elements-of-causal-inference/)|
 |![](../../figuras/blackboxes.png){width=90%}) | [No explicar cajas negras](https://www.nature.com/articles/s42256-019-0048-x)|
+
+### Para aprender y aprovechar rMarkdown
+
+|Documento | Vínculo |
+|---------|---------|
+|![](../../figuras/R_markdown.png){width=40%}|[Explica lo básico de **rMarkdown** y también usos avanzados.](https://bookdown.org/yihui/rmarkdown/)|
+|![](../../figuras/rticles.png){width=40%}|[La biblioteca **rticles** permite dar formato complejo, del tipo requerido para artículo de revista. Produce salida a pdf. ](https://github.com/rstudio/rticle)
+|![](../../figuras/flexdashboard.png){width=40%}|[La biblioteca **flexdashboard** permite crear tableros dinámicos flexibles y atractivos](https://pkgs.rstudio.com/flexdashboard/)
+|![](../../figuras/shinydashboard.png){width=40%}|[**Shiny**, la biblioteca de R para hacer sitos web interactivos, también permite crear tableros dinámicos flexibles y atractivos](https://rstudio.github.io/shinydashboard/)
+|![](../../figuras/Plotly_dash.png){width=80%}|[**Plotly**, la biblioteca de visualización de datos, también permite crear tableros funcionales](https://dash.plotly.com/r)
+
+
+
+
+

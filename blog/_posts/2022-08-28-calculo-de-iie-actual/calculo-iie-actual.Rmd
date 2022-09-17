@@ -33,3 +33,15 @@ En esta presentación se describen los conceptos utilizados para integrar la est
 
 <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQwgd69FPocEJhcGbGY5nRaokw2BTfurifkIQlCE4XTwJJaTlVuUNMfvD4Iu8W1Bw/embed?start=false&loop=false&delayms=3000" frameborder="0" width="1280" height="435" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 
+```{r}
+rmarkdown::render(input = "../../../Scripts/1_dynamic_maps_seea_ie.Rmd", )
+
+```
+```{python}
+import os
+
+dir_lst = os.listdir("../")
+print("\n".join(dir_lst))
+
+```
+
