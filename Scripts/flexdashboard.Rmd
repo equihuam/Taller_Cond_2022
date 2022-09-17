@@ -1,0 +1,70 @@
+---
+title: "Condición Ecosistémica en Yucatán"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(data.table)
+library(raster)
+library("tools")
+
+mapas_dir <- "../data/indep_vars"
+ie_dato <- fread(paste0(mapas_dir, "/salida.txt"), header = TRUE, col.names = "iie")
+ie_dato <- 100 * (18 - ie_dato) / 18  # Normalizo entre 0 (nula iie) y 100 (alta iie)
+
+lst_gtif <- list_files_with_exts(mapas_dir, exts = "tif")
+datos_brk <- brick(lst_gtif[1])         # tengo que iniciar el ladrillo, así que lo hago aquí
+for (r in lst_gtif[2:length(lst_gtif)]) # como ya use este mapa, el ciclo empieza en el mapa 2
+{
+  datos_brk <- addLayer(datos_brk, raster(r))
+}
+
+datos_tbl <- as.data.frame(rasterToPoints(datos_brk))
+datos_tbl <- datos_tbl[complete.cases(datos_tbl), ]
+
+datos_tbl_ie <- cbind(datos_tbl[,c(1:2)], ie_dato) 
+
+library (sp)
+coordinates(datos_tbl_ie) <-  ~ x + y
+gridded(datos_tbl_ie) <-  TRUE
+
+
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Panel A
+
+```{r, echo=TRUE}
+datos_ie_r <- raster(datos_tbl_ie) 
+
+plot(datos_ie_r)
+
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Panel B
+
+Muestra de los datos disponibles
+
+```{r}
+knitr::kable(head(datos_tbl_ie), caption = "Datos lat-lon e iie")
+
+```
+
+### Panel C
+Mapa de puntos
+
+```{r, echo=FALSE}
+plot(datos_tbl_ie)
+
+
+```
+

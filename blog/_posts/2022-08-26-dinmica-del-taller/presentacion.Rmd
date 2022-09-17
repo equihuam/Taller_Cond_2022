@@ -55,7 +55,7 @@ tiempos <- as.character(agenda$tiempo[!grepl("Duración|Día", agenda$tema) &
 # ubicación de los artículoa
 posts_lnk <- list.dirs("../../_posts", recursive = FALSE, full.names = FALSE)
 posts_lnk <- posts_lnk[c(12,1,2,3,5,4,6,11,8,7,9,10)]
-posts_lnk <- data.frame(tema = temas[!grepl("Día|Desc|Discu|Ini", temas)], 
+posts_lnk <- data.frame(tema = temas[!grepl("Día|Desc|Discu|Ini|ejemplo", temas)], 
                         dir = posts_lnk)
 
 datatemas <- character(0)

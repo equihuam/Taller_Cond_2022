@@ -137,3 +137,17 @@ Un poco en esta misma tónica hicimos un ensayo en el *piloto NCAVES*. Produjimo
     target="_blank">
 </iframe>
 
+
+
+
+  \
+  \
+  \
+  \
+  \
+  \
+
+### Tableros
+
+Otra forma de presentar los resultados es un "panel de control". Hay varias opciones que hemos anotado en las referencias, pero una muy accesible es la biblioteca [flexdashboard](https://rstudio.github.io/flexdashboard/articles/using.html). Con lo que hemos venido haciendo podemos construir un [ejemplo crudo como este](../ejemplos/flexdashboard.html)
+
