@@ -1,0 +1,81 @@
+---
+title: "Untitled"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    theme: yeti
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(googlesheets4)
+library(flexdashboard)
+library(plotly)
+
+# Make googlesheets4 not try to authenticate, since we're using a public sheet
+gs4_deauth()
+```
+
+
+
+```{r get-data, message=FALSE, include=FALSE}
+# Create a function that reads the data from Google. I've seen other examples
+# that make this a reactive(), but I don't really know what that is since I
+# rarely use Shiny :shrug:
+#
+# I'm also not completely sold that this is the right approach, since this feels
+# kind of roundabout (create a function, run the function), but it doesn't work
+# if you just do remote_data <- read_sheet(). Also :shrug: for now.
+#
+# ALSO flexdashboard can use a special global chunk to speed up expensive data
+# loading (https://rmarkdown.rstudio.com/flexdashboard/shiny.html#loading_data),
+# which I assume also includes loading data remotely from Google, but if you
+# name this chunk global, the dynamic data loading stops working. Once again,
+# big :shrug:.
+load_remote_data <- function() {
+  read_sheet("https://docs.google.com/spreadsheets/d/1eBISFY_3a9mWNmbPq1LHT8pEELef_5eFd34xFt0e4Jw/edit?usp=sharing")
+}
+
+remote_data <- load_remote_data()
+```
+
+## Row
+
+### Categories {.value-box}
+
+```{r}
+# Find the number of unique categories
+n_categories <- remote_data %>% distinct(estado) %>% nrow()
+
+# Put valueBox() inside renderValueBox({})
+renderValueBox({
+  valueBox(value = n_categories, icon = "fas fa-users")
+})
+```
+
+### Total {.value-box}
+
+```{r}
+# Get a total of all the counts
+total <- sum(remote_data$dato)
+
+# Put valueBox() inside renderValueBox({})
+renderValueBox({
+  valueBox(value = total, icon = "fas fa-cubes")
+})
+```
+
+## Row
+
+###
+
+```{r}
+my_plot <- ggplot(remote_data, aes(x = estado, y = dato)) +
+  geom_col(aes(text = dato)) + 
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 1, hjust=1))
+
+# Put ggplotly() inside renderPlotly({})
+renderPlotly({ggplotly(my_plot, tooltip = "text")})
+```

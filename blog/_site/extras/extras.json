@@ -13,8 +13,8 @@
     "categories": [],
     "contents": "\r\n\r\n\r\n\r\nLa experiencia SEEA EA y NCAVES\r\nDocumento\r\nVínculo\r\n\r\nPágina SEEA EA\r\n\r\nPágina SEEA EA - NCAVES-Mexico\r\n\r\nReporte SEEA EA NCAVES-México\r\n\r\nReporte INEGI NCAVES\r\n\r\nMateriales de ayuda y aprendizaje de ONU-SCAE\r\nCompartir: datos y código abiertos\r\nDocumento\r\nVínculo\r\n\r\nCompartir código\r\n\r\nHacer reproducibles las rutinas de proceso (pipelines) analíticas\r\n\r\nLos documentos de Office como vehículos de datos\r\nSugerencias sobre modelación causal\r\nDocumento\r\nVínculo\r\n\r\nJudea Pear y la revolución causal en marcha\r\n\r\nInferencia causal moderna\r\n)\r\nNo explicar cajas negras\r\nPara aprender y aprovechar rMarkdown\r\nDocumento\r\nVínculo\r\n\r\nExplica lo básico de rMarkdown y también usos avanzados.\r\n\r\nLa biblioteca rticles permite dar formato complejo, del tipo requerido para artículo de revista. Produce salida a pdf.\r\n\r\nLa biblioteca flexdashboard permite crear tableros dinámicos flexibles y atractivos\r\n\r\nShiny, la biblioteca de R para hacer sitos web interactivos, también permite crear tableros dinámicos flexibles y atractivos\r\n\r\nPlotly, la biblioteca de visualización de datos, también permite crear tableros funcionales\r\n\r\n\r\n\r\n",
     "preview": "extras/2022-09-02-referencias/robots-judea-pearl-IA.jpg",
-    "last_modified": "2022-09-16T21:14:26-05:00",
-    "input_file": {}
+    "last_modified": "2022-09-23T11:23:34-05:00",
+    "input_file": "referencias.knit.md"
   },
   {
     "path": "extras/2022-08-29-datos/",

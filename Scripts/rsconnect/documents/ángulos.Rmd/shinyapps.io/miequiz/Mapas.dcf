@@ -1,0 +1,13 @@
+name: Mapas
+title: Mapas
+username:
+account: miequiz
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 7058570
+bundleId: 6322561
+url: https://miequiz.shinyapps.io/Mapas/
+when: 1663734740.69919
+lastSyncTime: 1663734740.69919
+asMultiple: FALSE
+asStatic: FALSE

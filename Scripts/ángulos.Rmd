@@ -1,0 +1,60 @@
+---
+title: Datos columpio
+output: flexdashboard::flex_dashboard
+runtime: shiny
+---
+
+
+Column {.sidebar data-width=150}
+-------------------------------------
+
+```{r}
+library(shiny)
+library(DT)
+
+angX <- 45
+angY <- 105
+rad <- 180 / pi
+factX <- 1 / sin(angX/2 * rad)  # En el caballete respecto del eje mayor
+factY <- 1 / sin((90 - angY) * rad) # hacia afuera del caballete sobre el ejem mayor
+
+numericInput(inputId = "largoCentro", label = "Altura al Centro: ", value = 200, step = 1)
+numericInput(inputId = "largoA", label = "Altura en A: ", value = 200, step = 1)
+numericInput(inputId = "largoB", label = "Altura en B: ", value = 200, step = 1)
+numericInput(inputId = "largoC", label = "Altura en C: ", value = 200, step = 1)
+numericInput(inputId = "largoD", label = "Altura en D: ", value = 200, step = 1)
+
+larCen <- reactive(round({input$largoCentro} * factX * factY, 1))
+larA <- reactive({input$largoA} * factX * factY)
+larB <- reactive({input$largoB} * factX * factY)
+larC <- reactive({input$largoC} * factX * factY)
+larD <- reactive({input$largoD} * factX * factY)
+
+data <- reactive({data.frame(punto = c("Centro", "A", "B", "C", "D"),
+                  largo = c(round(input$largoCentro * factX * factY, 1),
+                  round(input$largoA * factX * factY, 1),
+                  round(input$largoB * factX * factY, 1),
+                  round(input$largoC * factX * factY, 1),
+                  round(input$largoD * factX * factY, 1)))})
+
+```
+
+
+Column {data-width=300}
+-------------------------------------
+
+### Longitud de las patas
+
+
+```{r}
+largo_centro <- reactive(round({input$largoCentro} * factX * factY, 1))
+
+renderDT(data(), rownames = FALSE, 
+         options = list(sDom  = '<"top">rt<"bottom">', # botones: <"top">flrt<"bottom">ip
+                        autoWidth = FALSE, 
+                        columnDefs = list(list(className = 'dt-center', 
+                                               stripe = TRUE, 
+                                               # width = "100px", 
+                                               targets = "_all"))))
+```   
+

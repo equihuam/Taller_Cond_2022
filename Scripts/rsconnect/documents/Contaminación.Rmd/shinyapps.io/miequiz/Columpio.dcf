@@ -1,0 +1,13 @@
+name: Columpio
+title: Columpio
+username:
+account: miequiz
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 7071789
+bundleId: 6322092
+url: https://miequiz.shinyapps.io/Columpio/
+when: 1663723008.11195
+lastSyncTime: 1663723008.11196
+asMultiple: FALSE
+asStatic: FALSE

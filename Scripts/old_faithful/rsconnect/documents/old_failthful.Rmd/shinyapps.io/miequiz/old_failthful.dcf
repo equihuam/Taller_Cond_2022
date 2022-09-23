@@ -1,0 +1,13 @@
+name: old_failthful
+title: old_failthful
+username:
+account: miequiz
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 7048362
+bundleId: 6314957
+url: https://miequiz.shinyapps.io/old_failthful/
+when: 1663556455.92339
+lastSyncTime: 1663556455.9234
+asMultiple: FALSE
+asStatic: FALSE
