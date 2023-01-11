@@ -96,9 +96,9 @@
     ],
     "date": "2022-08-30",
     "categories": [],
-    "contents": "\r\nEn este video se explica la forma de utilizar Netica que es un programa comercial para el diseño y entrenamiento de redes bayesianas. Lo utilizamos para construir y entrenar la red bayesiana que utilizamos para producir las estimaciones del índice de integridad ecosistémica que hicimos para valorar la condición de los ecosistemas de México. En el video se muestra como hacer los cálculos para el caso particular del estado de Yucatán, sólo como una forma de ejercitar con un conjunto relativamente pequeño de datos. Las mismas operaciones y lógica se aplica al caso general que usamos para obtener los estimadores do todo el país. El objetivo que proponemos para esta participación es:\r\n\r\nEl participante se familiariza con las operaciones y lógica de cómputo involucradas en la generación de los estimadores del índice de integridad ecosistémica, tal y como se aplicó el enfoque en el piloto mexicano\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
-    "preview": {},
-    "last_modified": "2023-01-11T02:44:45-06:00",
+    "contents": "\r\n\r\n\r\n\r\nHemos recurrido a un video para explicar con bastante detalle la forma como utilizammos Netica para construir y entrenar la red bayesiana que fue la base para producir las estimaciones del índice de integridad ecosistémica. Estos valores fueron los datos con los que se generó la cuenta de condición de los ecosistemas de México. Netica es un programa comercial muy eficiente para el diseño y entrenamiento de redes bayesianas. En el video se muestra como hacer los cálculos para el caso particular del estado de Yucatán, sólo como una forma demostrativa con un conjunto relativamente pequeño de datos. Las mismas operaciones y lógica se aplico al caso general que usamos para obtener los estimadores do todo el país. El objetivo que proponemos para esta participación es:\r\n\r\nEl participante se familiariza con las operaciones y lógica de cómputo involucradas en la generación de los estimadores del índice de integridad ecosistémica, tal y como se aplicó el enfoque en el piloto mexicano\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+    "preview": "posts/2022-09-14-clculo-con-netica/../../figuras/Netica_portada.png",
+    "last_modified": "2023-01-11T02:55:56-06:00",
     "input_file": "clculo-con-netica.knit.md"
   },
   {
