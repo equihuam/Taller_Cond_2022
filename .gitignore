@@ -80,3 +80,4 @@ cmake-build-*/
 out/
 /data/indep_vars/*.sav
 /*.mp4
+/*.mp4
