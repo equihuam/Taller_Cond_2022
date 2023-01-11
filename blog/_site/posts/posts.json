@@ -90,15 +90,17 @@
     "description": "Ejercicio que ejemplifica la obtención de los valores del índice con Netica.",
     "author": [
       {
-        "name": "Octavio Pérez Maqueo y Miguel Equihua Zamora",
-        "url": {}
+        "name": "Octavio Pérez Maqueo, Miguel Equihua Zamora y Julián Equihua Benítez",
+        "url": {
+          "https://www.youtube.com/embed/W5esQJeQ_oE": {}
+        }
       }
     ],
     "date": "2022-08-30",
     "categories": [],
-    "contents": "\r\n\r\n\r\n\r\nHemos recurrido a un video para explicar con bastante detalle la forma como utilizammos Netica para construir y entrenar la red bayesiana que fue la base para producir las estimaciones del índice de integridad ecosistémica. Estos valores fueron los datos con los que se generó la cuenta de condición de los ecosistemas de México. Netica es un programa comercial muy eficiente para el diseño y entrenamiento de redes bayesianas. En el video se muestra como hacer los cálculos para el caso particular del estado de Yucatán, sólo como una forma demostrativa con un conjunto relativamente pequeño de datos. Las mismas operaciones y lógica se aplico al caso general que usamos para obtener los estimadores do todo el país. El objetivo que proponemos para esta participación es:\r\n\r\nEl participante se familiariza con las operaciones y lógica de cómputo involucradas en la generación de los estimadores del índice de integridad ecosistémica, tal y como se aplicó el enfoque en el piloto mexicano\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+    "contents": "\r\n\r\n\r\n\r\nHemos recurrido a un video para explicar con bastante detalle la forma como utilizamos Netica para construir y entrenar la red bayesiana que fue la base para producir las estimaciones del índice de integridad ecosistémica (IIE). Estos valores fueron los datos con los que se generó la cuenta de condición de los ecosistemas de México. Netica es un programa comercial muy eficiente para el diseño interactivo y entrenamiento de redes bayesianas. En el video se muestra como hacer los cálculos para el caso particular del estado de Yucatán. Lo proponemos sólo como una recurso demostrativo pues usa un conjunto relativamente pequeño de datos. Las mismas operaciones y lógica se aplicaron al caso general con el que obtuvimos los estimadores de todo el país. El objetivo que proponemos para esta participación es:\r\n\r\nEl participante entiende los conceptos básicos de redes bayesianas y puede calcular el IIE utilizando un programa basado en este paradigma\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
     "preview": "posts/2022-09-14-clculo-con-netica/../../figuras/Netica_portada.png",
-    "last_modified": "2023-01-11T02:55:56-06:00",
+    "last_modified": "2023-01-11T14:13:10-06:00",
     "input_file": "clculo-con-netica.knit.md"
   },
   {
